@@ -8,6 +8,8 @@ import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.log4j.Logger;
+
 public class LogTest extends GenericPortlet {
 
 	@Override
@@ -15,6 +17,10 @@ public class LogTest extends GenericPortlet {
 			throws PortletException, IOException {
 		PortletRequestDispatcher prd = getPortletContext().getRequestDispatcher("/view.jsp");
 		prd.include(request, response);
+
+		_log.error("doView");
 	}
+
+	private static Logger _log = Logger.getLogger(LogTest.class);
 
 }
