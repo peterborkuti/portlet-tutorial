@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>modes</portlet-name>
 		<display-name>modes</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.Modes</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
@@ -12,6 +12,8 @@
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
+			<portlet-mode>EDIT</portlet-mode>
+			<portlet-mode>HELP</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>modes</title>
