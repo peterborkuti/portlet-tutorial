@@ -18,4 +18,4 @@
 
 <portlet:defineObjects />
 
-This is the <b>modes</b> portlet VIEW mode.
+This is the <b>modes</b> portlet HELP mode.
