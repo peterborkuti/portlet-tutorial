@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>minimaljsr286</portlet-name>
 		<display-name>minimaljsr286</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.MinimalJSR286</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
