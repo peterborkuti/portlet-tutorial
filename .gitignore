@@ -2,4 +2,6 @@ build-common-portlet.xml
 build.xml
 create.bat
 create.sh
-.settings
+.settings/
+classes/
+.sass-cache/
