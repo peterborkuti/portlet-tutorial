@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-
-<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	version="2.0">
 	<portlet>
 		<portlet-name>twoportlets</portlet-name>
 		<display-name>twoportlets</display-name>
@@ -30,8 +32,9 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		<supported-public-render-parameter>pparam</supported-public-render-parameter>
 	</portlet>
-		<portlet>
+	<portlet>
 		<portlet-name>twoportlets2</portlet-name>
 		<display-name>twoportlets2</display-name>
 		<portlet-class>test.TwoPortlets2</portlet-class>
@@ -46,7 +49,7 @@
 		<portlet-info>
 			<title>twoportlets2</title>
 			<short-title>twoportlets2</short-title>
-			<keywords>twoportlets</keywords>
+			<keywords>twoportlets2</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
@@ -60,5 +63,10 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		<supported-public-render-parameter>pparam</supported-public-render-parameter>
 	</portlet>
+	<public-render-parameter>
+		<identifier>pparam</identifier>
+		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:someidentifier</qname>
+	</public-render-parameter>
 </portlet-app>

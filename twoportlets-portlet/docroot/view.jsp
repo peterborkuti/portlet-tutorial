@@ -19,3 +19,6 @@
 <portlet:defineObjects />
 
 This is the <b>twoportlets</b> portlet.
+<p>
+<a href="<portlet:renderURL><portlet:param name="pparam" value="XYZ"/></portlet:renderURL>">render</a>
+</p>

@@ -19,3 +19,7 @@
 <portlet:defineObjects />
 
 This is the <b>twoportlets2</b> portlet.
+
+<p>
+pparam: <%= renderRequest.getParameter("pparam") %>
+</p>
