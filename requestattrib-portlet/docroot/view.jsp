@@ -19,3 +19,7 @@
 <portlet:defineObjects />
 
 This is the <b>requestattrib</b> portlet.
+
+<p>
+Value of attribute myattr is <%= (String)renderRequest.getAttribute("myattr") %>
+</p>

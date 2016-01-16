@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>requestattrib</portlet-name>
 		<display-name>requestattrib</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.RequestAttrib</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
