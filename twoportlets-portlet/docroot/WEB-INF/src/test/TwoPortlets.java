@@ -13,8 +13,9 @@ public class TwoPortlets extends GenericPortlet {
 	@Override
 	protected void doView(RenderRequest request, RenderResponse response)
 			throws PortletException, IOException {
-PortletRequestDispatcher prd = getPortletContext().getRequestDispatcher("/view.jsp");
-prd.include(request, response);
+		PortletRequestDispatcher prd = getPortletContext()
+				.getRequestDispatcher("/view.jsp");
+		prd.include(request, response);
 	}
 
 }
