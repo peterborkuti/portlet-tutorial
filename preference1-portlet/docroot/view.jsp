@@ -19,3 +19,13 @@
 <portlet:defineObjects />
 
 This is the <b>preference1</b> portlet.
+
+<p>
+<a href="<portlet:actionURL></portlet:actionURL>">Count!</a>
+</p>
+
+<p>
+
+Counter is <%= portletPreferences.getValue("counter", "0") %>
+
+</p>
