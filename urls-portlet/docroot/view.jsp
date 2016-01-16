@@ -19,3 +19,13 @@
 <portlet:defineObjects />
 
 This is the <b>urls</b> portlet.
+
+<p>
+Click on the links and check the logs.
+</p>
+
+<p>
+<a href="<portlet:renderURL></portlet:renderURL>">render url</a><br>
+<a href="<portlet:actionURL></portlet:actionURL>">action url</a><br>
+<a href="<portlet:resourceURL></portlet:resourceURL>">resource url</a><br>
+</p>
