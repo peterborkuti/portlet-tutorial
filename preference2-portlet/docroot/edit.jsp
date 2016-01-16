@@ -18,8 +18,8 @@
 
 <portlet:defineObjects />
 
-Set Preferences from the menu!
+<form action="<portlet:actionURL></portlet:actionURL>" method="post">
+Your name: <input name="<portlet:namespace/>inputname">
+<input type="submit">
+</form>
 
-<p>
-Hello <%= portletPreferences.getValue("yourname", "X Y")%>!
-</p>
