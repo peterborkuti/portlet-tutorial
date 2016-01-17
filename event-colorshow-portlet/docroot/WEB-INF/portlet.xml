@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>event-colorshow</portlet-name>
 		<display-name>event-colorshow</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.ColorReceiver</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
@@ -31,12 +31,12 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 		<supported-processing-event>
-			<name>color</name>
+			<name>colorsetevent</name>
 		</supported-processing-event>
 	</portlet>
 	<default-namespace>mynamespace</default-namespace>
 	<event-definition>
-		<name>color</name>
+		<name>colorsetevent</name>
 		<value-type>java.lang.String</value-type>
 	</event-definition>
 </portlet-app>

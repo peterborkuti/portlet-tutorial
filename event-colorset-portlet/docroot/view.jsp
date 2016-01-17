@@ -19,3 +19,13 @@
 <portlet:defineObjects />
 
 This is the <b>event-colorset</b> portlet.
+
+<form action="<portlet:actionURL></portlet:actionURL>" method="post">
+<select name='<portlet:namespace/>colorselector'>
+<option value="red">Red</option>
+<option value="green">Green</option>
+<option value="yellow">Yellow</option>
+</select>
+
+<input type="submit">
+</form>
