@@ -1,7 +1,7 @@
-build-common-portlet.xml
-build.xml
-create.bat
-create.sh
+/build-common-portlet.xml
+/build.xml
+/create.bat
+/create.sh
 .settings/
 classes/
 .sass-cache/
