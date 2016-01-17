@@ -17,6 +17,19 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects />
-<div style="width:100%; height:100%; background-color:<%= renderRequest.getParameter("color") %>">
+
+<%
+	boolean reset = "true".equals(renderRequest.getParameter("resetcolor"));
+
+	String color = renderRequest.getParameter("color");
+
+	String divcolor = "background-color:" + color;
+	if (reset) {
+		divcolor = "";
+	}
+%>
+
+<div style="width:100%; height:100%; <%= divcolor %>">
+
 This is the <b>colorshower</b> portlet.
 </div>

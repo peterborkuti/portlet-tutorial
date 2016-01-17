@@ -31,9 +31,14 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 		<supported-public-render-parameter>color</supported-public-render-parameter>
+		<supported-public-render-parameter>resetcolor</supported-public-render-parameter>
 	</portlet>
 	<public-render-parameter>
 		<identifier>color</identifier>
 		<qname xmlns:x="mynamespace">x:colorparamidentifier</qname>
+	</public-render-parameter>
+	<public-render-parameter>
+		<identifier>resetcolor</identifier>
+		<qname xmlns:x="mynamespace">x:resetcolorparamidentifier</qname>
 	</public-render-parameter>
 </portlet-app>

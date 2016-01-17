@@ -20,6 +20,7 @@
 
 This is the <b>colorsetter</b> portlet.
 
-<a href="<portlet:renderURL><portlet:param name="color" value="red"/></portlet:renderURL>">red</a><br>
-<a href="<portlet:renderURL><portlet:param name="color" value="green"/></portlet:renderURL>">green</a><br>
-<a href="<portlet:renderURL><portlet:param name="color" value="yellow"/></portlet:renderURL>">yellow</a><br>
+<a href="<portlet:renderURL><portlet:param name="color" value="red"/><portlet:param name="resetcolor" value="false"/></portlet:renderURL>">red</a><br>
+<a href="<portlet:renderURL><portlet:param name="color" value="green"/><portlet:param name="resetcolor" value="false"/></portlet:renderURL>">green</a><br>
+<a href="<portlet:renderURL><portlet:param name="color" value="yellow"/><portlet:param name="resetcolor" value="false"/></portlet:renderURL>">yellow</a><br>
+<a href="<portlet:renderURL><portlet:param name="resetcolor" value="true"/></portlet:renderURL>">none</a><br>
