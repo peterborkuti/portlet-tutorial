@@ -22,7 +22,7 @@ public class ColorReceiver extends GenericPortlet {
 		prd.include(request, response);
 	}
 
-	@ProcessEvent(name="colorsetevent")
+	@ProcessEvent(qname="{mynamespace}colorsetevent")
 	public void colorSetEventProcessor(EventRequest request, EventResponse response)
 			throws PortletException, IOException {
 
