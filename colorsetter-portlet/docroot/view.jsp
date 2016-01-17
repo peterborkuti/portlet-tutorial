@@ -19,3 +19,7 @@
 <portlet:defineObjects />
 
 This is the <b>colorsetter</b> portlet.
+
+<a href="<portlet:renderURL><portlet:param name="color" value="red"/></portlet:renderURL>">red</a><br>
+<a href="<portlet:renderURL><portlet:param name="color" value="green"/></portlet:renderURL>">green</a><br>
+<a href="<portlet:renderURL><portlet:param name="color" value="yellow"/></portlet:renderURL>">yellow</a><br>
