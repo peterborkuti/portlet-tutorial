@@ -21,5 +21,5 @@
 This is the <b>twoportlets2</b> portlet.
 
 <p>
-pparam: <%= renderRequest.getParameter("pparam") %>
+Public render param: <%= renderRequest.getParameter("pparam") %>
 </p>

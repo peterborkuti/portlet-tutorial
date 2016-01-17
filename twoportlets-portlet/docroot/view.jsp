@@ -19,6 +19,18 @@
 <portlet:defineObjects />
 
 This is the <b>twoportlets</b> portlet.
+
+To demonstrate the working of Public Render Parameters, put TwoPortlets2 also on
+this page.
 <p>
-<a href="<portlet:renderURL><portlet:param name="pparam" value="XYZ"/></portlet:renderURL>">render</a>
+Click <a href="<portlet:renderURL><portlet:param name="pparam" value="XYZ"/></portlet:renderURL>">here</a>
+to set pparam public render parameter to XYZ and check twoportlets2.
 </p>
+<p>
+For page-cross public render params, check the README.md or set this into
+your portal's portal-ext.properties file:
+</p>
+<pre>
+layout.default.p_l_reset=false
+portlet.public.render.parameter.distribution=layout-set
+</pre>
