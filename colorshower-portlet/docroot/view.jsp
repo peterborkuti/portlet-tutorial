@@ -33,3 +33,5 @@
 
 This is the <b>colorshower</b> portlet.
 </div>
+
+It needs colorsetter portlet.
