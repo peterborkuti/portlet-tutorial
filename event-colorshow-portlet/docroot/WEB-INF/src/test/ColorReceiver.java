@@ -8,6 +8,7 @@ import javax.portlet.EventResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.ProcessEvent;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -21,8 +22,8 @@ public class ColorReceiver extends GenericPortlet {
 		prd.include(request, response);
 	}
 
-	@Override
-	public void processEvent(EventRequest request, EventResponse response)
+	@ProcessEvent(name="colorsetevent")
+	public void colorSetEventProcessor(EventRequest request, EventResponse response)
 			throws PortletException, IOException {
 
 		Event event = request.getEvent();
