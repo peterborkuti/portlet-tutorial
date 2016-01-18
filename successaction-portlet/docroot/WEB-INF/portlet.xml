@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>successaction</portlet-name>
 		<display-name>successaction</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.SuccessAction</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>

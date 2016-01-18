@@ -19,3 +19,8 @@
 <portlet:defineObjects />
 
 This is the <b>successaction</b> portlet.
+<p>
+<form action='<portlet:actionURL name="myAction"></portlet:actionURL>' method="post">
+Click  <input type="submit" value="here"> for the  success message
+</form>
+</p>
