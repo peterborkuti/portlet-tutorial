@@ -19,3 +19,7 @@
 <portlet:defineObjects />
 
 This is the <b>moreactions</b> portlet.
+
+<form action='<portlet:actionURL name="Action1,Action2"></portlet:actionURL>' method="post">
+<input type="submit" value="Call Action1 and Action2">
+</form>
