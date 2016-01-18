@@ -18,8 +18,8 @@
 
 <portlet:defineObjects />
 
-This is the <b>mvcpath</b> portlet. VIEW.JSP
+This is the <b>mvcpath</b> portlet. VIEW1.JSP
 
 <p>
-<a href='<portlet:renderURL><portlet:param name="mvcPath" value="/view1.jsp" /></portlet:renderURL>'>view1.jsp</a>
+<a href='<portlet:renderURL><portlet:param name="mvcPath" value="/view.jsp"/></portlet:renderURL>'>view.jsp</a>
 </p>
