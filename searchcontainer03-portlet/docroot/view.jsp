@@ -1,3 +1,4 @@
+<%@page import="test.RandomStringModel"%>
 <%
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -15,7 +16,46 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <portlet:defineObjects />
 
 This is the <b>searchcontainer03</b> portlet.
+
+<%
+java.util.List<RandomStringModel> randomList =
+	(java.util.List<RandomStringModel>)renderRequest.getAttribute("randomList");
+
+%>
+
+<liferay-ui:search-container delta="10" total="<%= randomList.size() %>" >
+
+	<liferay-ui:search-container-results
+		results="<%= 
+			randomList.subList(
+				searchContainer.getStart(),
+				Math.min(searchContainer.getEnd(), randomList.size())) 
+				%>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="test.RandomStringModel"
+		keyProperty="id"
+		modelVar="randomString"
+	>
+
+	<liferay-ui:search-container-column-text
+		name="ID"
+		property="id"
+	/>
+
+	<liferay-ui:search-container-column-text
+		name="Random String"
+		property="string"
+	/>
+
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+
+</liferay-ui:search-container>

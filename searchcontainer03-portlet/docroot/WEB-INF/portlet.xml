@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>searchcontainer03</portlet-name>
 		<display-name>searchcontainer03</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.RandomStringLister</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
