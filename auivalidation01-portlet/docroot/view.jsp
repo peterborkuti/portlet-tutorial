@@ -15,7 +15,15 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <portlet:defineObjects />
 
 This is the <b>auivalidation01</b> portlet.
+
+<aui:form>
+<aui:input type="text" name="textinput">
+	<aui:validator name="digits" errorMessage="Only digits are allowed"></aui:validator>
+</aui:input>
+<input type="submit">
+</aui:form>
