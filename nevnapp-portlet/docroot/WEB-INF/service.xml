@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="hu.borkutip.lfrnevnapp.data">
+    <author>Péter Borkuti</author>
+    <namespace>nevnapp</namespace>
+    <entity name="NameEntity" local-service="true">
+
+
+    	<!-- PK fields -->
+
+    	<column name="nameId" type="long" primary="true"></column>
+
+    	<!-- Group instance -->
+
+    	<!-- Audit fields -->
+        <column name="name" type="String"></column>
+        <column name="gender" type="int"></column>
+        <order by="asc">
+            <order-column name="name" order-by="asc"></order-column>
+        </order>
+    </entity>
+    <entity name="DayEntity" local-service="true">
+
+    	<!-- PK fields -->
+
+    	<column name="dayId" type="long" primary="true"></column>
+
+    	<!-- Group instance -->
+
+    	<!-- Audit fields -->
+        <column name="month" type="int"></column>
+        <column name="day" type="int"></column>
+        <column name="nameId" type="long"></column>
+        <order by="asc">
+            <order-column name="month" order-by="asc"></order-column>
+            <order-column name="day" order-by="asc"></order-column>
+        </order>
+        <finder name="monthAndDay" return-type="Collection">
+            <finder-column name="month"></finder-column>
+            <finder-column name="day"></finder-column>
+        </finder>
+    </entity>
+</service-builder>
