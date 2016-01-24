@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -15,7 +16,46 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <portlet:defineObjects />
 
 This is the <b>NevNapp</b> portlet.
+
+<%
+	java.util.List<String> names = (java.util.List<String>)renderRequest.getAttribute("names");
+
+%>
+
+<p>
+Found <%= names.size() %> names for today.
+</p>
+<liferay-ui:search-container
+	delta="10"
+	total="<%= names.size()	%>"
+>
+
+	<liferay-ui:search-container-results
+		results="<%=
+			names.subList(
+				searchContainer.getStart(),
+				Math.min(searchContainer.getEnd(), names.size()))
+				%>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="String"
+		modelVar="name"
+	>
+
+	<liferay-ui:search-container-column-text
+		name="Name"
+		value="<%= name %>"
+	/>
+
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+
+</liferay-ui:search-container>
+
