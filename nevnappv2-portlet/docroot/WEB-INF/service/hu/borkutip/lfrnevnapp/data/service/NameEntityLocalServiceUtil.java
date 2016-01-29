@@ -274,6 +274,10 @@ public class NameEntityLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static boolean fillDatabase(java.net.URL resource) {
+		return getService().fillDatabase(resource);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -284,6 +284,25 @@ public class DayEntityLocalServiceWrapper implements DayEntityLocalService,
 			arguments);
 	}
 
+	@Override
+	public java.util.List<hu.borkutip.lfrnevnapp.data.model.DayEntity> getDatesByNameId(
+		long nameId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _dayEntityLocalService.getDatesByNameId(nameId);
+	}
+
+	@Override
+	public java.util.List<hu.borkutip.lfrnevnapp.data.model.NameEntity> getNamesByMonthAndDay(
+		int month, int day)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			hu.borkutip.lfrnevnapp.data.NoSuchNameEntityException {
+		return _dayEntityLocalService.getNamesByMonthAndDay(month, day);
+	}
+
+	@Override
+	public boolean fillDatabase(java.net.URL resource) {
+		return _dayEntityLocalService.fillDatabase(resource);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

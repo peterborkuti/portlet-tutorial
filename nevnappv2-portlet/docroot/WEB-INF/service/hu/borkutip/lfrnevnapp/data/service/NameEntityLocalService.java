@@ -252,4 +252,6 @@ public interface NameEntityLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public boolean fillDatabase(java.net.URL resource);
 }

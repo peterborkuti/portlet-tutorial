@@ -274,6 +274,22 @@ public class DayEntityLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<hu.borkutip.lfrnevnapp.data.model.DayEntity> getDatesByNameId(
+		long nameId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDatesByNameId(nameId);
+	}
+
+	public static java.util.List<hu.borkutip.lfrnevnapp.data.model.NameEntity> getNamesByMonthAndDay(
+		int month, int day)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			hu.borkutip.lfrnevnapp.data.NoSuchNameEntityException {
+		return getService().getNamesByMonthAndDay(month, day);
+	}
+
+	public static boolean fillDatabase(java.net.URL resource) {
+		return getService().fillDatabase(resource);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

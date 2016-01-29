@@ -286,6 +286,11 @@ public class NameEntityLocalServiceWrapper implements NameEntityLocalService,
 			arguments);
 	}
 
+	@Override
+	public boolean fillDatabase(java.net.URL resource) {
+		return _nameEntityLocalService.fillDatabase(resource);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

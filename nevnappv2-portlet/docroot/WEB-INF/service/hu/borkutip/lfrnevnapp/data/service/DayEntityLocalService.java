@@ -251,4 +251,16 @@ public interface DayEntityLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<hu.borkutip.lfrnevnapp.data.model.DayEntity> getDatesByNameId(
+		long nameId) throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<hu.borkutip.lfrnevnapp.data.model.NameEntity> getNamesByMonthAndDay(
+		int month, int day)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			hu.borkutip.lfrnevnapp.data.NoSuchNameEntityException;
+
+	public boolean fillDatabase(java.net.URL resource);
 }
