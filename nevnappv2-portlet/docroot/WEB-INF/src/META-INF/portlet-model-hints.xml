@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="hu.borkutip.lfrnevnapp.data.model.DayEntity">
+		<field name="dayId" type="long" />
+		<field name="month" type="int" />
+		<field name="day" type="int" />
+		<field name="nameId" type="long" />
+	</model>
+	<model name="hu.borkutip.lfrnevnapp.data.model.NameEntity">
+		<field name="nameId" type="long" />
+		<field name="name" type="String" />
+		<field name="gender" type="int" />
+	</model>
+</model-hints>

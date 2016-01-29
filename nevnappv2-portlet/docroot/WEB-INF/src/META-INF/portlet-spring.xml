@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="hu.borkutip.lfrnevnapp.data.service.DayEntityLocalService" class="hu.borkutip.lfrnevnapp.data.service.impl.DayEntityLocalServiceImpl" />
+	<bean id="hu.borkutip.lfrnevnapp.data.service.DayEntityService" class="hu.borkutip.lfrnevnapp.data.service.impl.DayEntityServiceImpl" />
+	<bean id="hu.borkutip.lfrnevnapp.data.service.persistence.DayEntityPersistence" class="hu.borkutip.lfrnevnapp.data.service.persistence.DayEntityPersistenceImpl" parent="basePersistence" />
+	<bean id="hu.borkutip.lfrnevnapp.data.service.NameEntityLocalService" class="hu.borkutip.lfrnevnapp.data.service.impl.NameEntityLocalServiceImpl" />
+	<bean id="hu.borkutip.lfrnevnapp.data.service.NameEntityService" class="hu.borkutip.lfrnevnapp.data.service.impl.NameEntityServiceImpl" />
+	<bean id="hu.borkutip.lfrnevnapp.data.service.persistence.NameEntityPersistence" class="hu.borkutip.lfrnevnapp.data.service.persistence.NameEntityPersistenceImpl" parent="basePersistence" />
+</beans>
