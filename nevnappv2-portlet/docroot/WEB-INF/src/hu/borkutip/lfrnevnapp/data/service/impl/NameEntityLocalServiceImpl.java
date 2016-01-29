@@ -14,6 +14,18 @@
 
 package hu.borkutip.lfrnevnapp.data.service.impl;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.log4j.Logger;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringPool;
+
+import hu.borkutip.lfrnevnapp.data.model.DayEntity;
+import hu.borkutip.lfrnevnapp.data.model.NameEntity;
 import hu.borkutip.lfrnevnapp.data.service.base.NameEntityLocalServiceBaseImpl;
 
 /**
@@ -36,4 +48,52 @@ public class NameEntityLocalServiceImpl extends NameEntityLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link hu.borkutip.lfrnevnapp.data.service.NameEntityLocalServiceUtil} to access the name entity local service.
 	 */
+	public boolean fillDatabase(URL resource) {
+		boolean success = false;
+		try {
+			if (nameEntityPersistence.countAll() > 0) {
+				_log.error("table exists, remove all");
+				nameEntityPersistence.removeAll();
+			}
+		} catch (Exception e) {
+			_log.error(e);
+		}
+
+		try {
+			String dates = HttpUtil.URLtoString(resource);
+			String[] lines = dates.split(StringPool.NEW_LINE);
+			for (String l : lines) {
+				String[] parts = l.split(",");
+				if (parts.length < 2) {
+					_log.error("error when adding line :" + l);
+					continue;
+				}
+				Long nameId;
+				try {
+					nameId = Long.parseLong(parts[0]);
+				} catch (Exception e) {
+					_log.error(e);
+					continue;
+				}
+				String name = parts[1];
+				NameEntity ne = nameEntityPersistence.create(nameId);
+				ne.setGender(3);
+				ne.setName(name);
+				nameEntityLocalService.addNameEntity(ne);
+				_log.error("added:" + l);
+			}
+			success = true;
+
+		} catch (MalformedURLException e) {
+			_log.error(e);
+		} catch (IOException e) {
+			_log.error(e);
+		} catch (SystemException e) {
+			_log.error(e);
+		}
+
+		return success;
+	}
+
+	private static Logger _log = Logger.getLogger(DayEntityLocalServiceImpl.class);
 }
