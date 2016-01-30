@@ -22,20 +22,14 @@
 <portlet:defineObjects />
 
 <%@include file="today.jspf" %>
-This is the <b>NevNapp</b> portlet.
 
 <%
 	List<DayEntity> days = (List<DayEntity>)renderRequest.getAttribute("days");
-
 %>
-
-<p>
-Found <%= days.size() %> dates for a name. 
-</p>
 
 <liferay-ui:search-container
 	delta="10"
-	total="<%= days.size()	%>"
+	total="<%= days.size()	%>" 
 >
 
 	<liferay-ui:search-container-results

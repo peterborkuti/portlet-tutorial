@@ -17,8 +17,8 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<portlet:actionURL name="listNames" var="listNamesURL"></portlet:actionURL>
-<% String msg = "Go to <a href=\"" + listNamesURL + "\">today's names</a>"; %>
+<portlet:actionURL name="listNames" var="listNamesURLForToday"></portlet:actionURL>
+<% String msg = "Go to <a href=\"" + listNamesURLForToday + "\">today's names</a>"; %>
 <liferay-ui:success
 	key="today"
 	message="<%= msg %>"
