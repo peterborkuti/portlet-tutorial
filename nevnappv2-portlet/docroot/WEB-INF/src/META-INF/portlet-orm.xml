@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="hu.borkutip.lfrnevnapp.data.model.impl.DayEntityModelImpl">
+		<attributes>
+			<id name="dayId" />
+			<basic name="month" />
+			<basic name="day" />
+			<basic name="nameId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="hu.borkutip.lfrnevnapp.data.model.impl.NameEntityModelImpl">
+		<attributes>
+			<id name="nameId" />
+			<basic name="name" />
+			<basic name="gender" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="hu.borkutip.lfrnevnapp.data.model.impl.DayEntityImpl" name="DayEntity">
+		<table name="nevnapp_DayEntity" />
+		<attributes />
+	</entity>
+	<entity class="hu.borkutip.lfrnevnapp.data.model.impl.NameEntityImpl" name="NameEntity">
+		<table name="nevnapp_NameEntity" />
+		<attributes />
+	</entity>
+</entity-mappings>

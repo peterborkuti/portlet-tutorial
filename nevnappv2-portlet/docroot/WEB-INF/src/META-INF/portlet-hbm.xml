@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="hu.borkutip.lfrnevnapp.data.model.DayEntity" />
+	<import class="hu.borkutip.lfrnevnapp.data.model.NameEntity" />
+	<class name="hu.borkutip.lfrnevnapp.data.model.impl.DayEntityImpl" table="nevnapp_DayEntity">
+		<cache usage="read-write" />
+		<id name="dayId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="month" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="day" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="nameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="hu.borkutip.lfrnevnapp.data.model.impl.NameEntityImpl" table="nevnapp_NameEntity">
+		<cache usage="read-write" />
+		<id name="nameId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+</hibernate-mapping>

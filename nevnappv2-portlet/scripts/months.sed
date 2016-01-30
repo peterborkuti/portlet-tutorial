@@ -1,0 +1,12 @@
+s/január */1-/g;
+s/február */2-/g;
+s/március */3-/g;
+s/április */4-/g;
+s/május */5-/g;
+s/június */6-/g;
+s/július */7-/g;
+s/augusztus */8-/g;
+s/szeptember */9-/g;
+s/október */10-/g;
+s/november */11-/g;
+s/december */12-/g;
