@@ -21,15 +21,17 @@
 
 <portlet:defineObjects />
 
+<%@include file="today.jspf" %>
+
 This is the <b>NevNapp</b> portlet.
 
 <%
 	List<NameEntity> names = (List<NameEntity>)renderRequest.getAttribute("names");
-
+	boolean isToday = (Boolean)renderRequest.getAttribute("isToday");
 %>
 
 <p>
-Found <%= names.size() %> names for today.
+Found <%= names.size() %> names.
 </p>
 <liferay-ui:search-container
 	delta="10"

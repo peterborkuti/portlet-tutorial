@@ -108,10 +108,14 @@ public class DayEntityLocalServiceImpl extends DayEntityLocalServiceBaseImpl {
 					_log.error(e);
 					continue;
 				}
-				DayEntity de = dayEntityPersistence.create(counterLocalService.increment());
+				DayEntity de =
+					dayEntityPersistence.create(
+						counterLocalService.increment(DayEntity.class.getName()));
+
 				de.setDay(day);
 				de.setMonth(month);
 				de.setNameId(nameId);
+
 				dayEntityLocalService.addDayEntity(de);
 				// _log.error("added:" + l);
 			}

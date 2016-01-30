@@ -21,6 +21,7 @@
 
 <portlet:defineObjects />
 
+<%@include file="today.jspf" %>
 This is the <b>NevNapp</b> portlet.
 
 <%
@@ -29,8 +30,9 @@ This is the <b>NevNapp</b> portlet.
 %>
 
 <p>
-Found <%= days.size() %> dates for a name.
+Found <%= days.size() %> dates for a name. 
 </p>
+
 <liferay-ui:search-container
 	delta="10"
 	total="<%= days.size()	%>"
@@ -49,9 +51,21 @@ Found <%= days.size() %> dates for a name.
 		modelVar="day"
 	>
 
+	<portlet:actionURL name="listNames" var="listNamesURL">
+		<portlet:param name="month" value='<%= "" + day.getMonth() %>'/>
+		<portlet:param name="day" value='<%= "" + day.getDay() %>'/>
+	</portlet:actionURL>
+
+	<% 
+		String href=
+			"<a href='" + listNamesURL + "'>" +
+				day.getMonth() + ". " + day.getDay() +
+			"</a>"; 
+	%>
+
 	<liferay-ui:search-container-column-text
 		name="Day"
-		value="<%= day.getMonth() + ". " + day.getDay() %>"
+		value="<%= href %>"
 	/>
 
 	</liferay-ui:search-container-row>

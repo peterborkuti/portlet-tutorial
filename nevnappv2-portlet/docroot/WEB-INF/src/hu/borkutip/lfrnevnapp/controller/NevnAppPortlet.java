@@ -9,13 +9,18 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.StateAwareResponse;
 
 import org.apache.log4j.Logger;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -29,8 +34,8 @@ public class NevnAppPortlet extends MVCPortlet {
 	public void init() throws PortletException {
 		super.init();
 		_log.error("init started");
-		DAYS_PATH = viewTemplate;
-		NAMES_PATH = getInitParameter("days-template");
+		NAMES_PATH = viewTemplate;
+		DAYS_PATH = getPortletConfig().getInitParameter("days-template");
 
 		try {
 
@@ -46,18 +51,27 @@ public class NevnAppPortlet extends MVCPortlet {
 	@Override
 	public void render(RenderRequest request, RenderResponse response)
 			throws IOException, PortletException {
+		_log.error("render getPath:" + getPath(request));
 
-		if (NAMES_PATH.equals(getPath(request))) {
-			List<String> errors = new ArrayList<String>();
-
-			request.setAttribute("names", NevnAppLogic.getNames(errors));
-
-			for (String err: errors) {
-				SessionErrors.add(request, err);
-			}
+		if (null == getPath(request)) {
+			_getListNames(request, response);
 		}
 
 		super.render(request, response);
+	}
+
+	@ProcessAction(name = "listNames")
+	public void listNamesAction(ActionRequest actionRequest, ActionResponse actionResponse)
+			throws IOException, PortletException {
+
+		boolean today = _getListNames(actionRequest, actionResponse);
+
+		if (!today) {
+			SessionMessages.add(actionRequest, "today");
+		}
+
+		actionResponse.setRenderParameter(PATH_PARAM, NAMES_PATH);
+
 	}
 
 	@ProcessAction(name = "listDays")
@@ -66,26 +80,38 @@ public class NevnAppPortlet extends MVCPortlet {
 
 		Long nameId = GetterUtil.getLong(actionRequest.getParameter("nameId"), -1);
 
-		if (nameId > -1) {
-			List<String> errors = new ArrayList<String>();
+		List<String> errors = new ArrayList<String>();
 
-			actionRequest.setAttribute("days", NevnAppLogic.getDays(nameId, errors));
-			actionResponse.setRenderParameter("mvcPath", DAYS_PATH);
+		actionRequest.setAttribute("days", NevnAppLogic.getDays(nameId, errors));
 
-			for (String err: errors) {
-				SessionErrors.add(actionRequest, err);
-			}
-		}
-		else {
-			SessionErrors.add(actionRequest, "missing-parameter");
+		for (String err: errors) {
+			SessionErrors.add(actionRequest, err);
 		}
 
-		super.processAction(actionRequest, actionResponse);
+		SessionMessages.add(actionRequest, "today");
+
+		actionResponse.setRenderParameter(PATH_PARAM, DAYS_PATH);
 	}
 
+	// return true if today
+	private boolean _getListNames(PortletRequest request, PortletResponse response) {
+		int month = GetterUtil.getInteger(request.getParameter("month"), -1);
+		int day = GetterUtil.getInteger(request.getParameter("day"), -1);
+
+		List<String> errors = new ArrayList<String>();
+
+		request.setAttribute("names", NevnAppLogic.getNames(month, day, errors));
+
+		for (String err: errors) {
+			SessionErrors.add(request, err);
+		}
+
+		return ((month == -1) || (day == -1));
+	}
 
 	private static Logger _log = Logger.getLogger(NevnAppPortlet.class);
-	private static String DAYS_PATH;
-	private static String NAMES_PATH;
+	public static String DAYS_PATH;
+	public static String NAMES_PATH;
+	private static final String PATH_PARAM = "mvcPath";
 
 }
