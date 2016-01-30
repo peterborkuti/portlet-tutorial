@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import hu.borkutip.lfrnevnapp.data.service.DayEntityLocalServiceUtil;
@@ -53,9 +54,34 @@ public class NevnAppPortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		_log.error("render getPath:" + getPath(request));
 
-		if (null == getPath(request)) {
+		PortletURL iteratorURL = response.createRenderURL();;
+
+		String path = getPath(request);
+
+		if (null == path) {
 			_getListNames(request, response);
 		}
+		else if (NAMES_PATH.equals(path)) {
+			String month = GetterUtil.getString(request.getParameter("month"), "-1");
+			String day = GetterUtil.getString(request.getParameter("day"), "-1");
+
+			iteratorURL = response.createActionURL();
+			iteratorURL.setParameter(ActionRequest.ACTION_NAME, "listNames");
+			iteratorURL.setParameter("month", month);
+			iteratorURL.setParameter("day", day);
+		}
+		else if (DAYS_PATH.equals(path)) {
+			String nameId = GetterUtil.getString(request.getParameter("nameId"), "-1");
+
+			iteratorURL = response.createActionURL();
+			iteratorURL.setParameter(ActionRequest.ACTION_NAME, "listDays");
+			iteratorURL.setParameter("nameId", nameId);
+		}
+		else {
+			_log.error("Invalid path:" + path);
+		}
+
+		request.setAttribute("iteratorURL", iteratorURL);
 
 		super.render(request, response);
 	}
@@ -70,8 +96,9 @@ public class NevnAppPortlet extends MVCPortlet {
 			SessionMessages.add(actionRequest, "today");
 		}
 
-		actionResponse.setRenderParameter(PATH_PARAM, NAMES_PATH);
+		PortalUtil.copyRequestParameters(actionRequest, actionResponse);
 
+		actionResponse.setRenderParameter(PATH_PARAM, NAMES_PATH);
 	}
 
 	@ProcessAction(name = "listDays")
@@ -89,6 +116,8 @@ public class NevnAppPortlet extends MVCPortlet {
 		}
 
 		SessionMessages.add(actionRequest, "today");
+
+		PortalUtil.copyRequestParameters(actionRequest, actionResponse);
 
 		actionResponse.setRenderParameter(PATH_PARAM, DAYS_PATH);
 	}
