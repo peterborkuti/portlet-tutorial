@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -19,8 +20,25 @@
 
 <portlet:defineObjects />
 
+<%
+	String[] names={"A","B","C"};
+
+%>
+
 This is the <b>auibutton</b> portlet.
 
 <portlet:renderURL var="renderURL"></portlet:renderURL>
 
 <aui:button value="add-manufacturer" onClick="<%= renderURL.toString() %>"/>
+
+<aui:select name="someSelect">
+<%
+	for (int i = 0; i < names.length; i++) {
+%>
+
+	<aui:option value='<%= "" + i %>'><%= HtmlUtil.escape(names[i]) %></aui:option>
+
+<%
+	}
+%>
+</aui:select>
