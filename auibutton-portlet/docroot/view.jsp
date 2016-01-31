@@ -15,7 +15,12 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <portlet:defineObjects />
 
 This is the <b>auibutton</b> portlet.
+
+<portlet:renderURL var="renderURL"></portlet:renderURL>
+
+<aui:button value="add-manufacturer" onClick="<%= renderURL.toString() %>"/>
