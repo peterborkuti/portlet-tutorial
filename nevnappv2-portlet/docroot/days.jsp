@@ -27,7 +27,15 @@
 <%
 	List<DayEntity> days = (List<DayEntity>)renderRequest.getAttribute("days");
 	PortletURL iteratorURL = (PortletURL)renderRequest.getAttribute("iteratorURL");
+	PortletURL namesURL = renderResponse.createRenderURL();
+	String name = (String)renderRequest.getAttribute("name");
 %>
+
+<liferay-ui:header
+	backURL="<%= namesURL.toString() %>"
+	title='some title'
+/>
+
 
 <liferay-ui:search-container
 	iteratorURL="<%= iteratorURL %>"
