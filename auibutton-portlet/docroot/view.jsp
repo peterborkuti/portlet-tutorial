@@ -1,4 +1,5 @@
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="java.util.Date" %>
 <%
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -42,3 +43,37 @@ This is the <b>auibutton</b> portlet.
 	}
 %>
 </aui:select>
+
+<%
+
+class MyDate {
+	private Date myDate = new Date();
+	private String aaa = "";
+	public void setMyDate(Date d) {
+		myDate = d;
+	}
+	public Date getMyDate() {
+		return myDate;
+	}
+	public void setAaa(String d) {
+		aaa = d;
+	}
+	public String getAaa() {
+		return aaa;
+	}
+}
+
+MyDate mDate = new MyDate();
+
+%>
+
+<aui:model-context bean="<%= mDate %>" model="<%= MyDate.class %>"/>
+
+<portlet:actionURL name="setDate" var="setDateURL"></portlet:actionURL>
+<aui:form action="<%= setDateURL %>" name="fm" method="POST">
+<aui:fieldset>
+<aui:input name="myDate"/>
+<aui:input name="aaa"/>
+</aui:fieldset>
+<aui:button type="submit">Send</aui:button>
+</aui:form>
