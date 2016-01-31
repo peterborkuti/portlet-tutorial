@@ -19,10 +19,30 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <portlet:defineObjects />
 
 <%@include file="today.jspf" %>
+
+<button id='<portlet:namespace/>dateSelector' class="btn btn-primary"><i class="icon-calendar icon-white"></i> Select the date</button>
+
+<aui:script use="aui-datepicker">
+console.log("Hello");
+new A.DatePicker(
+	      {
+	        trigger: '#<portlet:namespace/>dateSelector',
+	        popover: {
+	          zIndex: 1
+	        },
+	        on: {
+	          selectionChange: function(event) {
+	            console.log(event.newSelection)
+	          }
+	        }
+	      }
+	    );
+</aui:script>
 
 <%
 	List<NameEntity> names = (List<NameEntity>)renderRequest.getAttribute("names");

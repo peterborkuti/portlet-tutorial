@@ -39,7 +39,6 @@ public class NevnAppPortlet extends MVCPortlet {
 		DAYS_PATH = getPortletConfig().getInitParameter("days-template");
 
 		try {
-
 			URL url = getPortletContext().getResource("/WEB-INF/data/dates.txt");
 			DayEntityLocalServiceUtil.fillDatabase(url);
 			url = getPortletContext().getResource("/WEB-INF/data/names.txt");
