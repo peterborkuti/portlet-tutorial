@@ -18,12 +18,12 @@
 
 <portlet:defineObjects />
 
-This is the <b>friendlyurl</b> portlet - VIEW.JSP.
+This is the <b>friendlyurl</b> portlet - PAGE1.JSP.
 
-<portlet:renderURL var="page1URL">
-	<portlet:param name="mvcPath" value="/page1.jsp"/>
+<portlet:renderURL var="viewURL">
+	<portlet:param name="mvcPath" value="/view.jsp"/>
 </portlet:renderURL>
 
 <p>
-<a href="<%= page1URL.toString() %>">go to page1</a>
+<a href="<%= viewURL.toString() %>">go to view</a>
 </p>
