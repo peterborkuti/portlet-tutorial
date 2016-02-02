@@ -19,3 +19,11 @@
 <portlet:defineObjects />
 
 This is the <b>sendredirect</b> portlet.
+
+<portlet:actionURL name="doRedirect" var="redirectURL">
+	<portlet:param name="redirect" value="http://index.hu"/>
+</portlet:actionURL>
+
+<p>
+<a href="<%= redirectURL.toString() %>">Click here to re-render</a>
+</p>
