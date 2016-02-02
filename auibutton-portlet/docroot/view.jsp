@@ -48,18 +48,11 @@ This is the <b>auibutton</b> portlet.
 
 class MyDate {
 	private Date myDate = new Date();
-	private String aaa = "";
 	public void setMyDate(Date d) {
 		myDate = d;
 	}
 	public Date getMyDate() {
 		return myDate;
-	}
-	public void setAaa(String d) {
-		aaa = d;
-	}
-	public String getAaa() {
-		return aaa;
 	}
 }
 
@@ -70,10 +63,15 @@ MyDate mDate = new MyDate();
 <aui:model-context bean="<%= mDate %>" model="<%= MyDate.class %>"/>
 
 <portlet:actionURL name="setDate" var="setDateURL"></portlet:actionURL>
+
 <aui:form action="<%= setDateURL %>" name="fm" method="POST">
-<aui:fieldset>
-<aui:input name="myDate"/>
-<aui:input name="aaa"/>
-</aui:fieldset>
-<aui:button type="submit">Send</aui:button>
+
+	<%--
+	normally aui:input does not need type attribute because ModelHintsUtil will help
+	but my object is not created with service builder so ModelHintsUtil has no clue
+	about it
+	 --%>
+	<aui:input name="myDate" type="date"/>
+
+	<aui:button type="submit" value="Send"/>
 </aui:form>
