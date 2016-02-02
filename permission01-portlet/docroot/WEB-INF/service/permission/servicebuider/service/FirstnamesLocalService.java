@@ -253,4 +253,6 @@ public interface FirstnamesLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public boolean addName(java.lang.String name);
 }

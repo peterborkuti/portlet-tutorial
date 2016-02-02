@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>permission01</portlet-name>
 		<display-name>permission01</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>permission.controller.PermissionPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>

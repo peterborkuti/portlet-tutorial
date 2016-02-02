@@ -287,6 +287,11 @@ public class FirstnamesLocalServiceWrapper implements FirstnamesLocalService,
 			arguments);
 	}
 
+	@Override
+	public boolean addName(java.lang.String name) {
+		return _firstnamesLocalService.addName(name);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

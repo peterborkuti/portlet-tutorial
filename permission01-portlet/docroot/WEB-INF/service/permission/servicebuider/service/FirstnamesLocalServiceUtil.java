@@ -275,6 +275,10 @@ public class FirstnamesLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static boolean addName(java.lang.String name) {
+		return getService().addName(name);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

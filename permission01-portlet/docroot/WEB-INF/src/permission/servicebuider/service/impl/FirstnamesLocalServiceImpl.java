@@ -36,4 +36,8 @@ public class FirstnamesLocalServiceImpl extends FirstnamesLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link permission.servicebuider.service.FirstnamesLocalServiceUtil} to access the firstnames local service.
 	 */
+
+	public boolean addName(String name) {
+		return true;
+	}
 }
