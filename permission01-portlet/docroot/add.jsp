@@ -19,8 +19,16 @@
 
 <portlet:defineObjects />
 
-<portlet:renderURL var="addURL">
-	<portlet:param name="mvcPath" value="/add.jsp"/>
+<portlet:actionURL name="saveName" var="saveURL"/>
+
+<portlet:renderURL var="cancelURL">
+	<portlet:param name="mvcPath" value="/view.jsp"/>
 </portlet:renderURL>
 
-<aui:button name="add" value="add-name" onClick="<%= addURL.toString() %>"/>
+<aui:form action="<%= saveURL.toString() %>" method="POST">
+	<aui:input name="name" type="text"/>
+	<aui:button-row>
+	<aui:button type="submit" value="Save"/>
+	<aui:button type="cancel" value="Cancel" onClick="<%= cancelURL.toString() %>"/>
+	</aui:button-row>
+</aui:form>
