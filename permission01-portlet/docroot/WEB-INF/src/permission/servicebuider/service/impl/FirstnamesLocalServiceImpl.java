@@ -14,6 +14,11 @@
 
 package permission.servicebuider.service.impl;
 
+import java.util.Date;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import permission.servicebuider.model.Firstnames;
 import permission.servicebuider.service.base.FirstnamesLocalServiceBaseImpl;
 
 /**
@@ -38,6 +43,19 @@ public class FirstnamesLocalServiceImpl extends FirstnamesLocalServiceBaseImpl {
 	 */
 
 	public boolean addName(String name) {
+		long id;
+		try {
+			id = counterLocalService.increment(Firstnames.class.getName());
+			Firstnames fname = firstnamesPersistence.create(id);
+			fname.setFirstname(name);
+			fname.setModifiedDate(new Date());
+			fname.setCreateDate(new Date());
+			firstnamesPersistence.update(fname);
+		} catch (SystemException e) {
+			e.printStackTrace();
+			return false;
+		}
+
 		return true;
 	}
 }
