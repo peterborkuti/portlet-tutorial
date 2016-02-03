@@ -5,5 +5,10 @@
 <routes>
     <route>
         <pattern>/hello</pattern>
+        <generated-parameter name="mvcPath">/page1.jsp</generated-parameter>
+    </route>
+    <route>
+        <pattern>/cica</pattern>
+        <generated-parameter name="mvcPath">/view.jsp</generated-parameter>
     </route>
 </routes>
