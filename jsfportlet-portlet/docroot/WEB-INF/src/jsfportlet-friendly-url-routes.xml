@@ -3,11 +3,7 @@
 "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
 <routes>
 	<route>
-		<pattern>/page1</pattern>
-		<generated-parameter name="_facesViewIdRender">/views/page1.xhtml</generated-parameter>
-	</route>
-	<route>
-		<pattern>/view</pattern>
-		<generated-parameter name="_facesViewIdRender">/views/view.xhtml</generated-parameter>
+		<pattern>/TEST/{pageName}</pattern>
+		<generated-parameter name="_facesViewIdRender">/views/{pageName}.xhtml</generated-parameter>
 	</route>
 </routes>
