@@ -5,6 +5,8 @@
 	<portlet>
 		<portlet-name>adt01</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
+		<template-handler>test.template.Adt01PortletDisplayTemplateHandler</template-handler>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>adt01-portlet</css-class-wrapper>
