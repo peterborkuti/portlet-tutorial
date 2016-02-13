@@ -2,9 +2,10 @@
 <!DOCTYPE resource-action-mapping PUBLIC "-//Liferay//DTD Resource Action Mapping 6.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_6_2_0.dtd">
 <resource-action-mapping>
 <portlet-resource>
-		<portlet-name>adt01-portlet</portlet-name>
+		<portlet-name>adt01</portlet-name>
 		<permissions>
 			<supports>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
 				<action-key>ADD_TO_PAGE</action-key>
 				<action-key>CONFIGURATION</action-key>
 				<action-key>VIEW</action-key>
