@@ -19,18 +19,5 @@
 
 <portlet:defineObjects />
 
-This is the <b>form-navigator-00</b> portlet.
+PAGEC.jsp
 
-<%
-
-	String[] sectionNames = {"Section 1", "Section 2"};
-	String[][] entries = {{"a","b", "c"}, {"d", "e"}};
-%>
-
-<aui:form action='<portlet:actionURL/>' method="post" name="fm">
-	<liferay-ui:form-navigator
-		categoryNames="<%= sectionNames %>"
-		categorySections="<%= entries %>"
-		jspPath="/"
-	/>
-</aui:form>
