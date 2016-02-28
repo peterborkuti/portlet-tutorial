@@ -15,7 +15,10 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <portlet:defineObjects />
 
 This is the <b>tag-message</b> portlet.
+
+<p><liferay-ui:message key="something-other"></liferay-ui:message></p>
