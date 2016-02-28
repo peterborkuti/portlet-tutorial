@@ -15,21 +15,7 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <portlet:defineObjects />
 
-This is the <b>form-navigator-01</b> portlet.
-
-<%
-	String[] sectionNames = {"section-1", "section-2"};
-	String[][] entries = {{"page-a","page-b"}, {"page-c"}};
-%>
-
-<aui:form action='<portlet:actionURL/>' method="post" name="fm">
-	<liferay-ui:form-navigator
-		categoryNames="<%= sectionNames %>"
-		categorySections="<%= entries %>"
-		jspPath="/"
-	/>
-</aui:form>
+<p>This is Page C</p>
