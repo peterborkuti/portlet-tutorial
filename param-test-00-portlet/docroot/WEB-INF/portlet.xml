@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>param-test-00</portlet-name>
 		<display-name>param-test-00</display-name>
-		<portlet-class>X</portlet-class>
+		<portlet-class>test.ParamTestPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
