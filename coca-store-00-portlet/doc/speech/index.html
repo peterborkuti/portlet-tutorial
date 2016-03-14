@@ -77,7 +77,6 @@
           "interim_span"></span>
         </div>
         <div id="copy">
-          <button class="button" id="copy_button" onclick="copyButton()">Copy and Paste</button>
           <div id="copy_info">
             <p>
               Press Control-C to copy text.
@@ -85,8 +84,7 @@
             <p>
               (Command-C on Mac.)
             </p>
-          </div><button class="button" id="email_button" onclick="emailButton()">Create
-          Email</button>
+          </div>
           <div id="email_info">
             <p>
               Text sent to default email application.
@@ -174,10 +172,6 @@ if (!('webkitSpeechRecognition' in window)) {
       range.selectNode(document.getElementById('final_span'));
       window.getSelection().addRange(range);
     }
-    if (create_email) {
-      create_email = false;
-      createEmail();
-    }
   };
 
   recognition.onresult = function(event) {
@@ -211,39 +205,6 @@ function upgrade() {
 }
 
 
-function createEmail() {
-  var n = final_transcript.indexOf('\n');
-  if (n < 0 || n >= 80) {
-    n = 40 + final_transcript.substring(40).indexOf(' ');
-  }
-  var subject = encodeURI(final_transcript.substring(0, n));
-  var body = encodeURI(final_transcript.substring(n + 1));
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-}
-
-function copyButton() {
-  if (recognizing) {
-    recognizing = false;
-    recognition.stop();
-  }
-  copy_button.style.display = 'none';
-  copy_info.style.display = 'inline-block';
-  showInfo('');
-}
-
-function emailButton() {
-  if (recognizing) {
-    create_email = true;
-    recognizing = false;
-    recognition.stop();
-  } else {
-    createEmail();
-  }
-  email_button.style.display = 'none';
-  email_info.style.display = 'inline-block';
-  showInfo('');
-}
-
 function startButton(event) {
   if (recognizing) {
     recognition.stop();
@@ -268,8 +229,6 @@ function showButtons(style) {
     return;
   }
   current_style = style;
-  copy_button.style.display = style;
-  email_button.style.display = style;
   copy_info.style.display = 'none';
   email_info.style.display = 'none';
 }

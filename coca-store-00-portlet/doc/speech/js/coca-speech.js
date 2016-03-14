@@ -1,3 +1,30 @@
+var missed = {
+    'kinley': "kinti kim lee kienle kinizsi",
+    'cappy': "happy 2 kettő",
+    'nestea': "ness ikea tea",
+    'naturaqua': "natúr aqua víz",
+    'aloe': "alul",
+    'vadmálna': "vad málna",
+    'őszibarack': "őszi barack",
+    'multivitamin': "multi vitamin",
+    'bodzavirág': "bodza virág",
+    'citromfű': "citrom fű",
+    'buborékmentes': "mentes sima csendes",
+    'szénsavas': "csípős pezsgő buborékos bubi bubis",
+    'feketeribizli': "ribizli",
+    'emotion': "motion",
+    'rebarbara': "barbi barbie",
+    'mangó': "mango",
+    'light': "lajt lejt",
+    'chili': "csili",
+    'pulpy': "pult pálfi puppy púp party parti ulti árpi hp ápisz",
+    'grapefruit': "grépfrút",
+    'eper': "eperfa fr",
+    'coca': "kuka kula",
+    'cola': "kula",
+    'zero': "zéró"
+};
+
 var products = [
   "Coca cola",
   "Coca cola light",
@@ -6,7 +33,7 @@ var products = [
   "Fanta citrom",
   "Fanta narancs",
   "Fanta zero narancs",
-  "Fanta vadmálna vad málna",
+  "Fanta vadmálna",
   "Fanta bodza",
   "Sprite",
   "Kinley gyömbér",
@@ -16,8 +43,8 @@ var products = [
   "Lift meggy",
   "Lift citrom",
   "Lift narancs",
-  "Nestea nes tea fekete citrom",
-  "Nestea fekete őszibarack őszi barack",
+  "Nestea fekete citrom",
+  "Nestea fekete őszibarack",
   "Nestea fekete Bodza szőlő",
   "Nestea zöld eper",
   "Nestea zöld Aloe vera",
@@ -56,7 +83,7 @@ productsDiv.innerHTML = products.join(', ');
 
 var Words = function() {
     var found = 0.6;
-    var notFound = 0.2;
+    var notFound = 0.1;
 
     var productProbability = [];
     var words = [];
@@ -73,10 +100,18 @@ var Words = function() {
     var initWords = function() {
 	words = [];
 	productIndex = [];
+	
 
 	products.forEach(function(product, index) {
 	    product = product.toLowerCase();
 	    var w = product.split(' ');
+	    var l = w.length;
+	    for (var i = 0; i < l; i++) {
+		var word = w[i];
+		if (missed[word]) {
+		    w = w.concat(missed[word].split(' '));
+		}
+	    };
 
 	    w.forEach(function(word) {
 		var wordIndex = words.indexOf(word);
@@ -90,6 +125,16 @@ var Words = function() {
     	    });
 	});
     };
+
+    var listWords = function() {
+	words.forEach(function(word, index) {
+	    var ps = [];
+	    productIndex[index].forEach(function(pIndex) {
+		ps.push(products[pIndex]);
+	    });
+	    console.log(word + " => " + ps.join(','));
+	});
+    }
 
     var normalize = function() {
 	var sum = 0.0;
@@ -134,12 +179,20 @@ var Words = function() {
 	    limit = 0.2;
 	};
 
+	var pp = [].concat(productProbability);
+	pp.sort(function(a, b){return b-a});
+	var first = pp[0];
+	var second = pp[1];
 	var ps = [];
 	productProbability.forEach(function(p, index) {
-	    if (p > limit) {
-		ps.push(products[index]);
+	    if (((first > (second * 3)) && p === first) || (p > pp[2])){
+		ps.push((products[index]).split('|')[0]);
 	    };
 	});
+
+	if (ps.length === 1) {
+	    initProbability();
+	}
 
 	return ps;
     }
@@ -149,7 +202,7 @@ var Words = function() {
 
     console.log(words);
     console.log(productProbability);
-    console.log(productIndex);
+    listWords();
 
     return {
 	'restart' 	: initProbability,
