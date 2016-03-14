@@ -52,29 +52,117 @@ var products = [
   "NaturAqua Emotion őszibarack hibiszkusz"
 ];
 
-var words = [];
-for (var p = 0; p < products.length; p++) {
-    var w = products[p].split(' ');
-    w.forEach(function(word) {
-	word = word.toLowerCase();
-      if (words.indexOf(word)  === -1) {
-        words.push(word);
-      }
-  });
-};
+productsDiv.innerHTML = products.join(', ');
 
-console.log(words);
+var Words = function() {
+    var found = 0.6;
+    var notFound = 0.2;
 
-function newTranscriptResult(word) {
-    word = word.toLowerCase();
-    var words_ = word.split(' ');
-    for (var i = 0; i < words_.length; i++) {
-	word = words_[i];
-        if (words.indexOf(word) !== -1) {
-	    console.log(word + "exists among words");
-	}
-	else {
-	    console.log(word + " is unknown");
+    var productProbability = [];
+    var words = [];
+    var productIndex = [];
+
+    var initProbability = function() {
+	productProbability = [];
+	var prob = 1.0 / products.length;
+	products.forEach(function() {
+	    productProbability.push(prob);
+	})
+    };
+
+    var initWords = function() {
+	words = [];
+	productIndex = [];
+
+	products.forEach(function(product, index) {
+	    product = product.toLowerCase();
+	    var w = product.split(' ');
+
+	    w.forEach(function(word) {
+		var wordIndex = words.indexOf(word);
+
+		if (wordIndex === -1) {
+			words.push(word);
+			wordIndex = productIndex.push([]) - 1;
+		};
+
+		productIndex[wordIndex].push(index);
+    	    });
+	});
+    };
+
+    var normalize = function() {
+	var sum = 0.0;
+
+	productProbability.forEach(function(p) {
+	    sum += p;
+	});
+
+	var l = productProbability.length;
+
+	for ( var i = 0; i < l; i++) {
+	    productProbability[i] /=  sum;
 	}
     }
+
+    var tuneProbabilities = function(wordIndex) {
+	var indexes = productIndex[wordIndex];
+
+	for (var i = 0; i < productProbability.length; i++) {
+		productProbability[i] *= ((indexes.indexOf(i) !== -1) ? found : notFound);
+	}
+
+	normalize();
+    };
+
+    var checkWord = function(word) {
+        word = word.toLowerCase();
+	word.split(' ').forEach(function(word) {
+	    var index = words.indexOf(word);
+    	    if (index !== -1) {
+		tuneProbabilities(index);
+		console.log(word + " exists among words");
+	    }
+	    else {
+		console.log(word + " is unknown");
+	    }
+	});
+    }
+
+    var getClues = function(limit) {
+	if (!limit) {
+	    limit = 0.2;
+	};
+
+	var ps = [];
+	productProbability.forEach(function(p, index) {
+	    if (p > limit) {
+		ps.push(products[index]);
+	    };
+	});
+
+	return ps;
+    }
+
+    initProbability();
+    initWords();
+
+    console.log(words);
+    console.log(productProbability);
+    console.log(productIndex);
+
+    return {
+	'restart' 	: initProbability,
+	'checkWord'	: checkWord,
+	'getClues'	: getClues
+    }
+
+
+}
+
+var words = Words();
+
+function newTranscriptResult(word) {
+    words.checkWord(word);
+    console.log("clues:", words.getClues());
 }
