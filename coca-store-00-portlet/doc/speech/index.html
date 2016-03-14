@@ -109,6 +109,9 @@
 <script src="js/lang-options.js">
 </script>
 
+<script src="js/coca-speech.js">
+</script>
+
 <script>
 var create_email = false;
 var final_transcript = '';
@@ -121,7 +124,7 @@ if (!('webkitSpeechRecognition' in window)) {
   start_button.style.display = 'inline-block';
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
-  recognition.interimResults = true;
+  recognition.interimResults = false;
 
   recognition.onstart = function() {
     recognizing = true;
@@ -184,6 +187,7 @@ if (!('webkitSpeechRecognition' in window)) {
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
+	newTranscriptResult(event.results[i][0].transcript);
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
