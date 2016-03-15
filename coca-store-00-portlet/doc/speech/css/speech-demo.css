@@ -13,7 +13,7 @@
     border: 1px solid #ddd;
     padding: 15px;
     text-align: left;
-    min-height: 150px;
+    min-height: 20px;
     }
     #start_button {
     border: 0;
@@ -48,6 +48,10 @@
     display: none;
     margin: 0 70px;
     }
+    #productsDiv > span::after {
+	content: " | ";
+    }
+
 
 a.c1 {font-weight: normal;}
 

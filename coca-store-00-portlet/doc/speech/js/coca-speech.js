@@ -17,21 +17,21 @@ var missed = {
     'mangó': "mango",
     'light': "lajt lejt",
     'chili': "csili",
-    'pulpy': "pult pálfi puppy púp party parti ulti árpi hp ápisz",
+    'pulpy': "pult pálfi puppy púp party parti ulti árpi hp ápisz bárdi pápa youtube",
     'grapefruit': "grépfrút",
     'eper': "eperfa fr",
     'coca': "kuka kula",
     'cola': "kula",
-    'zero': "zéró"
+    'zero': "zéró euro"
 };
 
 var products = [
-  "Coca cola",
+  "Coca cola rendes",
   "Coca cola light",
   "Coca cola zero",
   "Coca cola cherry",
   "Fanta citrom",
-  "Fanta narancs",
+  "Fanta narancs normál",
   "Fanta zero narancs",
   "Fanta vadmálna",
   "Fanta bodza",
@@ -79,7 +79,20 @@ var products = [
   "NaturAqua Emotion őszibarack hibiszkusz"
 ];
 
-productsDiv.innerHTML = products.join(', ');
+
+(function(){
+
+    var s = '';
+
+    products.forEach(function(p, i) {
+	var span = '<span id="span' + i + '">' + p + '</span>';
+	s += span;
+    });
+
+    productsDiv.innerHTML = s;
+})();
+
+
 
 var Words = function() {
     var found = 0.6;
@@ -89,11 +102,20 @@ var Words = function() {
     var words = [];
     var productIndex = [];
 
+    var setProbabilityEffect = function(index) {
+	var span = document.getElementById('span' + index);
+	var p = productProbability[index];
+	var color = Math.ceil(255 - 255 * p);
+	span.style.backgroundColor = "rgb(255," + color + "," + color + ")";
+	//span.style.fontSize=(50.0 * productProbability[index] + 20)+"px";
+    };
+
     var initProbability = function() {
 	productProbability = [];
 	var prob = 1.0 / products.length;
-	products.forEach(function() {
+	products.forEach(function(p, i) {
 	    productProbability.push(prob);
+	    setProbabilityEffect(i);
 	})
     };
 
@@ -147,6 +169,7 @@ var Words = function() {
 
 	for ( var i = 0; i < l; i++) {
 	    productProbability[i] /=  sum;
+	    setProbabilityEffect(i);
 	}
     }
 
@@ -186,11 +209,12 @@ var Words = function() {
 	var ps = [];
 	productProbability.forEach(function(p, index) {
 	    if (((first > (second * 3)) && p === first) || (p > pp[2])){
-		ps.push((products[index]).split('|')[0]);
+		ps.push(products[index]);
 	    };
 	});
 
 	if (ps.length === 1) {
+	    last_recognized.innerHTML = ps[0];
 	    initProbability();
 	}
 
