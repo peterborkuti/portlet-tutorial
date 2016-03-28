@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>legacydb</portlet-name>
 		<display-name>legacydb</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.LegacydbPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
