@@ -1,0 +1,1 @@
+create index IX_6708220C on legacydb (name);
