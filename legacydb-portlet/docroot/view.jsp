@@ -32,20 +32,21 @@
 
 %>
 This is the <b>legacydb</b> portlet.
-<p>
 
 <portlet:actionURL var="actionURL">
 	<portlet:param name="delta" value='<%= "" + delta %>'/>
 	<portlet:param name="cur" value='<%= "" + curPage %>'/>
-
 </portlet:actionURL>
+
+<p>
 Add new <a href="<%= actionURL %>">random entity</a>
 </p>
 
 <liferay-ui:search-container delta="<%= delta %>" emptyResultsMessage="no-data-found">
 	<liferay-ui:search-container-results
-		results="<%= ListUtil.subList(
-				entities, delta * (curPage -1), delta * curPage - 1)
+		results="<%= 
+			ListUtil.subList(
+				entities, searchContainer.getStart(), searchContainer.getEnd())
 		%>"
 		total="<%= entities.size() %>"
 	/>
@@ -69,3 +70,4 @@ Add new <a href="<%= actionURL %>">random entity</a>
 	<liferay-ui:search-iterator />
 
 </liferay-ui:search-container>
+
