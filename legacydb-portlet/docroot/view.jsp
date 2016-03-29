@@ -21,28 +21,50 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="javax.portlet.PortletURL" %>
 
 <portlet:defineObjects />
 
 <%
 
 	List<Legacydb> entities = (List<Legacydb>)renderRequest.getAttribute("entities");
-	Integer delta = GetterUtil.getInteger(renderRequest.getParameter("delta"), 10);
-	String curPage = GetterUtil.getString(renderRequest.getParameter("cur"), "1");
+	Integer delta2 = GetterUtil.getInteger(renderRequest.getParameter("delta2"), 10);
+	String curPage2 = GetterUtil.getString(renderRequest.getParameter("cur2"), "1");
+	Integer delta1 = GetterUtil.getInteger(renderRequest.getParameter("delta1"), 10);
+	String curPage1 = GetterUtil.getString(renderRequest.getParameter("cur1"), "1");
 
 %>
 This is the <b>legacydb</b> portlet.
 
 <portlet:actionURL var="actionURL">
-	<portlet:param name="delta" value='<%= "" + delta %>'/>
-	<portlet:param name="cur" value='<%= "" + curPage %>'/>
+	<portlet:param name="delta2" value='<%= "" + delta2 %>'/>
+	<portlet:param name="cur2" value='<%= curPage2 %>'/>
+	<portlet:param name="delta1" value='<%= "" + delta1 %>'/>
+	<portlet:param name="cur1" value='<%= curPage1 %>'/>
 </portlet:actionURL>
+
+<%
+PortletURL iteratorURL1 = renderResponse.createRenderURL();
+iteratorURL1.setParameter("delta2", "" + delta2);
+iteratorURL1.setParameter("cur2", curPage2);
+
+PortletURL iteratorURL2 = renderResponse.createRenderURL();
+iteratorURL2.setParameter("delta1", "" + delta1);
+iteratorURL2.setParameter("cur1", curPage1);
+%>
 
 <p>
 Add new <a href="<%= actionURL %>">random entity</a>
 </p>
 
-<liferay-ui:search-container delta="<%= delta %>" emptyResultsMessage="no-data-found">
+<liferay-ui:search-container
+	iteratorURL="<%= iteratorURL1 %>"
+	delta="<%= delta1 %>"
+	emptyResultsMessage="no-data-found"
+	curParam="cur1"
+	deltaParam="delta1"
+	>
+
 	<liferay-ui:search-container-results
 		results="<%= 
 			ListUtil.subList(
@@ -71,7 +93,14 @@ Add new <a href="<%= actionURL %>">random entity</a>
 
 </liferay-ui:search-container>
 
-<liferay-ui:search-container delta="<%= delta %>" emptyResultsMessage="no-data-found">
+<liferay-ui:search-container
+	iteratorURL="<%= iteratorURL2 %>"
+	delta="<%= delta2 %>"
+	emptyResultsMessage="no-data-found"
+	curParam="cur2"
+	deltaParam="delta2"
+	>
+
 	<liferay-ui:search-container-results
 		results="<%= 
 			ListUtil.subList(
