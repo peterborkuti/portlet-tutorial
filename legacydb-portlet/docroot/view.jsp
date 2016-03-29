@@ -71,3 +71,32 @@ Add new <a href="<%= actionURL %>">random entity</a>
 
 </liferay-ui:search-container>
 
+<liferay-ui:search-container delta="<%= delta %>" emptyResultsMessage="no-data-found">
+	<liferay-ui:search-container-results
+		results="<%= 
+			ListUtil.subList(
+				entities, searchContainer.getStart(), searchContainer.getEnd())
+		%>"
+		total="<%= entities.size() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="test.sb.model.Legacydb"
+		keyProperty="legacydbid"
+		modelVar="entity"
+	>
+		<liferay-ui:search-container-column-text
+			name="Id"
+			property="legacydbid"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="Name"
+			property="name"
+		/>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+
+</liferay-ui:search-container>
+
