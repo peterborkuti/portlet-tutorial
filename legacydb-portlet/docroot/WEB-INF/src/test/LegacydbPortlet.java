@@ -12,10 +12,8 @@ import javax.portlet.RenderResponse;
 import org.apache.log4j.Logger;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -36,8 +34,6 @@ public class LegacydbPortlet extends MVCPortlet {
 			_log.error(e.getMessage());
 		}
 
-		renderRequest.setAttribute("cur", GetterUtil.getInteger(renderRequest.getParameter("cur"), 1));
-		renderRequest.setAttribute("delta", GetterUtil.getInteger(renderRequest.getParameter("delta"), 10));
 		renderRequest.setAttribute("entities", entities);
 
 		super.doView(renderRequest, renderResponse);

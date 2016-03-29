@@ -27,8 +27,8 @@
 <%
 
 	List<Legacydb> entities = (List<Legacydb>)renderRequest.getAttribute("entities");
-	Integer delta = (Integer)renderRequest.getAttribute("delta");
-	Integer curPage = (Integer)renderRequest.getAttribute("cur");
+	Integer delta = GetterUtil.getInteger(renderRequest.getParameter("delta"), 10);
+	String curPage = GetterUtil.getString(renderRequest.getParameter("cur"), "1");
 
 %>
 This is the <b>legacydb</b> portlet.
