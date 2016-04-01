@@ -5,7 +5,8 @@ custom validators works for aui:input tags but not with aui:select.
 Here you can find the [documentation](https://dev.liferay.com/develop/tutorials/-/knowledge_base/6-2/using-the-alloyui-validator-tag) of javascript validation of aui:input tag.
 It does not mention aui:select validation, however, this code works in a way, but not perfeclty:
 
-´´´
+
+```
 <aui:form action="<%=formRenderUrl.toString()%>" name="fm1"
 	method="post">
 	<aui:select label="select1" name="select1">
@@ -27,7 +28,8 @@ It does not mention aui:select validation, however, this code works in a way, bu
 	</aui:script>
 
 </aui:form>
-´´´
+```
+
 
 ## Working example
 
