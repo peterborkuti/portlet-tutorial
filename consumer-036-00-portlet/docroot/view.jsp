@@ -23,6 +23,10 @@
 
 This is the <b>consumer-036-00</b> portlet.
 
+<p>producer-036-00 portlet must be deployed first and you have to add some
+record with that portlet. This portlet will display the list of those
+records to show how to use another portlet's service.</p>
+
 <liferay-ui:search-container delta="10" emptyResultsMessage="no-users-were-found">
 	<liferay-ui:search-container-results
 		results="<%= FooLocalServiceUtil.getFoos(searchContainer.getStart(), searchContainer.getEnd()) %>"

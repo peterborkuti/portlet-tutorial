@@ -20,6 +20,9 @@
 
 This is the <b>producer-036-00</b> portlet.
 
+<p>Add some record with this portlet and add consumer-036-00 portlet to
+see the records.</p>
+
 <p>
 <a href="<portlet:actionURL></portlet:actionURL>">ADD</a> a new random entry
 </p>
