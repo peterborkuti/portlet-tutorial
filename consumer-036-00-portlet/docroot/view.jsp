@@ -15,7 +15,32 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
+<%@ page import="test.producer.sb.service.FooLocalServiceUtil" %>
 
 <portlet:defineObjects />
 
 This is the <b>consumer-036-00</b> portlet.
+
+<liferay-ui:search-container delta="10" emptyResultsMessage="no-users-were-found">
+	<liferay-ui:search-container-results
+		results="<%= FooLocalServiceUtil.getFoos(searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= FooLocalServiceUtil.getFoosCount() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="test.producer.sb.model.Foo"
+		keyProperty="fooId"
+		modelVar="foo"
+	>
+		<liferay-ui:search-container-column-text
+			name="Field1"
+			property="field1"
+		/>
+
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+
+</liferay-ui:search-container>
