@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="test.producer.sb.service.FooLocalService" class="test.producer.sb.service.impl.FooLocalServiceImpl" />
+	<bean id="test.producer.sb.service.FooService" class="test.producer.sb.service.impl.FooServiceImpl" />
+	<bean id="test.producer.sb.service.persistence.FooPersistence" class="test.producer.sb.service.persistence.FooPersistenceImpl" parent="basePersistence" />
+</beans>
