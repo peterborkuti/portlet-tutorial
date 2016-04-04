@@ -16,6 +16,8 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<portlet:defineObjects />
 
-This is the <b>util-include</b> portlet.
+<portlet:defineObjects />
+<p>
+This is the <b>test3.jsp</b> page.
+</p>
