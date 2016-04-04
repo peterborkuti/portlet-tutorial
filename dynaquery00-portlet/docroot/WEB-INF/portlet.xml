@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>dynaquery00</portlet-name>
 		<display-name>dynaquery00</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>test.DynaQueryPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
