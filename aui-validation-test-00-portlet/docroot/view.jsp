@@ -86,6 +86,7 @@ portlet.
 				return result;
 			},
 			custom : true,
+			customValidatorRequired: true,
 			errorMessage : 'First name is missing.',
 			fieldName : '<portlet:namespace />emailfield3',
 			validatorName : 'custom_rule_emailfield3'
