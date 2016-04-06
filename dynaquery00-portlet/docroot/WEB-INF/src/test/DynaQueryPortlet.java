@@ -15,59 +15,24 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 
 public class DynaQueryPortlet extends MVCPortlet {
-	protected class DayComparator extends OrderByComparator {
-
-
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public String getOrderBy() {
-			return "createDate";
-		}
-
-		@Override
-		public int compare(Object obj1, Object obj2) {
-			Contact a = (Contact)obj1;
-			Contact b = (Contact)obj2;
-			if ((a == null) || (b == null)) {
-				return 0;
-			}
-			int da = a.getModifiedDate().getDate();
-			int db = b.getModifiedDate().getDate();
-
-			if (da > db) {
-				return -1;
-			}
-			if (da < db) {
-				return 1;
-			}
-
-			return 0;
-		}
-		
-	}
-
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Contact.class);
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Contact.class, PortalClassLoaderUtil.getClassLoader());
 
-		OrderByComparator oComp = new DayComparator();
+		OrderByComparator oComp = new DayComparator(true);
 
 		List<Contact> results = new ArrayList<Contact>();
 			try {
-				results =
+				results =(List<Contact>)
 					ContactLocalServiceUtil.dynamicQuery(
 						query, QueryUtil.ALL_POS, QueryUtil.ALL_POS, oComp);
 			} catch (SystemException e) {
