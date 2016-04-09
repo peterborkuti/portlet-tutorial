@@ -15,7 +15,70 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ page import="com.liferay.portal.model.Contact" %>
+<%@ page import="com.liferay.portal.kernel.util.OrderByComparator" %>
 
 <portlet:defineObjects />
 
 This is the <b>dynaquery00</b> portlet.
+
+<portlet:renderURL var="upURL"><portlet:param name="order" value="true"/></portlet:renderURL>
+
+<portlet:renderURL var="downURL"><portlet:param name="order" value="false"/></portlet:renderURL>
+
+<p>
+<a href="<%= upURL %>">UP</a>
+</p>
+
+<p>
+<a href="<%= downURL %>">DOWN</a>
+</p>
+
+<%
+java.util.List<Contact> contactList =
+	(java.util.List<Contact>)renderRequest.getAttribute("contactList");
+%>
+
+<liferay-ui:search-container delta="10" total="<%= contactList.size() %>" >
+
+	<liferay-ui:search-container-results
+		results="<%= 
+			contactList.subList(
+				searchContainer.getStart(),
+				Math.min(searchContainer.getEnd(), contactList.size())) 
+				%>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Contact"
+		keyProperty="contactId"
+		modelVar="contact"
+	>
+
+	<liferay-ui:search-container-column-text
+		name="ID"
+		property="contactId"
+	/>
+
+	<liferay-ui:search-container-column-text
+		name="name"
+		property="firstName"
+	/>
+
+	<liferay-ui:search-container-column-text
+		name="email"
+		property="emailAddress"
+	/>
+
+	<liferay-ui:search-container-column-text
+		name="moddate"
+		property="modifiedDate"
+	/>
+
+
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+
+</liferay-ui:search-container>

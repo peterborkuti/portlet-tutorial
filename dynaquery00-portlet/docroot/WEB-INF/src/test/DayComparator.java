@@ -6,7 +6,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Contact;
 
 public class DayComparator extends OrderByComparator {
-	private static String field = "createDate";
+	private static String field = "modifiedDate";
 
 	public static final String ORDER_BY_ASC = field + " ASC";
 

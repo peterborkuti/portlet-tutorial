@@ -2,6 +2,7 @@ package test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletException;
@@ -33,16 +34,18 @@ public class DynaQueryPortlet extends MVCPortlet {
 		OrderByComparator oComp = new DayComparator(order);
 
 		List<Contact> results = new ArrayList<Contact>();
-			try {
-				results =(List<Contact>)
-					ContactLocalServiceUtil.dynamicQuery(
-						query, QueryUtil.ALL_POS, QueryUtil.ALL_POS, oComp);
-			} catch (SystemException e) {
-				_log.error(e.getMessage());
-			}
-		for (Contact contact: results) {
-			_log.error("Contact:" + contact.getEmailAddress() + "," + contact.getModifiedDate().getDate());
+		try {
+			results =(List<Contact>)
+				ContactLocalServiceUtil.dynamicQuery(
+					query, QueryUtil.ALL_POS, QueryUtil.ALL_POS, oComp);
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
 		}
+
+		List<Contact> modifiableList = new ArrayList<Contact>(results);
+		Collections.sort(modifiableList, oComp);
+		renderRequest.setAttribute("contactList", modifiableList);
+
 		super.doView(renderRequest, renderResponse);
 	}
 
