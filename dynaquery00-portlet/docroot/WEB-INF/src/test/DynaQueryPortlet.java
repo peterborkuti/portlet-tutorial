@@ -14,6 +14,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Contact;
@@ -26,9 +27,10 @@ public class DynaQueryPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
+		boolean order = GetterUtil.getBoolean(renderRequest.getParameter("order"), true);
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Contact.class, PortalClassLoaderUtil.getClassLoader());
 
-		OrderByComparator oComp = new DayComparator(true);
+		OrderByComparator oComp = new DayComparator(order);
 
 		List<Contact> results = new ArrayList<Contact>();
 			try {
