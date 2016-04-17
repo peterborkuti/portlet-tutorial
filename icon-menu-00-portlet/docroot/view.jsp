@@ -1,3 +1,4 @@
+
 <%
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -14,8 +15,19 @@
  */
 %>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
+
 
 <portlet:defineObjects />
 
-This is the <b>icon-menu-00</b> portlet.
+This is the
+<b>icon-menu-00</b>
+portlet.
+
+<liferay-ui:icon-menu direction="down" message="navigation">
+	<liferay-ui:icon iconCssClass="icon-heart" message="Glypicon"
+		url="http://www.glyphicons.com" useDialog="true"/>
+	<liferay-ui:icon iconCssClass="icon-eye-open" message="Education"
+		url="http://www.coursera.com" />
+</liferay-ui:icon-menu>
