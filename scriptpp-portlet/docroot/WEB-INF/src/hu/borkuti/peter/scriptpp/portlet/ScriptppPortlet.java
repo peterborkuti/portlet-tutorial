@@ -8,6 +8,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
@@ -28,21 +30,41 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class ScriptppPortlet extends MVCPortlet {
 
-	public void executeScript(ActionRequest actionRequest, ActionResponse actionResponse)
+	public void executeScript(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException {
 
 		PortletConfig portletConfig = 
-			(PortletConfig)actionRequest.getAttribute(
+			(PortletConfig)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		String script = ParamUtil.getString(actionRequest, "script", "");
+		String script = ParamUtil.getString(request, "script", "");
 
 		_log.error("executeScript:" + script);
 
-		runScript(portletConfig, actionRequest, actionResponse);
+		runScript(portletConfig, request, response);
 
-		PortalUtil.copyRequestParameters(actionRequest, actionResponse);
+		PortalUtil.copyRequestParameters(request, response);
 	}
+
+	
+
+	public void executeScriptWithAjax(ResourceRequest request, ResourceResponse response)
+			throws IOException, PortletException {
+		
+
+		PortletConfig portletConfig = 
+			(PortletConfig)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		String script = ParamUtil.getString(request, "script", "");
+
+		_log.error("executeScript:" + script);
+
+		runScript(portletConfig, "groovy", script, request, response);
+
+	}
+
+	private doExecute()
 
 	protected void runScript(
 			PortletConfig portletConfig, ActionRequest actionRequest,

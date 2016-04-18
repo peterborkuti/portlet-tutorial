@@ -15,16 +15,16 @@
 	 */
 %>
 
-<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil"%>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
 
 <portlet:defineObjects />
 
-<% 
-	String output = GetterUtil.getString((String)renderRequest.getAttribute("output"));
-	String error = GetterUtil.getString((String)renderRequest.getAttribute("error"));
+<%
+	String output = GetterUtil.getString((String) renderRequest.getAttribute("output"));
+	String error = GetterUtil.getString((String) renderRequest.getAttribute("error"));
 %>
 This is the
 <b>script++</b>
@@ -32,17 +32,36 @@ portlet.
 
 <portlet:actionURL name="executeScript" var="actionURL"></portlet:actionURL>
 
-<aui:form action="<%=actionURL%>" method="POST">
+<aui:form action="#" method="POST" name="scriptFm" id="scriptFm">
 	<aui:fieldset>
 		<aui:input name="script" type="textarea"></aui:input>
 	</aui:fieldset>
 	<aui:button-row>
-		<aui:button type="submit" value="submit"></aui:button>
+		<aui:button onClick="submitForm();" value="submit"></aui:button>
 	</aui:button-row>
 	<aui:fieldset>
-		<aui:input name="output" type="textarea" disabled="true" value="<%= output %>"></aui:input>
+		<aui:input name="output" type="textarea" disabled="true"
+			value="<%=output%>"></aui:input>
 	</aui:fieldset>
 	<aui:fieldset>
-		<aui:input name="error" type="textarea" disabled="true" value="<%= error %>"></aui:input>
+		<aui:input name="error" type="textarea" disabled="true"
+			value="<%=error%>"></aui:input>
 	</aui:fieldset>
 </aui:form>
+
+<aui:script use="aui-io-request,aui-node">
+    Liferay.provide(window,'submitForm',
+         function() {
+          var A = AUI();
+          A.io.request('<%= actionURL %>',{
+              method: 'POST',
+              form: { id: '<portlet:namespace />scriptFm' },
+              on: {
+                  success: function(){
+  					console.log("done");
+   
+                   }
+             }
+        });
+  });
+</aui:script>
