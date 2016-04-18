@@ -15,18 +15,23 @@
 	 */
 %>
 
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
 
 <portlet:defineObjects />
 
+<% 
+	String output = GetterUtil.getString((String)renderRequest.getAttribute("output"));
+	String error = GetterUtil.getString((String)renderRequest.getAttribute("error"));
+%>
 This is the
 <b>script++</b>
 portlet.
 
 <portlet:actionURL name="executeScript" var="actionURL"></portlet:actionURL>
 
-<
 <aui:form action="<%=actionURL%>" method="POST">
 	<aui:fieldset>
 		<aui:input name="script" type="textarea"></aui:input>
@@ -34,4 +39,10 @@ portlet.
 	<aui:button-row>
 		<aui:button type="submit" value="submit"></aui:button>
 	</aui:button-row>
+	<aui:fieldset>
+		<aui:input name="output" type="textarea" disabled="true" value="<%= output %>"></aui:input>
+	</aui:fieldset>
+	<aui:fieldset>
+		<aui:input name="error" type="textarea" disabled="true" value="<%= error %>"></aui:input>
+	</aui:fieldset>
 </aui:form>

@@ -71,17 +71,11 @@ public class ScriptppPortlet extends MVCPortlet {
 
 			unsyncPrintWriter.flush();
 
-			SessionMessages.add(
-				actionRequest, "scriptOutput",
-				unsyncByteArrayOutputStream.toString());
+			actionRequest.setAttribute(
+				"output", unsyncByteArrayOutputStream.toString());
 		}
 		catch (ScriptingException se) {
-			SessionErrors.add(
-				actionRequest, ScriptingException.class.getName(), se);
-
-			Log log = SanitizerLogWrapper.allowCRLF(_log);
-
-			log.error(se.getMessage());
+			actionRequest.setAttribute("error", se.getMessage());
 		}
 	}
 
