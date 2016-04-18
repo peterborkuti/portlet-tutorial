@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>scriptpp</portlet-name>
 		<display-name>script++</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>hu.borkuti.peter.scriptpp.portlet.ScriptppPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
