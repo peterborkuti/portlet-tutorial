@@ -30,7 +30,7 @@ This is the
 <b>script++</b>
 portlet.
 
-<portlet:actionURL name="executeScript" var="actionURL"></portlet:actionURL>
+<portlet:resourceURL var="actionURL"></portlet:resourceURL>
 
 <aui:form action="#" method="POST" name="scriptFm" id="scriptFm">
 	<aui:fieldset>
@@ -49,19 +49,32 @@ portlet.
 	</aui:fieldset>
 </aui:form>
 
-<aui:script use="aui-io-request,aui-node">
-    Liferay.provide(window,'submitForm',
-         function() {
-          var A = AUI();
-          A.io.request('<%= actionURL %>',{
-              method: 'POST',
-              form: { id: '<portlet:namespace />scriptFm' },
-              on: {
-                  success: function(){
-  					console.log("done");
-   
-                   }
-             }
-        });
-  });
+<aui:script use="aui-io-request,aui-node,json-parse">
+Liferay.provide(window, 'submitForm',
+	function() {
+		var A = AUI();
+		var output = A.one("#<portlet:namespace />output");
+		var error = A.one("#<portlet:namespace />error");
+		A.io.request('<%= actionURL %>', {
+			method: 'POST',
+			form: {
+				id: '<portlet:namespace />scriptFm'
+			},
+			on: {
+				success: function(event, id, response) {
+					var parsedResponse = {
+						'output': '',
+						'error': 'no meaningful response'
+					};
+					try {
+						parsedResponse = A.JSON.parse(response.responseText);
+					} catch (e) {}
+					output.val(parsedResponse.output);
+					error.val(parsedResponse.error);
+					console.log("done", event, id, response);
+
+				}
+			}
+		});
+	});
 </aui:script>
