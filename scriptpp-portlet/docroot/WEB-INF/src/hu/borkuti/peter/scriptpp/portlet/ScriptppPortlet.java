@@ -35,12 +35,14 @@ public class ScriptppPortlet extends MVCPortlet {
 		PortletConfig portletConfig = 
 			(PortletConfig)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
-
+		
+		String type = ParamUtil.getString(request, "type", "command");
+		String command = ParamUtil.getString(request, "command", "");
 		String script = ParamUtil.getString(request, "script", "");
 
-		_log.error("executeScript:" + script);
+		_log.error("executeScript:" + command + "," + script);
 
-		runScript(portletConfig, "groovy", script, request, response);
+		runScript(portletConfig, "groovy", script + ";" + command, request, response);
 
 	}
 

@@ -32,6 +32,8 @@ portlet.
 
 <portlet:resourceURL var="actionURL"></portlet:resourceURL>
 
+<div id="<portlet:namespace/>terminal"></div>
+
 <aui:form action="#" method="POST" name="scriptFm" id="scriptFm">
 	<aui:fieldset>
 		<aui:input name="script" type="textarea"></aui:input>
@@ -72,9 +74,64 @@ Liferay.provide(window, 'submitForm',
 					output.val(parsedResponse.output);
 					error.val(parsedResponse.error);
 					console.log("done", event, id, response);
-
 				}
 			}
 		});
 	});
+</aui:script>
+
+
+<aui:script>
+
+
+jQuery(function($, undefined) {
+	var processResponse = function(response, term) {
+		var parsedResponse = {
+			'output': '',
+			'error': 'no meaningful response'
+		};
+		try {
+			parsedResponse = $.parseJSON(response);
+		} catch (e) {};
+		if (parsedResponse && parsedResponse.output) {
+			term.echo(new String(parsedResponse.output));
+		};
+		if (!parsedResponse) {
+			term.error("Response from server is not parseable");
+		};
+		if (parsedResponse && parsedResponse.error) {
+			term.error(new String(parsedResponse.error));
+		};
+		console.log("done", response);
+	};
+
+	var sendCommand = function(command, term) {
+		$.ajax({
+				method: "POST",
+				url: "<%= actionURL %>",
+				data: {
+					'<portlet:namespace/>type': 'command',
+					'<portlet:namespace/>script': '',
+					'<portlet:namespace/>command': command
+				}
+			})
+			.done(function(msg) {
+				processResponse(msg, term);
+			});
+	};
+
+	$('#<portlet:namespace/>terminal').terminal(function(command, term) {
+		if (command !== '') {
+			sendCommand(command, term);
+		} else {
+			term.echo('');
+		}
+	}, {
+		greetings: 'Groovy Interpreter',
+		name: 'Script++ terminal',
+		height: 200,
+		prompt: 'groovy> '
+	});
+});
+
 </aui:script>
