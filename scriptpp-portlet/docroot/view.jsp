@@ -24,7 +24,18 @@
 
 <portlet:resourceURL var="actionURL"></portlet:resourceURL>
 
-<div id="<portlet:namespace/>terminal"></div>
+<div id="<portlet:namespace/>tabs">
+	<ul>
+		<li><a href="#<portlet:namespace/>terminalTab">Terminal</a></li>
+		<li><a href="#<portlet:namespace/>module">Module</a></li>
+		<li><a href="#<portlet:namespace/>import">Import</a></li>
+	</ul>
+	<div id="<portlet:namespace/>terminalTab">
+		<div id="<portlet:namespace/>terminal"></div>
+	</div>
+	<div id="<portlet:namespace/>module"></div>
+	<div id="<portlet:namespace/>import"></div>
+</div>
 
 <aui:script>
 
@@ -77,6 +88,8 @@ jQuery(function($, undefined) {
 		height: 200,
 		prompt: 'groovy> '
 	});
+
+	$( "#<portlet:namespace/>tabs" ).tabs();
 });
 
 </aui:script>
