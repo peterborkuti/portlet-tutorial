@@ -27,14 +27,22 @@
 <div id="<portlet:namespace/>tabs">
 	<ul>
 		<li><a href="#<portlet:namespace/>terminalTab">Terminal</a></li>
-		<li><a href="#<portlet:namespace/>module">Module</a></li>
-		<li><a href="#<portlet:namespace/>import">Import</a></li>
+		<li><a href="#<portlet:namespace/>moduleTab">Module</a></li>
+		<li><a href="#<portlet:namespace/>importTab">Import</a></li>
 	</ul>
 	<div id="<portlet:namespace/>terminalTab">
 		<div id="<portlet:namespace/>terminal"></div>
 	</div>
-	<div id="<portlet:namespace/>module"></div>
-	<div id="<portlet:namespace/>import"></div>
+	<div id="<portlet:namespace/>moduleTab">
+		<div class="tabBox">
+			<aui:input name="module" id="module" type="textarea"/>
+		</div>
+	</div>
+	<div id="<portlet:namespace/>importTab">
+		<div class="tabBox">
+			<aui:input name="import" id="module" type="textarea"/>
+		</div>
+	</div>
 </div>
 
 <aui:script>
@@ -83,7 +91,7 @@ jQuery(function($, undefined) {
 			term.echo('');
 		}
 	}, {
-		greetings: 'Groovy Interpreter',
+		greetings: '',
 		name: 'Script++ terminal',
 		height: 200,
 		prompt: 'groovy> '
