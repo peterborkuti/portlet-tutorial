@@ -26,21 +26,23 @@
 
 <div id="<portlet:namespace/>tabs">
 	<ul>
-		<li><a href="#<portlet:namespace/>terminalTab">Terminal</a></li>
 		<li><a href="#<portlet:namespace/>moduleTab">Module</a></li>
+		<li><a href="#<portlet:namespace/>terminalTab">Terminal</a></li>
 		<li><a href="#<portlet:namespace/>importTab">Import</a></li>
 	</ul>
 	<div id="<portlet:namespace/>terminalTab">
-		<div id="<portlet:namespace/>terminal"></div>
+		<div class="tabBox">
+			<div id="<portlet:namespace/>terminal"></div>
+		</div>
 	</div>
 	<div id="<portlet:namespace/>moduleTab">
 		<div class="tabBox">
-			<aui:input name="module" id="module" type="textarea"/>
+			<textarea id="<portlet:namespace/>module"></textarea>
 		</div>
 	</div>
 	<div id="<portlet:namespace/>importTab">
 		<div class="tabBox">
-			<aui:input name="import" id="module" type="textarea"/>
+			<textarea id="<portlet:namespace/>import" style="width: 100%; height: 100%;"></textarea>
 		</div>
 	</div>
 </div>
@@ -93,11 +95,20 @@ jQuery(function($, undefined) {
 	}, {
 		greetings: '',
 		name: 'Script++ terminal',
-		height: 200,
+		height: '90%',
 		prompt: 'groovy> '
 	});
 
 	$( "#<portlet:namespace/>tabs" ).tabs();
+
+	var moduleTextarea = document.getElementById('<portlet:namespace/>module');
+
+	var moduleEditor =
+		CodeMirror.fromTextArea(moduleTextarea, {
+			lineNumbers: true,
+			mode: "groovy",
+			viewportMargin: Infinity
+		});
 });
 
 </aui:script>
