@@ -26,8 +26,9 @@
 
 <div id="<portlet:namespace/>tabs">
 	<ul>
-		<li><a href="#<portlet:namespace/>moduleTab">Module</a></li>
 		<li><a href="#<portlet:namespace/>terminalTab">Terminal</a></li>
+		<li><a href="#<portlet:namespace/>historyTab">History</a></li>
+		<li><a href="#<portlet:namespace/>moduleTab">Module</a></li>
 		<li><a href="#<portlet:namespace/>importTab">Import</a></li>
 	</ul>
 	<div id="<portlet:namespace/>terminalTab">
@@ -35,6 +36,12 @@
 			<div id="<portlet:namespace/>terminal"></div>
 		</div>
 	</div>
+	<div id="<portlet:namespace/>historyTab">
+		<div class="tabBox">
+			<ol id="<portlet:namespace/>history"></ol>
+		</div>
+	</div>
+	
 	<div id="<portlet:namespace/>moduleTab">
 		<div class="tabBox">
 			<textarea id="<portlet:namespace/>module"></textarea>
@@ -51,6 +58,8 @@
 
 
 jQuery(function($, undefined) {
+	var history = $('#<portlet:namespace/>history');
+
 	var processResponse = function(response, term) {
 		var parsedResponse = {
 			'output': '',
@@ -72,6 +81,10 @@ jQuery(function($, undefined) {
 	};
 
 	var sendCommand = function(command, term) {
+	
+		var date = now().toLocalString();
+		var button = $('<li><span>' + date + '</span><span>' + command + '</span></li>');
+		history.append(button);
 		$.ajax({
 				method: "POST",
 				url: "<%= actionURL %>",
