@@ -82,8 +82,9 @@ jQuery(function($, undefined) {
 
 	var sendCommand = function(command, term) {
 	
-		var date = now().toLocalString();
-		var button = $('<li><span>' + date + '</span><span>' + command + '</span></li>');
+		var date = new Date();
+		var dateStr = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+		var button = $('<li><span class="historyDate">' + dateStr + '</span> - <span class="historyCommand">' + command + '</span></li>');
 		history.append(button);
 		$.ajax({
 				method: "POST",
@@ -99,7 +100,7 @@ jQuery(function($, undefined) {
 			});
 	};
 
-	$('#<portlet:namespace/>terminal').terminal(function(command, term) {
+	var terminal = $('#<portlet:namespace/>terminal').terminal(function(command, term) {
 		if (command !== '') {
 			sendCommand(command, term);
 		} else {
