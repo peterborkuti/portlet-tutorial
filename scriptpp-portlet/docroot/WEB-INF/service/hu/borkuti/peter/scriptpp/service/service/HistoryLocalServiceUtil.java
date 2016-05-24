@@ -275,6 +275,11 @@ public class HistoryLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String[] getHistoryLines()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getHistoryLines();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

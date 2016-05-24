@@ -35,6 +35,14 @@ public class HistoryServiceClpInvoker {
 		_methodName24 = "getRandomNumber";
 
 		_methodParameterTypes24 = new String[] {  };
+
+		_methodName25 = "getHistoryLines";
+
+		_methodParameterTypes25 = new String[] {  };
+
+		_methodName26 = "addHistoryLine";
+
+		_methodParameterTypes26 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -56,6 +64,18 @@ public class HistoryServiceClpInvoker {
 			return HistoryServiceUtil.getRandomNumber();
 		}
 
+		if (_methodName25.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
+			return HistoryServiceUtil.getHistoryLines();
+		}
+
+		if (_methodName26.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+			HistoryServiceUtil.addHistoryLine((java.lang.String)arguments[0]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -65,4 +85,8 @@ public class HistoryServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

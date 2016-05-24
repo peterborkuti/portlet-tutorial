@@ -284,6 +284,12 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 		return _historyLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.lang.String[] getHistoryLines()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _historyLocalService.getHistoryLines();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

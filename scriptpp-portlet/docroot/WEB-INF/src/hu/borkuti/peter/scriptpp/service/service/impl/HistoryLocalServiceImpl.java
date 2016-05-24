@@ -14,6 +14,12 @@
 
 package hu.borkuti.peter.scriptpp.service.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import hu.borkuti.peter.scriptpp.service.model.History;
 import hu.borkuti.peter.scriptpp.service.service.base.HistoryLocalServiceBaseImpl;
 
 /**
@@ -36,4 +42,17 @@ public class HistoryLocalServiceImpl extends HistoryLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link hu.borkuti.peter.scriptpp.service.service.HistoryLocalServiceUtil} to access the history local service.
 	 */
+	public String[] getHistoryLines() throws SystemException {
+		List<History> historyList;
+		historyList = historyPersistence.findAll();
+		List<String> lines = new ArrayList<String>();
+
+		for (History item : historyList) {
+			lines.add(item.getLine());
+		}
+
+		String[] history = lines.toArray(new String[0]);
+
+		return history;
+	}
 }

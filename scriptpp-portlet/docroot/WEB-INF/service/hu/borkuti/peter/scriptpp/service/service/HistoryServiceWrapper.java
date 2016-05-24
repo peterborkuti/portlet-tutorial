@@ -61,6 +61,16 @@ public class HistoryServiceWrapper implements HistoryService,
 		return _historyService.getRandomNumber();
 	}
 
+	@Override
+	public java.lang.String[] getHistoryLines() {
+		return _historyService.getHistoryLines();
+	}
+
+	@Override
+	public void addHistoryLine(java.lang.String line) {
+		_historyService.addHistoryLine(line);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

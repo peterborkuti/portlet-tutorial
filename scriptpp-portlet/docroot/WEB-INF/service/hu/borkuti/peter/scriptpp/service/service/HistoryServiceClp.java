@@ -35,6 +35,14 @@ public class HistoryServiceClp implements HistoryService {
 		_methodName3 = "getRandomNumber";
 
 		_methodParameterTypes3 = new String[] {  };
+
+		_methodName4 = "getHistoryLines";
+
+		_methodParameterTypes4 = new String[] {  };
+
+		_methodName5 = "addHistoryLine";
+
+		_methodParameterTypes5 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -110,6 +118,49 @@ public class HistoryServiceClp implements HistoryService {
 		return (java.lang.Integer)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.lang.String[] getHistoryLines() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void addHistoryLine(java.lang.String line) {
+		try {
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
+				new Object[] { ClpSerializer.translateInput(line) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -117,4 +168,8 @@ public class HistoryServiceClp implements HistoryService {
 	private String[] _methodParameterTypes1;
 	private String _methodName3;
 	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
+	private String _methodName5;
+	private String[] _methodParameterTypes5;
 }

@@ -16,6 +16,11 @@ package hu.borkuti.peter.scriptpp.service.service.impl;
 
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import hu.borkuti.peter.scriptpp.service.model.History;
 import hu.borkuti.peter.scriptpp.service.service.base.HistoryServiceBaseImpl;
 
 /**
@@ -42,5 +47,31 @@ public class HistoryServiceImpl extends HistoryServiceBaseImpl {
 		Random r = new Random();
 		return r.nextInt();
 	}
+
+	public String[] getHistoryLines() {
+		String[] lines;
+		try {
+			lines = historyLocalService.getHistoryLines();
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+			return new String[0];
+		}
+
+		return lines;
+	}
+
+	public void addHistoryLine(String line) {
+		try {
+			long historyId;
+			historyId = counterLocalService.increment();
+			History history = historyPersistence.create(historyId);
+			history.setLine(line);
+			historyPersistence.update(history);
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		}
+	}
+
+	Logger _log = Logger.getLogger(getClass());
 
 }

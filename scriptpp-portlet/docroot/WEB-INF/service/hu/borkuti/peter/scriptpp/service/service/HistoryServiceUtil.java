@@ -67,6 +67,14 @@ public class HistoryServiceUtil {
 		return getService().getRandomNumber();
 	}
 
+	public static java.lang.String[] getHistoryLines() {
+		return getService().getHistoryLines();
+	}
+
+	public static void addHistoryLine(java.lang.String line) {
+		getService().addHistoryLine(line);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

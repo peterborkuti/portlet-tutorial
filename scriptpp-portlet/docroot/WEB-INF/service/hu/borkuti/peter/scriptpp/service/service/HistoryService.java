@@ -67,4 +67,9 @@ public interface HistoryService extends BaseService, InvokableService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.Integer getRandomNumber();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getHistoryLines();
+
+	public void addHistoryLine(java.lang.String line);
 }

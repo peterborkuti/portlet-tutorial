@@ -253,4 +253,8 @@ public interface HistoryLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getHistoryLines()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

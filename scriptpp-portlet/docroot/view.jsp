@@ -15,12 +15,19 @@
 	 */
 %>
 
-<%@ page import="com.liferay.portal.kernel.util.GetterUtil"%>
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portal.security.auth.AuthTokenUtil" %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
 
 <portlet:defineObjects />
+
+<%
+
+	String p_auth = AuthTokenUtil.getToken(request);
+
+%>
 
 <portlet:resourceURL var="actionURL"></portlet:resourceURL>
 
@@ -80,12 +87,15 @@ jQuery(function($, undefined) {
 		console.log("done", response);
 	};
 
-	var sendCommand = function(command, term) {
-	
+	var updateHistoryOnUI = function(command) {
 		var date = new Date();
 		var dateStr = date.toLocaleDateString() + " " + date.toLocaleTimeString();
-		var button = $('<li><span class="historyDate">' + dateStr + '</span> - <span class="historyCommand">' + command + '</span></li>');
-		history.append(button);
+		var historyLine = $('<li><span class="historyDate">' + dateStr + '</span> - <span class="historyCommand">' + command + '</span></li>');
+		history.prepend(historyLine);
+	};
+
+	var sendCommand = function(command, term) {
+		updateHistoryOnUI(command);
 		$.ajax({
 				method: "POST",
 				url: "<%= actionURL %>",
@@ -100,8 +110,41 @@ jQuery(function($, undefined) {
 			});
 	};
 
+	var addHistoryLine = function(line) {
+			$.ajax({
+				method: "POST",
+				url: "/api/jsonws/scriptpp-portlet.history/add-history-line",
+				data: {
+					'p_auth': '<%= p_auth %>',
+					'line': line
+				}
+			})
+			.done(function() {
+				console.log('history added on backend');
+			});
+	};
+	
+
+	var setHistoryLines = function(terminal) {
+			$.ajax({
+				method: "POST",
+				url: "/api/jsonws/scriptpp-portlet.history/get-history-lines",
+				data: {
+					'p_auth': '<%= p_auth %>'
+				}
+			})
+			.done(function(linesArray) {
+				$.each(linesArray, function(index, value) {
+					terminal.history().append(value);
+					updateHistoryOnUI(value);
+					console.log(value + " was added to history");
+				})	
+			});
+	};
+
 	var terminal = $('#<portlet:namespace/>terminal').terminal(function(command, term) {
 		if (command !== '') {
+			addHistoryLine(command);
 			sendCommand(command, term);
 		} else {
 			term.echo('');
@@ -112,6 +155,8 @@ jQuery(function($, undefined) {
 		height: '90%',
 		prompt: 'groovy> '
 	});
+
+	setHistoryLines(terminal);
 
 	$( "#<portlet:namespace/>tabs" ).tabs();
 

@@ -75,5 +75,31 @@ public class HistoryServiceSoap {
 		}
 	}
 
+	public static java.lang.String[] getHistoryLines()
+		throws RemoteException {
+		try {
+			java.lang.String[] returnValue = HistoryServiceUtil.getHistoryLines();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addHistoryLine(java.lang.String line)
+		throws RemoteException {
+		try {
+			HistoryServiceUtil.addHistoryLine(line);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(HistoryServiceSoap.class);
 }
