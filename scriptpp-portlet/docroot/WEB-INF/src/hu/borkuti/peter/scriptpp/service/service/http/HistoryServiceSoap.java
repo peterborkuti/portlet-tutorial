@@ -14,6 +14,13 @@
 
 package hu.borkuti.peter.scriptpp.service.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import hu.borkuti.peter.scriptpp.service.service.HistoryServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link hu.borkuti.peter.scriptpp.service.service.HistoryServiceUtil} service utility. The
@@ -55,4 +62,18 @@ package hu.borkuti.peter.scriptpp.service.service.http;
  * @generated
  */
 public class HistoryServiceSoap {
+	public static java.lang.Integer getRandomNumber() throws RemoteException {
+		try {
+			java.lang.Integer returnValue = HistoryServiceUtil.getRandomNumber();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(HistoryServiceSoap.class);
 }

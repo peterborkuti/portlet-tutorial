@@ -63,6 +63,10 @@ public class HistoryServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.Integer getRandomNumber() {
+		return getService().getRandomNumber();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

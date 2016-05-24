@@ -31,6 +31,10 @@ public class HistoryServiceClpInvoker {
 		_methodName19 = "setBeanIdentifier";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
+
+		_methodName24 = "getRandomNumber";
+
+		_methodParameterTypes24 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +51,11 @@ public class HistoryServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName24.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
+			return HistoryServiceUtil.getRandomNumber();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +63,6 @@ public class HistoryServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

@@ -14,6 +14,8 @@
 
 package hu.borkuti.peter.scriptpp.service.service.impl;
 
+import java.util.Random;
+
 import hu.borkuti.peter.scriptpp.service.service.base.HistoryServiceBaseImpl;
 
 /**
@@ -36,4 +38,9 @@ public class HistoryServiceImpl extends HistoryServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link hu.borkuti.peter.scriptpp.service.service.HistoryServiceUtil} to access the history remote service.
 	 */
+	public Integer getRandomNumber() {
+		Random r = new Random();
+		return r.nextInt();
+	}
+
 }
