@@ -4,4 +4,7 @@
 	<bean id="hu.borkuti.peter.scriptpp.service.service.HistoryLocalService" class="hu.borkuti.peter.scriptpp.service.service.impl.HistoryLocalServiceImpl" />
 	<bean id="hu.borkuti.peter.scriptpp.service.service.HistoryService" class="hu.borkuti.peter.scriptpp.service.service.impl.HistoryServiceImpl" />
 	<bean id="hu.borkuti.peter.scriptpp.service.service.persistence.HistoryPersistence" class="hu.borkuti.peter.scriptpp.service.service.persistence.HistoryPersistenceImpl" parent="basePersistence" />
+	<bean id="hu.borkuti.peter.scriptpp.service.service.ScriptLocalService" class="hu.borkuti.peter.scriptpp.service.service.impl.ScriptLocalServiceImpl" />
+	<bean id="hu.borkuti.peter.scriptpp.service.service.ScriptService" class="hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl" />
+	<bean id="hu.borkuti.peter.scriptpp.service.service.persistence.ScriptPersistence" class="hu.borkuti.peter.scriptpp.service.service.persistence.ScriptPersistenceImpl" parent="basePersistence" />
 </beans>

@@ -14,7 +14,7 @@
 
 package hu.borkuti.peter.scriptpp.service.service.base;
 
-import hu.borkuti.peter.scriptpp.service.service.HistoryLocalServiceUtil;
+import hu.borkuti.peter.scriptpp.service.service.ScriptLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author Peter Borkuti
  * @generated
  */
-public class HistoryLocalServiceClpInvoker {
-	public HistoryLocalServiceClpInvoker() {
-		_methodName0 = "addHistory";
+public class ScriptLocalServiceClpInvoker {
+	public ScriptLocalServiceClpInvoker() {
+		_methodName0 = "addScript";
 
 		_methodParameterTypes0 = new String[] {
-				"hu.borkuti.peter.scriptpp.service.model.History"
+				"hu.borkuti.peter.scriptpp.service.model.Script"
 			};
 
-		_methodName1 = "createHistory";
+		_methodName1 = "createScript";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteHistory";
+		_methodName2 = "deleteScript";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteHistory";
+		_methodName3 = "deleteScript";
 
 		_methodParameterTypes3 = new String[] {
-				"hu.borkuti.peter.scriptpp.service.model.History"
+				"hu.borkuti.peter.scriptpp.service.model.Script"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class HistoryLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchHistory";
+		_methodName10 = "fetchScript";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getHistory";
+		_methodName11 = "getScript";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class HistoryLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getHistories";
+		_methodName13 = "getScripts";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getHistoriesCount";
+		_methodName14 = "getScriptsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateHistory";
+		_methodName15 = "updateScript";
 
 		_methodParameterTypes15 = new String[] {
-				"hu.borkuti.peter.scriptpp.service.model.History"
+				"hu.borkuti.peter.scriptpp.service.model.Script"
 			};
 
 		_methodName40 = "getBeanIdentifier";
@@ -113,54 +113,50 @@ public class HistoryLocalServiceClpInvoker {
 		_methodName41 = "setBeanIdentifier";
 
 		_methodParameterTypes41 = new String[] { "java.lang.String" };
-
-		_methodName46 = "getHistoryLines";
-
-		_methodParameterTypes46 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return HistoryLocalServiceUtil.addHistory((hu.borkuti.peter.scriptpp.service.model.History)arguments[0]);
+			return ScriptLocalServiceUtil.addScript((hu.borkuti.peter.scriptpp.service.model.Script)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return HistoryLocalServiceUtil.createHistory(((Long)arguments[0]).longValue());
+			return ScriptLocalServiceUtil.createScript(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return HistoryLocalServiceUtil.deleteHistory(((Long)arguments[0]).longValue());
+			return ScriptLocalServiceUtil.deleteScript(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return HistoryLocalServiceUtil.deleteHistory((hu.borkuti.peter.scriptpp.service.model.History)arguments[0]);
+			return ScriptLocalServiceUtil.deleteScript((hu.borkuti.peter.scriptpp.service.model.Script)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return HistoryLocalServiceUtil.dynamicQuery();
+			return ScriptLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return HistoryLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return ScriptLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return HistoryLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return ScriptLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return HistoryLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return ScriptLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -168,61 +164,56 @@ public class HistoryLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return HistoryLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return ScriptLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return HistoryLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return ScriptLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return HistoryLocalServiceUtil.fetchHistory(((Long)arguments[0]).longValue());
+			return ScriptLocalServiceUtil.fetchScript(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return HistoryLocalServiceUtil.getHistory(((Long)arguments[0]).longValue());
+			return ScriptLocalServiceUtil.getScript(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return HistoryLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return ScriptLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return HistoryLocalServiceUtil.getHistories(((Integer)arguments[0]).intValue(),
+			return ScriptLocalServiceUtil.getScripts(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return HistoryLocalServiceUtil.getHistoriesCount();
+			return ScriptLocalServiceUtil.getScriptsCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return HistoryLocalServiceUtil.updateHistory((hu.borkuti.peter.scriptpp.service.model.History)arguments[0]);
+			return ScriptLocalServiceUtil.updateScript((hu.borkuti.peter.scriptpp.service.model.Script)arguments[0]);
 		}
 
 		if (_methodName40.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
-			return HistoryLocalServiceUtil.getBeanIdentifier();
+			return ScriptLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName41.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
-			HistoryLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			ScriptLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
-		}
-
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return HistoryLocalServiceUtil.getHistoryLines();
 		}
 
 		throw new UnsupportedOperationException();
@@ -264,6 +255,4 @@ public class HistoryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes40;
 	private String _methodName41;
 	private String[] _methodParameterTypes41;
-	private String _methodName46;
-	private String[] _methodParameterTypes46;
 }

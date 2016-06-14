@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
 import hu.borkuti.peter.scriptpp.service.model.HistoryClp;
+import hu.borkuti.peter.scriptpp.service.model.ScriptClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputHistory(oldModel);
 		}
 
+		if (oldModelClassName.equals(ScriptClp.class.getName())) {
+			return translateInputScript(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +130,16 @@ public class ClpSerializer {
 		HistoryClp oldClpModel = (HistoryClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getHistoryRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputScript(BaseModel<?> oldModel) {
+		ScriptClp oldClpModel = (ScriptClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getScriptRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +166,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"hu.borkuti.peter.scriptpp.service.model.impl.HistoryImpl")) {
 			return translateOutputHistory(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"hu.borkuti.peter.scriptpp.service.model.impl.ScriptImpl")) {
+			return translateOutputScript(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -270,6 +322,11 @@ public class ClpSerializer {
 			return new hu.borkuti.peter.scriptpp.service.NoSuchHistoryException();
 		}
 
+		if (className.equals(
+					"hu.borkuti.peter.scriptpp.service.NoSuchScriptException")) {
+			return new hu.borkuti.peter.scriptpp.service.NoSuchScriptException();
+		}
+
 		return throwable;
 	}
 
@@ -279,6 +336,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setHistoryRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputScript(BaseModel<?> oldModel) {
+		ScriptClp newModel = new ScriptClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setScriptRemoteModel(oldModel);
 
 		return newModel;
 	}

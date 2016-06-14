@@ -10,4 +10,14 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="line" type="String" />
 	</model>
+	<model name="hu.borkuti.peter.scriptpp.service.model.Script">
+		<field name="ScriptId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="importContent" type="String" />
+		<field name="moduleContent" type="String" />
+	</model>
 </model-hints>

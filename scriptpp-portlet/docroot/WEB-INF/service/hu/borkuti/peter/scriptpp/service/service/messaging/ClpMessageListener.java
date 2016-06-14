@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.messaging.Message;
 import hu.borkuti.peter.scriptpp.service.service.ClpSerializer;
 import hu.borkuti.peter.scriptpp.service.service.HistoryLocalServiceUtil;
 import hu.borkuti.peter.scriptpp.service.service.HistoryServiceUtil;
+import hu.borkuti.peter.scriptpp.service.service.ScriptLocalServiceUtil;
+import hu.borkuti.peter.scriptpp.service.service.ScriptServiceUtil;
 
 /**
  * @author Peter Borkuti
@@ -39,6 +41,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			HistoryLocalServiceUtil.clearService();
 
 			HistoryServiceUtil.clearService();
+			ScriptLocalServiceUtil.clearService();
+
+			ScriptServiceUtil.clearService();
 		}
 	}
 }
