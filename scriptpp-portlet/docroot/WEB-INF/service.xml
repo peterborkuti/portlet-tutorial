@@ -32,4 +32,32 @@
 		<!-- Finder methods -->
 
 	</entity>
+	<entity name="Script" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="ScriptId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="importContent" type="String" />
+		<column name="moduleContent" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
 </service-builder>
