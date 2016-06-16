@@ -1,0 +1,1 @@
+create index IX_27E7B9DF on scriptpp_Script (groupId, userId);

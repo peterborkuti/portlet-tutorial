@@ -123,7 +123,6 @@ jQuery(function($, undefined) {
 				console.log('history added on backend');
 			});
 	};
-	
 
 	var setHistoryLines = function(terminal) {
 			$.ajax({
@@ -158,8 +157,6 @@ jQuery(function($, undefined) {
 
 	setHistoryLines(terminal);
 
-	$( "#<portlet:namespace/>tabs" ).tabs();
-
 	var moduleTextarea = document.getElementById('<portlet:namespace/>module');
 
 	var moduleEditor =
@@ -168,6 +165,85 @@ jQuery(function($, undefined) {
 			mode: "groovy",
 			viewportMargin: Infinity
 		});
+
+	var importEditor = $('#<portlet:namespace/>import');
+
+	var lastSavedModuleContent = '', lastSavedImportContent = '';
+	var autoSavingIsProcessing = false;
+	var addScript = function(moduleContent, importContent) {
+		if (autoSavingIsProcessing) {
+			return;
+		}
+
+		if (!moduleContent && !importContent) {
+			return;
+		}
+
+		if ((lastSavedModuleContent == moduleContent) &&
+			(lastSavedImportContent == importContent)) {
+
+			return;
+		}
+
+		autoSavingIsProcessing = true;
+
+		lastSavedModuleContent = moduleContent;
+		lastSavedImportContent = importContent;
+
+		$.ajax({
+			method: "POST",
+			url: "/api/jsonws/scriptpp-portlet.script/add-script",
+			data: {
+				'p_auth': '<%= p_auth %>',
+				'moduleContent': moduleContent,
+				'importContent': importContent
+			}
+		})
+		.done(function() {
+			autoSavingIsProcessing = false;
+			console.log('script added on backend');
+		});
+
+	};
+
+	var loadLastScript = function() {
+		$.ajax({
+			method: "POST",
+			url: "/api/jsonws/scriptpp-portlet.script/get-last-script",
+			data: {
+				'p_auth': '<%= p_auth %>'
+			}
+		})
+		.done(function(contentArr) {
+			moduleEditor.setValue(contentArr[0]);
+			importEditor.val(contentArr[1]);
+			moduleEditor.refresh();
+		});
+	}
+
+	var autoSave = function() {
+		addScript(moduleEditor.getValue(), importEditor.val());
+
+		setTimeout(autoSave, 3000);
+	}
+
+	var tabActivateEventHandler = function(event, ui) {
+		var tabId = ui.newPanel.attr('id');
+		if (tabId.endsWith('moduleTab')) {
+			moduleEditor.refresh();
+		}
+	}
+
+	var main = function() {
+		$( "#<portlet:namespace/>tabs" ).tabs({
+			activate: tabActivateEventHandler
+		});
+		loadLastScript();
+		autoSave();
+	}
+
+	main();
+
 });
 
 </aui:script>

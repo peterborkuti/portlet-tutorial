@@ -14,6 +14,17 @@
 
 package hu.borkuti.peter.scriptpp.service.service.impl;
 
+import java.util.Date;
+
+import org.apache.log4j.Logger;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+
+import hu.borkuti.peter.scriptpp.service.model.Script;
+import hu.borkuti.peter.scriptpp.service.service.ScriptLocalServiceUtil;
 import hu.borkuti.peter.scriptpp.service.service.base.ScriptServiceBaseImpl;
 
 /**
@@ -36,4 +47,51 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link hu.borkuti.peter.scriptpp.service.service.ScriptServiceUtil} to access the script remote service.
 	 */
+
+	public String[] getLastScript() {
+		String[] strScript = {"", ""};
+
+		try {
+			User user = userService.getCurrentUser();
+
+			Script script = scriptPersistence.fetchByG_U(user.getGroupId(), user.getUserId());
+
+			if (script != null) {
+				strScript[1] = script.getImportContent();
+				strScript[0] = script.getModuleContent();
+			}
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		} catch (PortalException e) {
+			_log.error(e.getMessage());
+		}
+
+		return strScript;
+	}
+
+	public void addScript(String importContent, String moduleContent) {
+		try {
+			long scriptId;
+			ServiceContext context = new ServiceContext();
+			Date now = new Date();
+			User user = userService.getCurrentUser();
+
+			scriptId = counterLocalService.increment();
+			Script script = scriptPersistence.create(scriptId);
+			script.setUserId(user.getUserId());
+			script.setGroupId(user.getGroupId());
+			script.setCompanyId(user.getCompanyId());
+			script.setCreateDate(context.getCreateDate(now));
+			script.setModifiedDate(context.getModifiedDate(now));
+			script.setImportContent(importContent);
+			script.setModuleContent(moduleContent);
+			scriptPersistence.update(script);
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		} catch (PortalException e) {
+			_log.error(e.getMessage());
+		}
+	}
+
+	Logger _log = Logger.getLogger(getClass());
 }

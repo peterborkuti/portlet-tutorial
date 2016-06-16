@@ -89,7 +89,12 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.hu.borkuti.peter.scriptpp.service.model.Script"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.hu.borkuti.peter.scriptpp.service.model.Script"),
+			true);
+	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long USERID_COLUMN_BITMASK = 2L;
+	public static long CREATEDATE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -269,7 +274,19 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 
 	@Override
 	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -280,6 +297,14 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -293,6 +318,10 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 		_userUuid = userUuid;
 	}
 
+	public long getOriginalUserId() {
+		return _originalUserId;
+	}
+
 	@JSON
 	@Override
 	public Date getCreateDate() {
@@ -301,6 +330,8 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 
 	@Override
 	public void setCreateDate(Date createDate) {
+		_columnBitmask = -1L;
+
 		_createDate = createDate;
 	}
 
@@ -345,6 +376,10 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 	@Override
 	public void setModuleContent(String moduleContent) {
 		_moduleContent = moduleContent;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -432,6 +467,17 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 
 	@Override
 	public void resetOriginalValues() {
+		ScriptModelImpl scriptModelImpl = this;
+
+		scriptModelImpl._originalGroupId = scriptModelImpl._groupId;
+
+		scriptModelImpl._setOriginalGroupId = false;
+
+		scriptModelImpl._originalUserId = scriptModelImpl._userId;
+
+		scriptModelImpl._setOriginalUserId = false;
+
+		scriptModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -559,11 +605,16 @@ public class ScriptModelImpl extends BaseModelImpl<Script>
 	private long _ScriptId;
 	private long _companyId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _importContent;
 	private String _moduleContent;
+	private long _columnBitmask;
 	private Script _escapedModel;
 }

@@ -31,6 +31,16 @@ public class ScriptServiceClp implements ScriptService {
 		_methodName1 = "setBeanIdentifier";
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
+
+		_methodName3 = "getLastScript";
+
+		_methodParameterTypes3 = new String[] {  };
+
+		_methodName4 = "addScript";
+
+		_methodParameterTypes4 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -83,9 +93,61 @@ public class ScriptServiceClp implements ScriptService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.lang.String[] getLastScript() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName3,
+					_methodParameterTypes3, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void addScript(java.lang.String importContent,
+		java.lang.String moduleContent) {
+		try {
+			_invokableService.invokeMethod(_methodName4,
+				_methodParameterTypes4,
+				new Object[] {
+					ClpSerializer.translateInput(importContent),
+					
+				ClpSerializer.translateInput(moduleContent)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
 	private String _methodName1;
 	private String[] _methodParameterTypes1;
+	private String _methodName3;
+	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
 }

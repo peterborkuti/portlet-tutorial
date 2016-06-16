@@ -109,6 +109,79 @@ public class ScriptUtil {
 	}
 
 	/**
+	* Returns the script where groupId = &#63; and userId = &#63; or throws a {@link hu.borkuti.peter.scriptpp.service.NoSuchScriptException} if it could not be found.
+	*
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @return the matching script
+	* @throws hu.borkuti.peter.scriptpp.service.NoSuchScriptException if a matching script could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static hu.borkuti.peter.scriptpp.service.model.Script findByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			hu.borkuti.peter.scriptpp.service.NoSuchScriptException {
+		return getPersistence().findByG_U(groupId, userId);
+	}
+
+	/**
+	* Returns the script where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @return the matching script, or <code>null</code> if a matching script could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static hu.borkuti.peter.scriptpp.service.model.Script fetchByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_U(groupId, userId);
+	}
+
+	/**
+	* Returns the script where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching script, or <code>null</code> if a matching script could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static hu.borkuti.peter.scriptpp.service.model.Script fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the script where groupId = &#63; and userId = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @return the script that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static hu.borkuti.peter.scriptpp.service.model.Script removeByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			hu.borkuti.peter.scriptpp.service.NoSuchScriptException {
+		return getPersistence().removeByG_U(groupId, userId);
+	}
+
+	/**
+	* Returns the number of scripts where groupId = &#63; and userId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @return the number of matching scripts
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_U(groupId, userId);
+	}
+
+	/**
 	* Caches the script in the entity cache if it is enabled.
 	*
 	* @param script the script

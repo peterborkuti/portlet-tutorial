@@ -63,6 +63,15 @@ public class ScriptServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String[] getLastScript() {
+		return getService().getLastScript();
+	}
+
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent) {
+		getService().addScript(importContent, moduleContent);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -275,6 +275,11 @@ public class ScriptLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String[] getLastScript()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLastScript();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

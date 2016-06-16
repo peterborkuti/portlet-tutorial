@@ -56,6 +56,11 @@
 		<order by="desc">
 			<order-column name="createDate" />
 		</order>
+		
+		<finder name="G_U" return-type="Script">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
 
 		<!-- Finder methods -->
 

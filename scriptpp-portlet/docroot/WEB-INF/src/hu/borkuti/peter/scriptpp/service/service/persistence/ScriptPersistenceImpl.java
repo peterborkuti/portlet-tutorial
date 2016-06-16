@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
@@ -80,6 +82,244 @@ public class ScriptPersistenceImpl extends BasePersistenceImpl<Script>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ScriptModelImpl.ENTITY_CACHE_ENABLED,
 			ScriptModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_U = new FinderPath(ScriptModelImpl.ENTITY_CACHE_ENABLED,
+			ScriptModelImpl.FINDER_CACHE_ENABLED, ScriptImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			ScriptModelImpl.GROUPID_COLUMN_BITMASK |
+			ScriptModelImpl.USERID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(ScriptModelImpl.ENTITY_CACHE_ENABLED,
+			ScriptModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the script where groupId = &#63; and userId = &#63; or throws a {@link hu.borkuti.peter.scriptpp.service.NoSuchScriptException} if it could not be found.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @return the matching script
+	 * @throws hu.borkuti.peter.scriptpp.service.NoSuchScriptException if a matching script could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Script findByG_U(long groupId, long userId)
+		throws NoSuchScriptException, SystemException {
+		Script script = fetchByG_U(groupId, userId);
+
+		if (script == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", userId=");
+			msg.append(userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchScriptException(msg.toString());
+		}
+
+		return script;
+	}
+
+	/**
+	 * Returns the script where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @return the matching script, or <code>null</code> if a matching script could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Script fetchByG_U(long groupId, long userId)
+		throws SystemException {
+		return fetchByG_U(groupId, userId, true);
+	}
+
+	/**
+	 * Returns the script where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching script, or <code>null</code> if a matching script could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Script fetchByG_U(long groupId, long userId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, userId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
+					finderArgs, this);
+		}
+
+		if (result instanceof Script) {
+			Script script = (Script)result;
+
+			if ((groupId != script.getGroupId()) ||
+					(userId != script.getUserId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_SCRIPT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				List<Script> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"ScriptPersistenceImpl.fetchByG_U(long, long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					Script script = list.get(0);
+
+					result = script;
+
+					cacheResult(script);
+
+					if ((script.getGroupId() != groupId) ||
+							(script.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+							finderArgs, script);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Script)result;
+		}
+	}
+
+	/**
+	 * Removes the script where groupId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @return the script that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Script removeByG_U(long groupId, long userId)
+		throws NoSuchScriptException, SystemException {
+		Script script = findByG_U(groupId, userId);
+
+		return remove(script);
+	}
+
+	/**
+	 * Returns the number of scripts where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param userId the user ID
+	 * @return the number of matching scripts
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U;
+
+		Object[] finderArgs = new Object[] { groupId, userId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_SCRIPT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "script.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "script.userId = ?";
 
 	public ScriptPersistenceImpl() {
 		setModelClass(Script.class);
@@ -94,6 +334,9 @@ public class ScriptPersistenceImpl extends BasePersistenceImpl<Script>
 	public void cacheResult(Script script) {
 		EntityCacheUtil.putResult(ScriptModelImpl.ENTITY_CACHE_ENABLED,
 			ScriptImpl.class, script.getPrimaryKey(), script);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] { script.getGroupId(), script.getUserId() }, script);
 
 		script.resetOriginalValues();
 	}
@@ -151,6 +394,8 @@ public class ScriptPersistenceImpl extends BasePersistenceImpl<Script>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(script);
 	}
 
 	@Override
@@ -161,6 +406,52 @@ public class ScriptPersistenceImpl extends BasePersistenceImpl<Script>
 		for (Script script : scripts) {
 			EntityCacheUtil.removeResult(ScriptModelImpl.ENTITY_CACHE_ENABLED,
 				ScriptImpl.class, script.getPrimaryKey());
+
+			clearUniqueFindersCache(script);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(Script script) {
+		if (script.isNew()) {
+			Object[] args = new Object[] { script.getGroupId(), script.getUserId() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U, args, script);
+		}
+		else {
+			ScriptModelImpl scriptModelImpl = (ScriptModelImpl)script;
+
+			if ((scriptModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						script.getGroupId(), script.getUserId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U, args, script);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(Script script) {
+		ScriptModelImpl scriptModelImpl = (ScriptModelImpl)script;
+
+		Object[] args = new Object[] { script.getGroupId(), script.getUserId() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
+
+		if ((scriptModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					scriptModelImpl.getOriginalGroupId(),
+					scriptModelImpl.getOriginalUserId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
 		}
 	}
 
@@ -297,12 +588,15 @@ public class ScriptPersistenceImpl extends BasePersistenceImpl<Script>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !ScriptModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		EntityCacheUtil.putResult(ScriptModelImpl.ENTITY_CACHE_ENABLED,
 			ScriptImpl.class, script.getPrimaryKey(), script);
+
+		clearUniqueFindersCache(script);
+		cacheUniqueFindersCache(script);
 
 		return script;
 	}
@@ -632,9 +926,12 @@ public class ScriptPersistenceImpl extends BasePersistenceImpl<Script>
 	}
 
 	private static final String _SQL_SELECT_SCRIPT = "SELECT script FROM Script script";
+	private static final String _SQL_SELECT_SCRIPT_WHERE = "SELECT script FROM Script script WHERE ";
 	private static final String _SQL_COUNT_SCRIPT = "SELECT COUNT(script) FROM Script script";
+	private static final String _SQL_COUNT_SCRIPT_WHERE = "SELECT COUNT(script) FROM Script script WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "script.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Script exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Script exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(ScriptPersistenceImpl.class);

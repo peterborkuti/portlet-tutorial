@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_scriptpp_ScriptService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.service.scriptpp.peter.borkuti.hu" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<operation xmlns:operNS="urn:http.service.service.scriptpp.peter.borkuti.hu" name="addScript" qname="operNS:addScript" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="importContent" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="moduleContent" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.scriptpp.peter.borkuti.hu" xmlns:rtns="urn:http.service.service.scriptpp.peter.borkuti.hu" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getLastScript" qname="operNS:getLastScript" returnQName="getLastScriptReturn" returnType="rtns:ArrayOf_xsd_string" returnItemType="tns2:string" soapAction=""> </operation>
+		<parameter name="allowedMethods" value="addScript getLastScript" />
+		<parameter name="className" value="hu.borkuti.peter.scriptpp.service.service.http.ScriptServiceSoap" />
+		<parameter name="schemaUnqualified" value="urn:http.service.service.scriptpp.peter.borkuti.hu" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ScriptServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ScriptServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_scriptpp_ScriptService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.service.scriptpp.peter.borkuti.hu" />
+	</service>
+</deployment>

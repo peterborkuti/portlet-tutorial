@@ -56,6 +56,17 @@ public class ScriptServiceWrapper implements ScriptService,
 		return _scriptService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.lang.String[] getLastScript() {
+		return _scriptService.getLastScript();
+	}
+
+	@Override
+	public void addScript(java.lang.String importContent,
+		java.lang.String moduleContent) {
+		_scriptService.addScript(importContent, moduleContent);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

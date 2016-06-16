@@ -14,6 +14,13 @@
 
 package hu.borkuti.peter.scriptpp.service.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import hu.borkuti.peter.scriptpp.service.service.ScriptServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link hu.borkuti.peter.scriptpp.service.service.ScriptServiceUtil} service utility. The
@@ -55,4 +62,30 @@ package hu.borkuti.peter.scriptpp.service.service.http;
  * @generated
  */
 public class ScriptServiceSoap {
+	public static java.lang.String[] getLastScript() throws RemoteException {
+		try {
+			java.lang.String[] returnValue = ScriptServiceUtil.getLastScript();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent) throws RemoteException {
+		try {
+			ScriptServiceUtil.addScript(importContent, moduleContent);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(ScriptServiceSoap.class);
 }
