@@ -15,3 +15,8 @@
 .historyCommand {
 	font-weight: bold;
 }
+
+/* be in one line with the input element */
+.tabBox label {
+	display: inline;
+}

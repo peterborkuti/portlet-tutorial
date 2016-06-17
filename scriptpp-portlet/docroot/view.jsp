@@ -37,6 +37,7 @@
 		<li><a href="#<portlet:namespace/>historyTab">History</a></li>
 		<li><a href="#<portlet:namespace/>moduleTab">Module</a></li>
 		<li><a href="#<portlet:namespace/>importTab">Import</a></li>
+		<li><a href="#<portlet:namespace/>fileTab">File</a></li>
 	</ul>
 	<div id="<portlet:namespace/>terminalTab">
 		<div class="tabBox">
@@ -57,6 +58,32 @@
 	<div id="<portlet:namespace/>importTab">
 		<div class="tabBox">
 			<textarea id="<portlet:namespace/>import" style="width: 100%; height: 100%;"></textarea>
+		</div>
+	</div>
+	<div id="<portlet:namespace/>fileTab">
+		<div class="fileBox">
+			<fieldset>
+			<button>Save now</button>
+			<label for="<portlet:namespace/>autoSaveSwitch">Auto save</label>
+			<input type="checkbox" id="<portlet:namespace/>autoSaveSwitch"/>
+			</fieldset>
+
+			<fieldset>
+			<label for="<portlet:namespace/>fileName">Script name</label>
+			<input id="<portlet:namespace/>fileName"/>
+			</fieldset>
+
+			<fieldset>
+			<label for="<portlet:namespace/>dependencies">Dependencies</label>
+			<select id="<portlet:namespace/>dependenceSelector"></select>
+			</fieldset>
+
+			<fieldset>
+			<label for="<portlet:namespace/>loadScriptSelector">Load script</label>
+			<select id="<portlet:namespace/>loadScriptSelector">
+			</select>
+			<button>Load</button>
+			</fieldset>
 		</div>
 	</div>
 </div>
@@ -94,14 +121,28 @@ jQuery(function($, undefined) {
 		history.prepend(historyLine);
 	};
 
+	var moduleTextarea = document.getElementById('<portlet:namespace/>module');
+
+	var moduleEditor =
+		CodeMirror.fromTextArea(moduleTextarea, {
+			lineNumbers: true,
+			mode: "groovy",
+			viewportMargin: Infinity
+		});
+
+	var importEditor = $('#<portlet:namespace/>import');
+
 	var sendCommand = function(command, term) {
 		updateHistoryOnUI(command);
+		var moduleContent = moduleEditor.getValue(),
+			importContent = importEditor.val(),
+			script = importContent + ";" + moduleContent;
 		$.ajax({
 				method: "POST",
 				url: "<%= actionURL %>",
 				data: {
 					'<portlet:namespace/>type': 'command',
-					'<portlet:namespace/>script': '',
+					'<portlet:namespace/>script': script,
 					'<portlet:namespace/>command': command
 				}
 			})
@@ -141,32 +182,20 @@ jQuery(function($, undefined) {
 			});
 	};
 
-	var terminal = $('#<portlet:namespace/>terminal').terminal(function(command, term) {
-		if (command !== '') {
-			addHistoryLine(command);
-			sendCommand(command, term);
-		} else {
-			term.echo('');
-		}
-	}, {
-		greetings: '',
-		name: 'Script++ terminal',
-		height: '90%',
-		prompt: 'groovy> '
+	var terminal = $('#<portlet:namespace/>terminal').terminal(
+		function(command, term) {
+			if (command !== '') {
+				addHistoryLine(command);
+				sendCommand(command, term);
+			} else {
+				term.echo('');
+			}
+		}, {
+			greetings: '',
+			name: 'Script++ terminal',
+			height: '90%',
+			prompt: 'groovy> '
 	});
-
-	setHistoryLines(terminal);
-
-	var moduleTextarea = document.getElementById('<portlet:namespace/>module');
-
-	var moduleEditor =
-		CodeMirror.fromTextArea(moduleTextarea, {
-			lineNumbers: true,
-			mode: "groovy",
-			viewportMargin: Infinity
-		});
-
-	var importEditor = $('#<portlet:namespace/>import');
 
 	var lastSavedModuleContent = '', lastSavedImportContent = '';
 	var autoSavingIsProcessing = false;
@@ -235,11 +264,23 @@ jQuery(function($, undefined) {
 	}
 
 	var main = function() {
+		setHistoryLines(terminal);
 		$( "#<portlet:namespace/>tabs" ).tabs({
 			activate: tabActivateEventHandler
 		});
 		loadLastScript();
 		autoSave();
+		var dependenceSelector = $("#<portlet:namespace/>dependenceSelector").multiSelect(
+			{
+				keepOrder: true
+			}
+		);
+		var i;
+		for ( i = 0; i < 10; i++) {
+			dependenceSelector.multiSelect('addOption',
+				{ value: 'test' + i, text: 'test' + i}
+			);
+		}
 	}
 
 	main();
