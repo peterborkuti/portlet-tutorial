@@ -19,24 +19,24 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * Provides the remote service utility for Script. This utility wraps
- * {@link hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl} and is the
+ * Provides the remote service utility for ScriptOptions. This utility wraps
+ * {@link hu.borkuti.peter.scriptpp.service.service.impl.ScriptOptionsServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Peter Borkuti
- * @see ScriptService
- * @see hu.borkuti.peter.scriptpp.service.service.base.ScriptServiceBaseImpl
- * @see hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl
+ * @see ScriptOptionsService
+ * @see hu.borkuti.peter.scriptpp.service.service.base.ScriptOptionsServiceBaseImpl
+ * @see hu.borkuti.peter.scriptpp.service.service.impl.ScriptOptionsServiceImpl
  * @generated
  */
-public class ScriptServiceUtil {
+public class ScriptOptionsServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link hu.borkuti.peter.scriptpp.service.service.impl.ScriptOptionsServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -63,49 +63,27 @@ public class ScriptServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
-		return getService().getScriptOptions();
-	}
-
-	public static com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
-		return getService().getScriptNameVersions();
-	}
-
-	public static java.lang.String[] getLastScript() {
-		return getService().getLastScript();
-	}
-
-	public static java.lang.String getScriptList() {
-		return getService().getScriptList();
-	}
-
-	public static void addScript(java.lang.String importContent,
-		java.lang.String moduleContent) {
-		getService().addScript(importContent, moduleContent);
-	}
-
-	public static void addScript(java.lang.String importContent,
-		java.lang.String moduleContent, java.lang.String scriptName) {
-		getService().addScript(importContent, moduleContent, scriptName);
+	public static java.lang.Integer getRandomNumber() {
+		return getService().getRandomNumber();
 	}
 
 	public static void clearService() {
 		_service = null;
 	}
 
-	public static ScriptService getService() {
+	public static ScriptOptionsService getService() {
 		if (_service == null) {
 			InvokableService invokableService = (InvokableService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
-					ScriptService.class.getName());
+					ScriptOptionsService.class.getName());
 
-			if (invokableService instanceof ScriptService) {
-				_service = (ScriptService)invokableService;
+			if (invokableService instanceof ScriptOptionsService) {
+				_service = (ScriptOptionsService)invokableService;
 			}
 			else {
-				_service = new ScriptServiceClp(invokableService);
+				_service = new ScriptOptionsServiceClp(invokableService);
 			}
 
-			ReferenceRegistry.registerReference(ScriptServiceUtil.class,
+			ReferenceRegistry.registerReference(ScriptOptionsServiceUtil.class,
 				"_service");
 		}
 
@@ -115,8 +93,8 @@ public class ScriptServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
-	public void setService(ScriptService service) {
+	public void setService(ScriptOptionsService service) {
 	}
 
-	private static ScriptService _service;
+	private static ScriptOptionsService _service;
 }

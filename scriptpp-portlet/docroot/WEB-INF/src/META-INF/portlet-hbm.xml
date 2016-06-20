@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="hu.borkuti.peter.scriptpp.service.model.History" />
 	<import class="hu.borkuti.peter.scriptpp.service.model.Script" />
+	<import class="hu.borkuti.peter.scriptpp.service.model.ScriptOptions" />
 	<class name="hu.borkuti.peter.scriptpp.service.model.impl.HistoryImpl" table="scriptpp_History">
 		<cache usage="read-write" />
 		<id name="historyId" type="long">
@@ -26,7 +27,21 @@
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="scriptOptionsId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="importContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="moduleContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="hu.borkuti.peter.scriptpp.service.model.impl.ScriptOptionsImpl" table="scriptpp_ScriptOptions">
+		<cache usage="read-write" />
+		<id name="ScriptOptionsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="scriptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dependencyList" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

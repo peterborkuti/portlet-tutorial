@@ -18,9 +18,8 @@ import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
 import hu.borkuti.peter.scriptpp.service.service.ClpSerializer;
-import hu.borkuti.peter.scriptpp.service.service.HistoryLocalServiceUtil;
 import hu.borkuti.peter.scriptpp.service.service.HistoryServiceUtil;
-import hu.borkuti.peter.scriptpp.service.service.ScriptLocalServiceUtil;
+import hu.borkuti.peter.scriptpp.service.service.ScriptOptionsServiceUtil;
 import hu.borkuti.peter.scriptpp.service.service.ScriptServiceUtil;
 
 /**
@@ -38,12 +37,11 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			HistoryLocalServiceUtil.clearService();
-
 			HistoryServiceUtil.clearService();
-			ScriptLocalServiceUtil.clearService();
 
 			ScriptServiceUtil.clearService();
+
+			ScriptOptionsServiceUtil.clearService();
 		}
 	}
 }

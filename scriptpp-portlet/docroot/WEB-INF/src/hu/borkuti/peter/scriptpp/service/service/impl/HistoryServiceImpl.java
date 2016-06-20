@@ -14,6 +14,8 @@
 
 package hu.borkuti.peter.scriptpp.service.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -49,15 +51,19 @@ public class HistoryServiceImpl extends HistoryServiceBaseImpl {
 	}
 
 	public String[] getHistoryLines() {
-		String[] lines;
+		List<String> lines = new ArrayList<String>();
 		try {
-			lines = historyLocalService.getHistoryLines();
+			List<History> histories;
+			histories = historyPersistence.findAll();
+			for (History h : histories) {
+				lines.add(h.getLine());
+			}
 		} catch (SystemException e) {
 			_log.error(e.getMessage());
 			return new String[0];
 		}
 
-		return lines;
+		return lines.toArray(new String[0]);
 	}
 
 	public void addHistoryLine(String line) {

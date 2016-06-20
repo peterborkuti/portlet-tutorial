@@ -32,14 +32,32 @@ public class ScriptServiceClpInvoker {
 
 		_methodParameterTypes25 = new String[] { "java.lang.String" };
 
-		_methodName30 = "getLastScript";
+		_methodName30 = "getScriptOptions";
 
 		_methodParameterTypes30 = new String[] {  };
 
-		_methodName31 = "addScript";
+		_methodName32 = "getScriptNameVersions";
 
-		_methodParameterTypes31 = new String[] {
+		_methodParameterTypes32 = new String[] {  };
+
+		_methodName33 = "getLastScript";
+
+		_methodParameterTypes33 = new String[] {  };
+
+		_methodName34 = "getScriptList";
+
+		_methodParameterTypes34 = new String[] {  };
+
+		_methodName35 = "addScript";
+
+		_methodParameterTypes35 = new String[] {
 				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName37 = "addScript";
+
+		_methodParameterTypes37 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -59,13 +77,36 @@ public class ScriptServiceClpInvoker {
 
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
+			return ScriptServiceUtil.getScriptOptions();
+		}
+
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			return ScriptServiceUtil.getScriptNameVersions();
+		}
+
+		if (_methodName33.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
 			return ScriptServiceUtil.getLastScript();
 		}
 
-		if (_methodName31.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+		if (_methodName34.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
+			return ScriptServiceUtil.getScriptList();
+		}
+
+		if (_methodName35.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
 			ScriptServiceUtil.addScript((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+			ScriptServiceUtil.addScript((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 
 			return null;
 		}
@@ -79,6 +120,14 @@ public class ScriptServiceClpInvoker {
 	private String[] _methodParameterTypes25;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
-	private String _methodName31;
-	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
+	private String _methodName34;
+	private String[] _methodParameterTypes34;
+	private String _methodName35;
+	private String[] _methodParameterTypes35;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="hu.borkuti.peter.scriptpp.service.service.HistoryLocalService" class="hu.borkuti.peter.scriptpp.service.service.impl.HistoryLocalServiceImpl" />
 	<bean id="hu.borkuti.peter.scriptpp.service.service.HistoryService" class="hu.borkuti.peter.scriptpp.service.service.impl.HistoryServiceImpl" />
 	<bean id="hu.borkuti.peter.scriptpp.service.service.persistence.HistoryPersistence" class="hu.borkuti.peter.scriptpp.service.service.persistence.HistoryPersistenceImpl" parent="basePersistence" />
-	<bean id="hu.borkuti.peter.scriptpp.service.service.ScriptLocalService" class="hu.borkuti.peter.scriptpp.service.service.impl.ScriptLocalServiceImpl" />
 	<bean id="hu.borkuti.peter.scriptpp.service.service.ScriptService" class="hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl" />
 	<bean id="hu.borkuti.peter.scriptpp.service.service.persistence.ScriptPersistence" class="hu.borkuti.peter.scriptpp.service.service.persistence.ScriptPersistenceImpl" parent="basePersistence" />
+	<bean id="hu.borkuti.peter.scriptpp.service.service.ScriptOptionsService" class="hu.borkuti.peter.scriptpp.service.service.impl.ScriptOptionsServiceImpl" />
+	<bean id="hu.borkuti.peter.scriptpp.service.service.persistence.ScriptOptionsPersistence" class="hu.borkuti.peter.scriptpp.service.service.persistence.ScriptOptionsPersistenceImpl" parent="basePersistence" />
 </beans>

@@ -57,14 +57,35 @@ public class ScriptServiceWrapper implements ScriptService,
 	}
 
 	@Override
+	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
+		return _scriptService.getScriptOptions();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
+		return _scriptService.getScriptNameVersions();
+	}
+
+	@Override
 	public java.lang.String[] getLastScript() {
 		return _scriptService.getLastScript();
+	}
+
+	@Override
+	public java.lang.String getScriptList() {
+		return _scriptService.getScriptList();
 	}
 
 	@Override
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent) {
 		_scriptService.addScript(importContent, moduleContent);
+	}
+
+	@Override
+	public void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName) {
+		_scriptService.addScript(importContent, moduleContent, scriptName);
 	}
 
 	/**

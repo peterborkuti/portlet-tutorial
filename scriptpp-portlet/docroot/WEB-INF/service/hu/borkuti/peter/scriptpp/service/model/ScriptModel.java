@@ -160,6 +160,20 @@ public interface ScriptModel extends BaseModel<Script> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the script options ID of this script.
+	 *
+	 * @return the script options ID of this script
+	 */
+	public long getScriptOptionsId();
+
+	/**
+	 * Sets the script options ID of this script.
+	 *
+	 * @param scriptOptionsId the script options ID of this script
+	 */
+	public void setScriptOptionsId(long scriptOptionsId);
+
+	/**
 	 * Returns the import content of this script.
 	 *
 	 * @return the import content of this script

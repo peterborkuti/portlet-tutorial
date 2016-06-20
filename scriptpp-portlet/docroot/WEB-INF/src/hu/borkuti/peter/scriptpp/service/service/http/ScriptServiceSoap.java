@@ -62,9 +62,51 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class ScriptServiceSoap {
+	public static hu.borkuti.peter.scriptpp.service.model.ScriptOptionsSoap[] getScriptOptions()
+		throws RemoteException {
+		try {
+			java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> returnValue =
+				ScriptServiceUtil.getScriptOptions();
+
+			return hu.borkuti.peter.scriptpp.service.model.ScriptOptionsSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getScriptNameVersions()
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = ScriptServiceUtil.getScriptNameVersions();
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String[] getLastScript() throws RemoteException {
 		try {
 			java.lang.String[] returnValue = ScriptServiceUtil.getLastScript();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getScriptList() throws RemoteException {
+		try {
+			java.lang.String returnValue = ScriptServiceUtil.getScriptList();
 
 			return returnValue;
 		}
@@ -79,6 +121,19 @@ public class ScriptServiceSoap {
 		java.lang.String moduleContent) throws RemoteException {
 		try {
 			ScriptServiceUtil.addScript(importContent, moduleContent);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName)
+		throws RemoteException {
+		try {
+			ScriptServiceUtil.addScript(importContent, moduleContent, scriptName);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

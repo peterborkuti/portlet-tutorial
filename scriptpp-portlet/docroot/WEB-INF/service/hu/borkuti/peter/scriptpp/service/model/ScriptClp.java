@@ -24,7 +24,6 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import hu.borkuti.peter.scriptpp.service.service.ClpSerializer;
-import hu.borkuti.peter.scriptpp.service.service.ScriptLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -81,6 +80,7 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 		attributes.put("userId", getUserId());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("scriptOptionsId", getScriptOptionsId());
 		attributes.put("importContent", getImportContent());
 		attributes.put("moduleContent", getModuleContent());
 
@@ -123,6 +123,12 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Long scriptOptionsId = (Long)attributes.get("scriptOptionsId");
+
+		if (scriptOptionsId != null) {
+			setScriptOptionsId(scriptOptionsId);
 		}
 
 		String importContent = (String)attributes.get("importContent");
@@ -287,6 +293,29 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 	}
 
 	@Override
+	public long getScriptOptionsId() {
+		return _scriptOptionsId;
+	}
+
+	@Override
+	public void setScriptOptionsId(long scriptOptionsId) {
+		_scriptOptionsId = scriptOptionsId;
+
+		if (_scriptRemoteModel != null) {
+			try {
+				Class<?> clazz = _scriptRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setScriptOptionsId", long.class);
+
+				method.invoke(_scriptRemoteModel, scriptOptionsId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getImportContent() {
 		return _importContent;
 	}
@@ -382,16 +411,6 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 	}
 
 	@Override
-	public void persist() throws SystemException {
-		if (this.isNew()) {
-			ScriptLocalServiceUtil.addScript(this);
-		}
-		else {
-			ScriptLocalServiceUtil.updateScript(this);
-		}
-	}
-
-	@Override
 	public Script toEscapedModel() {
 		return (Script)ProxyUtil.newProxyInstance(Script.class.getClassLoader(),
 			new Class[] { Script.class }, new AutoEscapeBeanHandler(this));
@@ -407,6 +426,7 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setScriptOptionsId(getScriptOptionsId());
 		clone.setImportContent(getImportContent());
 		clone.setModuleContent(getModuleContent());
 
@@ -461,7 +481,7 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{ScriptId=");
 		sb.append(getScriptId());
@@ -475,6 +495,8 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", scriptOptionsId=");
+		sb.append(getScriptOptionsId());
 		sb.append(", importContent=");
 		sb.append(getImportContent());
 		sb.append(", moduleContent=");
@@ -486,7 +508,7 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("hu.borkuti.peter.scriptpp.service.model.Script");
@@ -517,6 +539,10 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>scriptOptionsId</column-name><column-value><![CDATA[");
+		sb.append(getScriptOptionsId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>importContent</column-name><column-value><![CDATA[");
 		sb.append(getImportContent());
 		sb.append("]]></column-value></column>");
@@ -537,6 +563,7 @@ public class ScriptClp extends BaseModelImpl<Script> implements Script {
 	private String _userUuid;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _scriptOptionsId;
 	private String _importContent;
 	private String _moduleContent;
 	private BaseModel<?> _scriptRemoteModel;

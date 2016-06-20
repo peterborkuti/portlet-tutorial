@@ -387,12 +387,6 @@ public class HistoryWrapper implements History, ModelWrapper<History> {
 	}
 
 	@Override
-	public void persist()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_history.persist();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

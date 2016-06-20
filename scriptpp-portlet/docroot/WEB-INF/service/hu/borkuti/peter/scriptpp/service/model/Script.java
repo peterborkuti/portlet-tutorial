@@ -14,8 +14,6 @@
 
 package hu.borkuti.peter.scriptpp.service.model;
 
-import com.liferay.portal.model.PersistedModel;
-
 /**
  * The extended model interface for the Script service. Represents a row in the &quot;scriptpp_Script&quot; database table, with each column mapped to a property of this class.
  *
@@ -25,7 +23,7 @@ import com.liferay.portal.model.PersistedModel;
  * @see hu.borkuti.peter.scriptpp.service.model.impl.ScriptModelImpl
  * @generated
  */
-public interface Script extends ScriptModel, PersistedModel {
+public interface Script extends ScriptModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

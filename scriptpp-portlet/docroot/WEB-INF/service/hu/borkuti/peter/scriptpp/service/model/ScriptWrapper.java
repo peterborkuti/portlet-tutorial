@@ -55,6 +55,7 @@ public class ScriptWrapper implements Script, ModelWrapper<Script> {
 		attributes.put("userId", getUserId());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("scriptOptionsId", getScriptOptionsId());
 		attributes.put("importContent", getImportContent());
 		attributes.put("moduleContent", getModuleContent());
 
@@ -97,6 +98,12 @@ public class ScriptWrapper implements Script, ModelWrapper<Script> {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Long scriptOptionsId = (Long)attributes.get("scriptOptionsId");
+
+		if (scriptOptionsId != null) {
+			setScriptOptionsId(scriptOptionsId);
 		}
 
 		String importContent = (String)attributes.get("importContent");
@@ -275,6 +282,26 @@ public class ScriptWrapper implements Script, ModelWrapper<Script> {
 	}
 
 	/**
+	* Returns the script options ID of this script.
+	*
+	* @return the script options ID of this script
+	*/
+	@Override
+	public long getScriptOptionsId() {
+		return _script.getScriptOptionsId();
+	}
+
+	/**
+	* Sets the script options ID of this script.
+	*
+	* @param scriptOptionsId the script options ID of this script
+	*/
+	@Override
+	public void setScriptOptionsId(long scriptOptionsId) {
+		_script.setScriptOptionsId(scriptOptionsId);
+	}
+
+	/**
 	* Returns the import content of this script.
 	*
 	* @return the import content of this script
@@ -410,12 +437,6 @@ public class ScriptWrapper implements Script, ModelWrapper<Script> {
 	@Override
 	public java.lang.String toXmlString() {
 		return _script.toXmlString();
-	}
-
-	@Override
-	public void persist()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_script.persist();
 	}
 
 	@Override

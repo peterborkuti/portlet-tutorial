@@ -14,10 +14,7 @@
 
 package hu.borkuti.peter.scriptpp.service.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
-
 import hu.borkuti.peter.scriptpp.service.model.Script;
-import hu.borkuti.peter.scriptpp.service.service.ScriptLocalServiceUtil;
 
 /**
  * The extended model base implementation for the Script service. Represents a row in the &quot;scriptpp_Script&quot; database table, with each column mapped to a property of this class.
@@ -37,13 +34,4 @@ public abstract class ScriptBaseImpl extends ScriptModelImpl implements Script {
 	 *
 	 * Never modify or reference this class directly. All methods that expect a script model instance should use the {@link Script} interface instead.
 	 */
-	@Override
-	public void persist() throws SystemException {
-		if (this.isNew()) {
-			ScriptLocalServiceUtil.addScript(this);
-		}
-		else {
-			ScriptLocalServiceUtil.updateScript(this);
-		}
-	}
 }

@@ -25,25 +25,25 @@ import com.liferay.portal.service.BaseService;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * Provides the remote service interface for Script. Methods of this
+ * Provides the remote service interface for ScriptOptions. Methods of this
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
  * @author Peter Borkuti
- * @see ScriptServiceUtil
- * @see hu.borkuti.peter.scriptpp.service.service.base.ScriptServiceBaseImpl
- * @see hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl
+ * @see ScriptOptionsServiceUtil
+ * @see hu.borkuti.peter.scriptpp.service.service.base.ScriptOptionsServiceBaseImpl
+ * @see hu.borkuti.peter.scriptpp.service.service.impl.ScriptOptionsServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ScriptService extends BaseService, InvokableService {
+public interface ScriptOptionsService extends BaseService, InvokableService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link ScriptServiceUtil} to access the script remote service. Add custom service methods to {@link hu.borkuti.peter.scriptpp.service.service.impl.ScriptServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link ScriptOptionsServiceUtil} to access the script options remote service. Add custom service methods to {@link hu.borkuti.peter.scriptpp.service.service.impl.ScriptOptionsServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
@@ -66,20 +66,5 @@ public interface ScriptService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String[] getLastScript();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getScriptList();
-
-	public void addScript(java.lang.String importContent,
-		java.lang.String moduleContent);
-
-	public void addScript(java.lang.String importContent,
-		java.lang.String moduleContent, java.lang.String scriptName);
+	public java.lang.Integer getRandomNumber();
 }

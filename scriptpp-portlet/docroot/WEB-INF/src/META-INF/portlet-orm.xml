@@ -38,8 +38,29 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="scriptOptionsId" />
 			<basic name="importContent" />
 			<basic name="moduleContent" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="hu.borkuti.peter.scriptpp.service.model.impl.ScriptOptionsModelImpl">
+		<attributes>
+			<id name="ScriptOptionsId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="scriptName" />
+			<basic name="dependencyList" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -52,6 +73,10 @@
 	</entity>
 	<entity class="hu.borkuti.peter.scriptpp.service.model.impl.ScriptImpl" name="Script">
 		<table name="scriptpp_Script" />
+		<attributes />
+	</entity>
+	<entity class="hu.borkuti.peter.scriptpp.service.model.impl.ScriptOptionsImpl" name="ScriptOptions">
+		<table name="scriptpp_ScriptOptions" />
 		<attributes />
 	</entity>
 </entity-mappings>

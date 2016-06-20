@@ -15,6 +15,18 @@ create table scriptpp_Script (
 	userId LONG,
 	createDate DATE null,
 	modifiedDate DATE null,
-	importContent VARCHAR(75) null,
-	moduleContent VARCHAR(75) null
+	scriptOptionsId LONG,
+	importContent STRING null,
+	moduleContent STRING null
+);
+
+create table scriptpp_ScriptOptions (
+	ScriptOptionsId LONG not null primary key,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	scriptName VARCHAR(75) null,
+	dependencyList VARCHAR(75) null
 );

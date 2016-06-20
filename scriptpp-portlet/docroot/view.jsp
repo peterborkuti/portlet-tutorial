@@ -61,28 +61,43 @@
 		</div>
 	</div>
 	<div id="<portlet:namespace/>fileTab">
-		<div class="fileBox">
+		<div class="tabBox">
 			<fieldset>
 			<button>Save now</button>
 			<label for="<portlet:namespace/>autoSaveSwitch">Auto save</label>
 			<input type="checkbox" id="<portlet:namespace/>autoSaveSwitch"/>
 			</fieldset>
 
+			<hr>
+
 			<fieldset>
 			<label for="<portlet:namespace/>fileName">Script name</label>
 			<input id="<portlet:namespace/>fileName"/>
 			</fieldset>
+
+			<hr>
 
 			<fieldset>
 			<label for="<portlet:namespace/>dependencies">Dependencies</label>
 			<select id="<portlet:namespace/>dependenceSelector"></select>
 			</fieldset>
 
+			<hr>
+
 			<fieldset>
 			<label for="<portlet:namespace/>loadScriptSelector">Load script</label>
 			<select id="<portlet:namespace/>loadScriptSelector">
 			</select>
 			<button>Load</button>
+			</fieldset>
+
+			<hr>
+
+			<fieldset>
+			<label for="<portlet:namespace/>deleteScriptSelector">Delete script</label>
+			<select id="<portlet:namespace/>deleteScriptSelector" multiple="multiple">
+			</select>
+			<button>Delete selected scripts</button>
 			</fieldset>
 		</div>
 	</div>
@@ -263,6 +278,55 @@ jQuery(function($, undefined) {
 		}
 	}
 
+	var fillFileTab = function() {
+		var dependenceSelector = $("#<portlet:namespace/>dependenceSelector");
+		var loadScriptSelector = $("#<portlet:namespace/>loadScriptSelector");
+		var deleteScriptSelector = $("#<portlet:namespace/>deleteScriptSelector");
+		$.ajax({
+			method: "POST",
+			url: "/api/jsonws/scriptpp-portlet.script/get-script-name-versions",
+			data: {
+				'p_auth': '<%= p_auth %>'
+			}
+		})
+		.done(function(content) {
+			var scriptNames = content["scriptNames"];
+			var versions = content["versions"];
+			var optgroups = {};
+
+			$.each(scriptNames, function(index, value) {
+				// I hope this escapes and prevents XSS issues
+				var optGroup = $('<optgroup/>').attr('label', value);
+				optgroups[value] = optGroup;
+			});
+
+			$.each(versions, function(index, value) {
+				var key = value.nested;
+				var option = $('<option/>');
+				option.attr({ 'value': value.value }).text(value.text);
+				if (!optgroups[value.nested]) {
+					console.log("Hello!", value.nested);
+				}
+				else {
+					optgroups[value.nested].append(option);
+				}
+			});
+
+			$.each(optgroups, function(index, value) {
+				dependenceSelector.append(value);
+				loadScriptSelector.append(value.clone());
+				deleteScriptSelector.append(value.clone());
+			});
+
+			var multiselect = dependenceSelector.multiSelect(
+					{
+						keepOrder: true
+					}
+				);
+
+		});
+	}
+
 	var main = function() {
 		setHistoryLines(terminal);
 		$( "#<portlet:namespace/>tabs" ).tabs({
@@ -270,17 +334,7 @@ jQuery(function($, undefined) {
 		});
 		loadLastScript();
 		autoSave();
-		var dependenceSelector = $("#<portlet:namespace/>dependenceSelector").multiSelect(
-			{
-				keepOrder: true
-			}
-		);
-		var i;
-		for ( i = 0; i < 10; i++) {
-			dependenceSelector.multiSelect('addOption',
-				{ value: 'test' + i, text: 'test' + i}
-			);
-		}
+		fillFileTab();
 	}
 
 	main();

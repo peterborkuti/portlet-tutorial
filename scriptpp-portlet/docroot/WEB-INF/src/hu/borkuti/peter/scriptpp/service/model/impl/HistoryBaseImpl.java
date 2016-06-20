@@ -14,10 +14,7 @@
 
 package hu.borkuti.peter.scriptpp.service.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
-
 import hu.borkuti.peter.scriptpp.service.model.History;
-import hu.borkuti.peter.scriptpp.service.service.HistoryLocalServiceUtil;
 
 /**
  * The extended model base implementation for the History service. Represents a row in the &quot;scriptpp_History&quot; database table, with each column mapped to a property of this class.
@@ -38,13 +35,4 @@ public abstract class HistoryBaseImpl extends HistoryModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a history model instance should use the {@link History} interface instead.
 	 */
-	@Override
-	public void persist() throws SystemException {
-		if (this.isNew()) {
-			HistoryLocalServiceUtil.addHistory(this);
-		}
-		else {
-			HistoryLocalServiceUtil.updateHistory(this);
-		}
-	}
 }

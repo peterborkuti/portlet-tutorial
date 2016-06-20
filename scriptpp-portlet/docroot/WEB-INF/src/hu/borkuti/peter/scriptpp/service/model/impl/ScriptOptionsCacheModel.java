@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
-import hu.borkuti.peter.scriptpp.service.model.Script;
+import hu.borkuti.peter.scriptpp.service.model.ScriptOptions;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -28,19 +28,20 @@ import java.io.ObjectOutput;
 import java.util.Date;
 
 /**
- * The cache model class for representing Script in entity cache.
+ * The cache model class for representing ScriptOptions in entity cache.
  *
  * @author Peter Borkuti
- * @see Script
+ * @see ScriptOptions
  * @generated
  */
-public class ScriptCacheModel implements CacheModel<Script>, Externalizable {
+public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
+	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{ScriptId=");
-		sb.append(ScriptId);
+		sb.append("{ScriptOptionsId=");
+		sb.append(ScriptOptionsId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", groupId=");
@@ -51,107 +52,100 @@ public class ScriptCacheModel implements CacheModel<Script>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", scriptOptionsId=");
-		sb.append(scriptOptionsId);
-		sb.append(", importContent=");
-		sb.append(importContent);
-		sb.append(", moduleContent=");
-		sb.append(moduleContent);
+		sb.append(", scriptName=");
+		sb.append(scriptName);
+		sb.append(", dependencyList=");
+		sb.append(dependencyList);
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	@Override
-	public Script toEntityModel() {
-		ScriptImpl scriptImpl = new ScriptImpl();
+	public ScriptOptions toEntityModel() {
+		ScriptOptionsImpl scriptOptionsImpl = new ScriptOptionsImpl();
 
-		scriptImpl.setScriptId(ScriptId);
-		scriptImpl.setCompanyId(companyId);
-		scriptImpl.setGroupId(groupId);
-		scriptImpl.setUserId(userId);
+		scriptOptionsImpl.setScriptOptionsId(ScriptOptionsId);
+		scriptOptionsImpl.setCompanyId(companyId);
+		scriptOptionsImpl.setGroupId(groupId);
+		scriptOptionsImpl.setUserId(userId);
 
 		if (createDate == Long.MIN_VALUE) {
-			scriptImpl.setCreateDate(null);
+			scriptOptionsImpl.setCreateDate(null);
 		}
 		else {
-			scriptImpl.setCreateDate(new Date(createDate));
+			scriptOptionsImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			scriptImpl.setModifiedDate(null);
+			scriptOptionsImpl.setModifiedDate(null);
 		}
 		else {
-			scriptImpl.setModifiedDate(new Date(modifiedDate));
+			scriptOptionsImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		scriptImpl.setScriptOptionsId(scriptOptionsId);
-
-		if (importContent == null) {
-			scriptImpl.setImportContent(StringPool.BLANK);
+		if (scriptName == null) {
+			scriptOptionsImpl.setScriptName(StringPool.BLANK);
 		}
 		else {
-			scriptImpl.setImportContent(importContent);
+			scriptOptionsImpl.setScriptName(scriptName);
 		}
 
-		if (moduleContent == null) {
-			scriptImpl.setModuleContent(StringPool.BLANK);
+		if (dependencyList == null) {
+			scriptOptionsImpl.setDependencyList(StringPool.BLANK);
 		}
 		else {
-			scriptImpl.setModuleContent(moduleContent);
+			scriptOptionsImpl.setDependencyList(dependencyList);
 		}
 
-		scriptImpl.resetOriginalValues();
+		scriptOptionsImpl.resetOriginalValues();
 
-		return scriptImpl;
+		return scriptOptionsImpl;
 	}
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		ScriptId = objectInput.readLong();
+		ScriptOptionsId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		userId = objectInput.readLong();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		scriptOptionsId = objectInput.readLong();
-		importContent = objectInput.readUTF();
-		moduleContent = objectInput.readUTF();
+		scriptName = objectInput.readUTF();
+		dependencyList = objectInput.readUTF();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(ScriptId);
+		objectOutput.writeLong(ScriptOptionsId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(userId);
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
-		objectOutput.writeLong(scriptOptionsId);
 
-		if (importContent == null) {
+		if (scriptName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(importContent);
+			objectOutput.writeUTF(scriptName);
 		}
 
-		if (moduleContent == null) {
+		if (dependencyList == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(moduleContent);
+			objectOutput.writeUTF(dependencyList);
 		}
 	}
 
-	public long ScriptId;
+	public long ScriptOptionsId;
 	public long companyId;
 	public long groupId;
 	public long userId;
 	public long createDate;
 	public long modifiedDate;
-	public long scriptOptionsId;
-	public String importContent;
-	public String moduleContent;
+	public String scriptName;
+	public String dependencyList;
 }

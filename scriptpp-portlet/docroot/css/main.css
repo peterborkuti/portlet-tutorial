@@ -1,5 +1,6 @@
 .tabBox {
 	height: 260px;
+	overflow-y: scroll;
 }
 
 .tabBox ol {
@@ -19,4 +20,9 @@
 /* be in one line with the input element */
 .tabBox label {
 	display: inline;
+}
+
+/* file tab's dependency chooser */
+.ms-container {
+	width: 100%;
 }

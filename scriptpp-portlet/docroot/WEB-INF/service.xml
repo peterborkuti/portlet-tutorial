@@ -5,7 +5,7 @@
 	<author>Peter Borkuti</author>
 	<namespace>scriptpp</namespace>
 
-	<entity name="History" local-service="true" remote-service="true">
+	<entity name="History" local-service="false" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -32,7 +32,40 @@
 		<!-- Finder methods -->
 
 	</entity>
-	<entity name="Script" local-service="true" remote-service="true">
+	<entity name="ScriptOptions" local-service="false" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="ScriptOptionsId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<column name="scriptName" type="String" />
+		<column name="dependencyList" type="String" />
+
+		<order by="desc">
+			<order-column name="scriptName" />
+			<order-column name="createDate" />
+		</order>
+
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+
+		<finder name="G_U_ScriptName" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="scriptName" />
+		</finder>
+	</entity>
+
+	<entity name="Script" local-service="false" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -47,7 +80,7 @@
 		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
-
+		<column name="scriptOptionsId" type="long" />
 		<column name="importContent" type="String" />
 		<column name="moduleContent" type="String" />
 
@@ -56,12 +89,17 @@
 		<order by="desc">
 			<order-column name="createDate" />
 		</order>
-		
-		<finder name="G_U" return-type="Script">
+
+		<finder name="G_U_SOid" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="scriptOptionsId" />
+		</finder>
+
+		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-
 		<!-- Finder methods -->
 
 	</entity>

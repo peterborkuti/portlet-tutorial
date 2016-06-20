@@ -10,6 +10,7 @@
 		<header-portlet-css>/css/jquery-ui.theme.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.terminal.css</header-portlet-css>
 		<header-portlet-css>/css/codemirror.css</header-portlet-css>
+		<header-portlet-css>/css/lou-multi-select/css/multi-select.css</header-portlet-css>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-javascript>/js/jquery-ui-1.11.4.custom/external/jquery/jquery.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/jquery-ui-1.11.4.custom/jquery-ui.js</header-portlet-javascript>
@@ -17,6 +18,7 @@
 		<header-portlet-javascript>/js/terminal/jquery.terminal-min.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/codemirror-5.14.2/lib/codemirror.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/codemirror-5.14.2/mode/groovy/groovy.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/lou-multi-select/jquery.multi-select.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>scriptpp-portlet</css-class-wrapper>
 	</portlet>

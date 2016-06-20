@@ -36,33 +36,34 @@ import java.util.Map;
 /**
  * @author Peter Borkuti
  */
-public class HistoryClp extends BaseModelImpl<History> implements History {
-	public HistoryClp() {
+public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
+	implements ScriptOptions {
+	public ScriptOptionsClp() {
 	}
 
 	@Override
 	public Class<?> getModelClass() {
-		return History.class;
+		return ScriptOptions.class;
 	}
 
 	@Override
 	public String getModelClassName() {
-		return History.class.getName();
+		return ScriptOptions.class.getName();
 	}
 
 	@Override
 	public long getPrimaryKey() {
-		return _historyId;
+		return _ScriptOptionsId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setHistoryId(primaryKey);
+		setScriptOptionsId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _historyId;
+		return _ScriptOptionsId;
 	}
 
 	@Override
@@ -74,23 +75,24 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("historyId", getHistoryId());
+		attributes.put("ScriptOptionsId", getScriptOptionsId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("line", getLine());
+		attributes.put("scriptName", getScriptName());
+		attributes.put("dependencyList", getDependencyList());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long historyId = (Long)attributes.get("historyId");
+		Long ScriptOptionsId = (Long)attributes.get("ScriptOptionsId");
 
-		if (historyId != null) {
-			setHistoryId(historyId);
+		if (ScriptOptionsId != null) {
+			setScriptOptionsId(ScriptOptionsId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -123,29 +125,35 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 			setModifiedDate(modifiedDate);
 		}
 
-		String line = (String)attributes.get("line");
+		String scriptName = (String)attributes.get("scriptName");
 
-		if (line != null) {
-			setLine(line);
+		if (scriptName != null) {
+			setScriptName(scriptName);
+		}
+
+		String dependencyList = (String)attributes.get("dependencyList");
+
+		if (dependencyList != null) {
+			setDependencyList(dependencyList);
 		}
 	}
 
 	@Override
-	public long getHistoryId() {
-		return _historyId;
+	public long getScriptOptionsId() {
+		return _ScriptOptionsId;
 	}
 
 	@Override
-	public void setHistoryId(long historyId) {
-		_historyId = historyId;
+	public void setScriptOptionsId(long ScriptOptionsId) {
+		_ScriptOptionsId = ScriptOptionsId;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setHistoryId", long.class);
+				Method method = clazz.getMethod("setScriptOptionsId", long.class);
 
-				method.invoke(_historyRemoteModel, historyId);
+				method.invoke(_scriptOptionsRemoteModel, ScriptOptionsId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -162,13 +170,13 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setCompanyId", long.class);
 
-				method.invoke(_historyRemoteModel, companyId);
+				method.invoke(_scriptOptionsRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -185,13 +193,13 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setGroupId", long.class);
 
-				method.invoke(_historyRemoteModel, groupId);
+				method.invoke(_scriptOptionsRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -208,13 +216,13 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	public void setUserId(long userId) {
 		_userId = userId;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setUserId", long.class);
 
-				method.invoke(_historyRemoteModel, userId);
+				method.invoke(_scriptOptionsRemoteModel, userId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -241,13 +249,13 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setCreateDate", Date.class);
 
-				method.invoke(_historyRemoteModel, createDate);
+				method.invoke(_scriptOptionsRemoteModel, createDate);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -264,13 +272,13 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setModifiedDate", Date.class);
 
-				method.invoke(_historyRemoteModel, modifiedDate);
+				method.invoke(_scriptOptionsRemoteModel, modifiedDate);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -279,21 +287,21 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	}
 
 	@Override
-	public String getLine() {
-		return _line;
+	public String getScriptName() {
+		return _scriptName;
 	}
 
 	@Override
-	public void setLine(String line) {
-		_line = line;
+	public void setScriptName(String scriptName) {
+		_scriptName = scriptName;
 
-		if (_historyRemoteModel != null) {
+		if (_scriptOptionsRemoteModel != null) {
 			try {
-				Class<?> clazz = _historyRemoteModel.getClass();
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setLine", String.class);
+				Method method = clazz.getMethod("setScriptName", String.class);
 
-				method.invoke(_historyRemoteModel, line);
+				method.invoke(_scriptOptionsRemoteModel, scriptName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -301,12 +309,37 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 		}
 	}
 
-	public BaseModel<?> getHistoryRemoteModel() {
-		return _historyRemoteModel;
+	@Override
+	public String getDependencyList() {
+		return _dependencyList;
 	}
 
-	public void setHistoryRemoteModel(BaseModel<?> historyRemoteModel) {
-		_historyRemoteModel = historyRemoteModel;
+	@Override
+	public void setDependencyList(String dependencyList) {
+		_dependencyList = dependencyList;
+
+		if (_scriptOptionsRemoteModel != null) {
+			try {
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDependencyList",
+						String.class);
+
+				method.invoke(_scriptOptionsRemoteModel, dependencyList);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	public BaseModel<?> getScriptOptionsRemoteModel() {
+		return _scriptOptionsRemoteModel;
+	}
+
+	public void setScriptOptionsRemoteModel(
+		BaseModel<?> scriptOptionsRemoteModel) {
+		_scriptOptionsRemoteModel = scriptOptionsRemoteModel;
 	}
 
 	public Object invokeOnRemoteModel(String methodName,
@@ -320,7 +353,7 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 			}
 		}
 
-		Class<?> remoteModelClass = _historyRemoteModel.getClass();
+		Class<?> remoteModelClass = _scriptOptionsRemoteModel.getClass();
 
 		ClassLoader remoteModelClassLoader = remoteModelClass.getClassLoader();
 
@@ -340,7 +373,7 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 		Method method = remoteModelClass.getMethod(methodName,
 				remoteParameterTypes);
 
-		Object returnValue = method.invoke(_historyRemoteModel,
+		Object returnValue = method.invoke(_scriptOptionsRemoteModel,
 				remoteParameterValues);
 
 		if (returnValue != null) {
@@ -351,31 +384,41 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 	}
 
 	@Override
-	public History toEscapedModel() {
-		return (History)ProxyUtil.newProxyInstance(History.class.getClassLoader(),
-			new Class[] { History.class }, new AutoEscapeBeanHandler(this));
+	public ScriptOptions toEscapedModel() {
+		return (ScriptOptions)ProxyUtil.newProxyInstance(ScriptOptions.class.getClassLoader(),
+			new Class[] { ScriptOptions.class }, new AutoEscapeBeanHandler(this));
 	}
 
 	@Override
 	public Object clone() {
-		HistoryClp clone = new HistoryClp();
+		ScriptOptionsClp clone = new ScriptOptionsClp();
 
-		clone.setHistoryId(getHistoryId());
+		clone.setScriptOptionsId(getScriptOptionsId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setLine(getLine());
+		clone.setScriptName(getScriptName());
+		clone.setDependencyList(getDependencyList());
 
 		return clone;
 	}
 
 	@Override
-	public int compareTo(History history) {
+	public int compareTo(ScriptOptions scriptOptions) {
 		int value = 0;
 
-		value = DateUtil.compareTo(getCreateDate(), history.getCreateDate());
+		value = getScriptName().compareTo(scriptOptions.getScriptName());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = DateUtil.compareTo(getCreateDate(),
+				scriptOptions.getCreateDate());
 
 		value = value * -1;
 
@@ -392,13 +435,13 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 			return true;
 		}
 
-		if (!(obj instanceof HistoryClp)) {
+		if (!(obj instanceof ScriptOptionsClp)) {
 			return false;
 		}
 
-		HistoryClp history = (HistoryClp)obj;
+		ScriptOptionsClp scriptOptions = (ScriptOptionsClp)obj;
 
-		long primaryKey = history.getPrimaryKey();
+		long primaryKey = scriptOptions.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -419,10 +462,10 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{historyId=");
-		sb.append(getHistoryId());
+		sb.append("{ScriptOptionsId=");
+		sb.append(getScriptOptionsId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
@@ -433,8 +476,10 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", line=");
-		sb.append(getLine());
+		sb.append(", scriptName=");
+		sb.append(getScriptName());
+		sb.append(", dependencyList=");
+		sb.append(getDependencyList());
 		sb.append("}");
 
 		return sb.toString();
@@ -442,15 +487,15 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
-		sb.append("hu.borkuti.peter.scriptpp.service.model.History");
+		sb.append("hu.borkuti.peter.scriptpp.service.model.ScriptOptions");
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>historyId</column-name><column-value><![CDATA[");
-		sb.append(getHistoryId());
+			"<column><column-name>ScriptOptionsId</column-name><column-value><![CDATA[");
+		sb.append(getScriptOptionsId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -473,8 +518,12 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>line</column-name><column-value><![CDATA[");
-		sb.append(getLine());
+			"<column><column-name>scriptName</column-name><column-value><![CDATA[");
+		sb.append(getScriptName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dependencyList</column-name><column-value><![CDATA[");
+		sb.append(getDependencyList());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -482,14 +531,15 @@ public class HistoryClp extends BaseModelImpl<History> implements History {
 		return sb.toString();
 	}
 
-	private long _historyId;
+	private long _ScriptOptionsId;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;
 	private String _userUuid;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _line;
-	private BaseModel<?> _historyRemoteModel;
+	private String _scriptName;
+	private String _dependencyList;
+	private BaseModel<?> _scriptOptionsRemoteModel;
 	private Class<?> _clpSerializerClass = hu.borkuti.peter.scriptpp.service.service.ClpSerializer.class;
 }

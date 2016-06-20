@@ -25,6 +25,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import hu.borkuti.peter.scriptpp.service.model.History;
 import hu.borkuti.peter.scriptpp.service.service.HistoryService;
 import hu.borkuti.peter.scriptpp.service.service.persistence.HistoryPersistence;
+import hu.borkuti.peter.scriptpp.service.service.persistence.ScriptOptionsPersistence;
 import hu.borkuti.peter.scriptpp.service.service.persistence.ScriptPersistence;
 
 import javax.sql.DataSource;
@@ -48,25 +49,6 @@ public abstract class HistoryServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link hu.borkuti.peter.scriptpp.service.service.HistoryServiceUtil} to access the history remote service.
 	 */
-
-	/**
-	 * Returns the history local service.
-	 *
-	 * @return the history local service
-	 */
-	public hu.borkuti.peter.scriptpp.service.service.HistoryLocalService getHistoryLocalService() {
-		return historyLocalService;
-	}
-
-	/**
-	 * Sets the history local service.
-	 *
-	 * @param historyLocalService the history local service
-	 */
-	public void setHistoryLocalService(
-		hu.borkuti.peter.scriptpp.service.service.HistoryLocalService historyLocalService) {
-		this.historyLocalService = historyLocalService;
-	}
 
 	/**
 	 * Returns the history remote service.
@@ -106,25 +88,6 @@ public abstract class HistoryServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the script local service.
-	 *
-	 * @return the script local service
-	 */
-	public hu.borkuti.peter.scriptpp.service.service.ScriptLocalService getScriptLocalService() {
-		return scriptLocalService;
-	}
-
-	/**
-	 * Sets the script local service.
-	 *
-	 * @param scriptLocalService the script local service
-	 */
-	public void setScriptLocalService(
-		hu.borkuti.peter.scriptpp.service.service.ScriptLocalService scriptLocalService) {
-		this.scriptLocalService = scriptLocalService;
-	}
-
-	/**
 	 * Returns the script remote service.
 	 *
 	 * @return the script remote service
@@ -159,6 +122,44 @@ public abstract class HistoryServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setScriptPersistence(ScriptPersistence scriptPersistence) {
 		this.scriptPersistence = scriptPersistence;
+	}
+
+	/**
+	 * Returns the script options remote service.
+	 *
+	 * @return the script options remote service
+	 */
+	public hu.borkuti.peter.scriptpp.service.service.ScriptOptionsService getScriptOptionsService() {
+		return scriptOptionsService;
+	}
+
+	/**
+	 * Sets the script options remote service.
+	 *
+	 * @param scriptOptionsService the script options remote service
+	 */
+	public void setScriptOptionsService(
+		hu.borkuti.peter.scriptpp.service.service.ScriptOptionsService scriptOptionsService) {
+		this.scriptOptionsService = scriptOptionsService;
+	}
+
+	/**
+	 * Returns the script options persistence.
+	 *
+	 * @return the script options persistence
+	 */
+	public ScriptOptionsPersistence getScriptOptionsPersistence() {
+		return scriptOptionsPersistence;
+	}
+
+	/**
+	 * Sets the script options persistence.
+	 *
+	 * @param scriptOptionsPersistence the script options persistence
+	 */
+	public void setScriptOptionsPersistence(
+		ScriptOptionsPersistence scriptOptionsPersistence) {
+		this.scriptOptionsPersistence = scriptOptionsPersistence;
 	}
 
 	/**
@@ -332,18 +333,18 @@ public abstract class HistoryServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
-	@BeanReference(type = hu.borkuti.peter.scriptpp.service.service.HistoryLocalService.class)
-	protected hu.borkuti.peter.scriptpp.service.service.HistoryLocalService historyLocalService;
 	@BeanReference(type = hu.borkuti.peter.scriptpp.service.service.HistoryService.class)
 	protected hu.borkuti.peter.scriptpp.service.service.HistoryService historyService;
 	@BeanReference(type = HistoryPersistence.class)
 	protected HistoryPersistence historyPersistence;
-	@BeanReference(type = hu.borkuti.peter.scriptpp.service.service.ScriptLocalService.class)
-	protected hu.borkuti.peter.scriptpp.service.service.ScriptLocalService scriptLocalService;
 	@BeanReference(type = hu.borkuti.peter.scriptpp.service.service.ScriptService.class)
 	protected hu.borkuti.peter.scriptpp.service.service.ScriptService scriptService;
 	@BeanReference(type = ScriptPersistence.class)
 	protected ScriptPersistence scriptPersistence;
+	@BeanReference(type = hu.borkuti.peter.scriptpp.service.service.ScriptOptionsService.class)
+	protected hu.borkuti.peter.scriptpp.service.service.ScriptOptionsService scriptOptionsService;
+	@BeanReference(type = ScriptOptionsPersistence.class)
+	protected ScriptOptionsPersistence scriptOptionsPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

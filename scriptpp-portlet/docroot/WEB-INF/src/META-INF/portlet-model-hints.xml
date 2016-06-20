@@ -17,7 +17,22 @@
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="importContent" type="String" />
-		<field name="moduleContent" type="String" />
+		<field name="scriptOptionsId" type="long" />
+		<field name="importContent" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="moduleContent" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="hu.borkuti.peter.scriptpp.service.model.ScriptOptions">
+		<field name="ScriptOptionsId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="scriptName" type="String" />
+		<field name="dependencyList" type="String" />
 	</model>
 </model-hints>

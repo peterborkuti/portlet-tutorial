@@ -21,31 +21,30 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link hu.borkuti.peter.scriptpp.service.service.http.ScriptServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link hu.borkuti.peter.scriptpp.service.service.http.ScriptOptionsServiceSoap}.
  *
  * @author Peter Borkuti
- * @see hu.borkuti.peter.scriptpp.service.service.http.ScriptServiceSoap
+ * @see hu.borkuti.peter.scriptpp.service.service.http.ScriptOptionsServiceSoap
  * @generated
  */
-public class ScriptSoap implements Serializable {
-	public static ScriptSoap toSoapModel(Script model) {
-		ScriptSoap soapModel = new ScriptSoap();
+public class ScriptOptionsSoap implements Serializable {
+	public static ScriptOptionsSoap toSoapModel(ScriptOptions model) {
+		ScriptOptionsSoap soapModel = new ScriptOptionsSoap();
 
-		soapModel.setScriptId(model.getScriptId());
+		soapModel.setScriptOptionsId(model.getScriptOptionsId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setScriptOptionsId(model.getScriptOptionsId());
-		soapModel.setImportContent(model.getImportContent());
-		soapModel.setModuleContent(model.getModuleContent());
+		soapModel.setScriptName(model.getScriptName());
+		soapModel.setDependencyList(model.getDependencyList());
 
 		return soapModel;
 	}
 
-	public static ScriptSoap[] toSoapModels(Script[] models) {
-		ScriptSoap[] soapModels = new ScriptSoap[models.length];
+	public static ScriptOptionsSoap[] toSoapModels(ScriptOptions[] models) {
+		ScriptOptionsSoap[] soapModels = new ScriptOptionsSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -54,14 +53,14 @@ public class ScriptSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static ScriptSoap[][] toSoapModels(Script[][] models) {
-		ScriptSoap[][] soapModels = null;
+	public static ScriptOptionsSoap[][] toSoapModels(ScriptOptions[][] models) {
+		ScriptOptionsSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new ScriptSoap[models.length][models[0].length];
+			soapModels = new ScriptOptionsSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new ScriptSoap[0][0];
+			soapModels = new ScriptOptionsSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -71,33 +70,33 @@ public class ScriptSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static ScriptSoap[] toSoapModels(List<Script> models) {
-		List<ScriptSoap> soapModels = new ArrayList<ScriptSoap>(models.size());
+	public static ScriptOptionsSoap[] toSoapModels(List<ScriptOptions> models) {
+		List<ScriptOptionsSoap> soapModels = new ArrayList<ScriptOptionsSoap>(models.size());
 
-		for (Script model : models) {
+		for (ScriptOptions model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new ScriptSoap[soapModels.size()]);
+		return soapModels.toArray(new ScriptOptionsSoap[soapModels.size()]);
 	}
 
-	public ScriptSoap() {
+	public ScriptOptionsSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _ScriptId;
+		return _ScriptOptionsId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setScriptId(pk);
+		setScriptOptionsId(pk);
 	}
 
-	public long getScriptId() {
-		return _ScriptId;
+	public long getScriptOptionsId() {
+		return _ScriptOptionsId;
 	}
 
-	public void setScriptId(long ScriptId) {
-		_ScriptId = ScriptId;
+	public void setScriptOptionsId(long ScriptOptionsId) {
+		_ScriptOptionsId = ScriptOptionsId;
 	}
 
 	public long getCompanyId() {
@@ -140,37 +139,28 @@ public class ScriptSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getScriptOptionsId() {
-		return _scriptOptionsId;
+	public String getScriptName() {
+		return _scriptName;
 	}
 
-	public void setScriptOptionsId(long scriptOptionsId) {
-		_scriptOptionsId = scriptOptionsId;
+	public void setScriptName(String scriptName) {
+		_scriptName = scriptName;
 	}
 
-	public String getImportContent() {
-		return _importContent;
+	public String getDependencyList() {
+		return _dependencyList;
 	}
 
-	public void setImportContent(String importContent) {
-		_importContent = importContent;
+	public void setDependencyList(String dependencyList) {
+		_dependencyList = dependencyList;
 	}
 
-	public String getModuleContent() {
-		return _moduleContent;
-	}
-
-	public void setModuleContent(String moduleContent) {
-		_moduleContent = moduleContent;
-	}
-
-	private long _ScriptId;
+	private long _ScriptOptionsId;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _scriptOptionsId;
-	private String _importContent;
-	private String _moduleContent;
+	private String _scriptName;
+	private String _dependencyList;
 }
