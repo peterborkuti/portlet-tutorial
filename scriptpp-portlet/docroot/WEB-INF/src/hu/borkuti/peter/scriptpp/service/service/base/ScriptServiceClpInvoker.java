@@ -32,33 +32,48 @@ public class ScriptServiceClpInvoker {
 
 		_methodParameterTypes25 = new String[] { "java.lang.String" };
 
-		_methodName30 = "getScriptOptions";
+		_methodName30 = "addScript";
 
-		_methodParameterTypes30 = new String[] {  };
-
-		_methodName32 = "getScriptNameVersions";
-
-		_methodParameterTypes32 = new String[] {  };
-
-		_methodName33 = "getLastScript";
-
-		_methodParameterTypes33 = new String[] {  };
-
-		_methodName34 = "getScriptList";
-
-		_methodParameterTypes34 = new String[] {  };
-
-		_methodName35 = "addScript";
-
-		_methodParameterTypes35 = new String[] {
+		_methodParameterTypes30 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName37 = "addScript";
+		_methodName31 = "addScript";
 
-		_methodParameterTypes37 = new String[] {
+		_methodParameterTypes31 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName32 = "addScript";
+
+		_methodParameterTypes32 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName33 = "deleteScripts";
+
+		_methodParameterTypes33 = new String[] { "java.lang.String" };
+
+		_methodName34 = "getLastScript";
+
+		_methodParameterTypes34 = new String[] {  };
+
+		_methodName35 = "getScript";
+
+		_methodParameterTypes35 = new String[] { "long" };
+
+		_methodName36 = "getScriptList";
+
+		_methodParameterTypes36 = new String[] {  };
+
+		_methodName37 = "getScriptNameVersions";
+
+		_methodParameterTypes37 = new String[] {  };
+
+		_methodName38 = "getScriptOptions";
+
+		_methodParameterTypes38 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -77,38 +92,59 @@ public class ScriptServiceClpInvoker {
 
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			return ScriptServiceUtil.getScriptOptions();
-		}
-
-		if (_methodName32.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
-			return ScriptServiceUtil.getScriptNameVersions();
-		}
-
-		if (_methodName33.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
-			return ScriptServiceUtil.getLastScript();
-		}
-
-		if (_methodName34.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
-			return ScriptServiceUtil.getScriptList();
-		}
-
-		if (_methodName35.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
 			ScriptServiceUtil.addScript((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName37.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
 			ScriptServiceUtil.addScript((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 
 			return null;
+		}
+
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			ScriptServiceUtil.addScript((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3]);
+
+			return null;
+		}
+
+		if (_methodName33.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+			ScriptServiceUtil.deleteScripts((java.lang.String)arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName34.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
+			return ScriptServiceUtil.getLastScript();
+		}
+
+		if (_methodName35.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
+			return ScriptServiceUtil.getScript(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName36.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
+			return ScriptServiceUtil.getScriptList();
+		}
+
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+			return ScriptServiceUtil.getScriptNameVersions();
+		}
+
+		if (_methodName38.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+			return ScriptServiceUtil.getScriptOptions();
 		}
 
 		throw new UnsupportedOperationException();
@@ -120,6 +156,8 @@ public class ScriptServiceClpInvoker {
 	private String[] _methodParameterTypes25;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
 	private String _methodName32;
 	private String[] _methodParameterTypes32;
 	private String _methodName33;
@@ -128,6 +166,10 @@ public class ScriptServiceClpInvoker {
 	private String[] _methodParameterTypes34;
 	private String _methodName35;
 	private String[] _methodParameterTypes35;
+	private String _methodName36;
+	private String[] _methodParameterTypes36;
 	private String _methodName37;
 	private String[] _methodParameterTypes37;
+	private String _methodName38;
+	private String[] _methodParameterTypes38;
 }

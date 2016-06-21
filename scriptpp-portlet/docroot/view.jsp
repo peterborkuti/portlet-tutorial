@@ -63,16 +63,11 @@
 	<div id="<portlet:namespace/>fileTab">
 		<div class="tabBox">
 			<fieldset>
+			<label for="<portlet:namespace/>scriptName">Script name</label>
+			<input id="<portlet:namespace/>scriptName"/>
 			<button>Save now</button>
 			<label for="<portlet:namespace/>autoSaveSwitch">Auto save</label>
 			<input type="checkbox" id="<portlet:namespace/>autoSaveSwitch"/>
-			</fieldset>
-
-			<hr>
-
-			<fieldset>
-			<label for="<portlet:namespace/>fileName">Script name</label>
-			<input id="<portlet:namespace/>fileName"/>
 			</fieldset>
 
 			<hr>
@@ -88,16 +83,16 @@
 			<label for="<portlet:namespace/>loadScriptSelector">Load script</label>
 			<select id="<portlet:namespace/>loadScriptSelector">
 			</select>
-			<button>Load</button>
+			<button id="<portlet:namespace/>loadScriptButton">Load</button>
 			</fieldset>
 
 			<hr>
 
 			<fieldset>
-			<label for="<portlet:namespace/>deleteScriptSelector">Delete script</label>
-			<select id="<portlet:namespace/>deleteScriptSelector" multiple="multiple">
+			<label for="<portlet:namespace/>deleteScriptsSelector">Delete script</label>
+			<select id="<portlet:namespace/>deleteScriptsSelector" multiple="multiple">
 			</select>
-			<button>Delete selected scripts</button>
+			<button id="<portlet:namespace/>deleteScriptsButton">Delete selected scripts</button>
 			</fieldset>
 		</div>
 	</div>
@@ -214,7 +209,29 @@ jQuery(function($, undefined) {
 
 	var lastSavedModuleContent = '', lastSavedImportContent = '';
 	var autoSavingIsProcessing = false;
+
+	var getJQueryObject = function(id) {
+		return $("#<portlet:namespace/>" + id);
+	} 
+
+	var loadScriptEventHandler = function(payLoad) {
+		moduleEditor.setValue(payLoad.moduleContent);
+		importEditor.val(payLoad.importContent);
+		getJQueryObject("scriptName").val(payLoad.scriptName);
+		var ids = payLoad.dependencyIds;
+		if (ids.length > 0) {
+			getJQueryObject("dependenceSelector").multiSelect('select',ids);
+		}
+		moduleEditor.refresh();
+	}
+
 	var addScript = function(moduleContent, importContent) {
+		var isAutosavingNeed = $("#<portlet:namespace/>autoSaveSwitch").is(':checked');
+
+		if (!isAutosavingNeed) {
+			return;
+		}
+
 		if (autoSavingIsProcessing) {
 			return;
 		}
@@ -229,6 +246,7 @@ jQuery(function($, undefined) {
 			return;
 		}
 
+		var scriptName = $("#<portlet:namespace/>scriptName").val();
 		autoSavingIsProcessing = true;
 
 		lastSavedModuleContent = moduleContent;
@@ -240,7 +258,8 @@ jQuery(function($, undefined) {
 			data: {
 				'p_auth': '<%= p_auth %>',
 				'moduleContent': moduleContent,
-				'importContent': importContent
+				'importContent': importContent,
+				'scriptName'   : scriptName
 			}
 		})
 		.done(function() {
@@ -258,12 +277,31 @@ jQuery(function($, undefined) {
 				'p_auth': '<%= p_auth %>'
 			}
 		})
-		.done(function(contentArr) {
-			moduleEditor.setValue(contentArr[0]);
-			importEditor.val(contentArr[1]);
-			moduleEditor.refresh();
+		.done(function(content) {
+			loadScriptEventHandler(content);
 		});
 	}
+
+	var loadScript = function() {
+		var scriptId = getJQueryObject('loadScriptSelector').val();
+
+		if (!scriptId || scriptId === 0) {
+			return;
+		}
+
+		$.ajax({
+			method: "POST",
+			url: "/api/jsonws/scriptpp-portlet.script/get-script",
+			data: {
+				'p_auth': '<%= p_auth %>',
+				'scriptId' : scriptId
+			}
+		})
+		.done(function(content) {
+			loadScriptEventHandler(content);
+		});
+	}
+
 
 	var autoSave = function() {
 		addScript(moduleEditor.getValue(), importEditor.val());
@@ -278,10 +316,39 @@ jQuery(function($, undefined) {
 		}
 	}
 
+	var deleteScripts = function() {
+		var scriptIds = getJQueryObject('deleteScriptsSelector').val();
+
+		if (!scriptIds || scriptIds.length === 0) {
+			return;
+		}
+
+		$.ajax({
+			method: "POST",
+			url: "/api/jsonws/scriptpp-portlet.script/delete-scripts",
+			data: {
+				'p_auth': '<%= p_auth %>',
+				'scriptIds' : scriptIds.join(",")
+			}
+		})
+		.done(function(content) {
+			getJQueryObject('deleteScriptsSelector').multiSelect('deselect_all');
+			fillFileTab();
+		});
+	}
+
+
+	var prepareFileTab = function() {
+		var loadButton = getJQueryObject('loadScriptButton');
+		loadButton.click(loadScript);
+		var loadButton = getJQueryObject('deleteScriptsButton');
+		loadButton.click(deleteScripts);
+	}
+
 	var fillFileTab = function() {
 		var dependenceSelector = $("#<portlet:namespace/>dependenceSelector");
 		var loadScriptSelector = $("#<portlet:namespace/>loadScriptSelector");
-		var deleteScriptSelector = $("#<portlet:namespace/>deleteScriptSelector");
+		var deleteScriptsSelector = $("#<portlet:namespace/>deleteScriptsSelector");
 		$.ajax({
 			method: "POST",
 			url: "/api/jsonws/scriptpp-portlet.script/get-script-name-versions",
@@ -315,15 +382,21 @@ jQuery(function($, undefined) {
 			$.each(optgroups, function(index, value) {
 				dependenceSelector.append(value);
 				loadScriptSelector.append(value.clone());
-				deleteScriptSelector.append(value.clone());
+				deleteScriptsSelector.append(value.clone());
 			});
 
-			var multiselect = dependenceSelector.multiSelect(
+			var multiselect1 = dependenceSelector.multiSelect(
 					{
 						keepOrder: true
 					}
-				);
+				).multiSelect('refresh');
 
+			var multiselect2 = deleteScriptsSelector.multiSelect(
+					{
+						keepOrder: true,
+						selectableOptgroup: true
+					}
+				).multiSelect('refresh');
 		});
 	}
 
@@ -335,6 +408,7 @@ jQuery(function($, undefined) {
 		loadLastScript();
 		autoSave();
 		fillFileTab();
+		prepareFileTab();
 	}
 
 	main();

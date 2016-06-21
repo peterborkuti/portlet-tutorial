@@ -63,22 +63,6 @@ public class ScriptServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
-		return getService().getScriptOptions();
-	}
-
-	public static com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
-		return getService().getScriptNameVersions();
-	}
-
-	public static java.lang.String[] getLastScript() {
-		return getService().getLastScript();
-	}
-
-	public static java.lang.String getScriptList() {
-		return getService().getScriptList();
-	}
-
 	public static void addScript(java.lang.String importContent,
 		java.lang.String moduleContent) {
 		getService().addScript(importContent, moduleContent);
@@ -87,6 +71,38 @@ public class ScriptServiceUtil {
 	public static void addScript(java.lang.String importContent,
 		java.lang.String moduleContent, java.lang.String scriptName) {
 		getService().addScript(importContent, moduleContent, scriptName);
+	}
+
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName,
+		java.lang.String dependencies) {
+		getService()
+			.addScript(importContent, moduleContent, scriptName, dependencies);
+	}
+
+	public static void deleteScripts(java.lang.String scriptIds) {
+		getService().deleteScripts(scriptIds);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONObject getLastScript() {
+		return getService().getLastScript();
+	}
+
+	public static com.liferay.portal.kernel.json.JSONObject getScript(
+		long scriptId) {
+		return getService().getScript(scriptId);
+	}
+
+	public static java.lang.String getScriptList() {
+		return getService().getScriptList();
+	}
+
+	public static com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
+		return getService().getScriptNameVersions();
+	}
+
+	public static java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
+		return getService().getScriptOptions();
 	}
 
 	public static void clearService() {

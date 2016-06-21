@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 
+import hu.borkuti.peter.scriptpp.portlet.ScriptUtil;
 import hu.borkuti.peter.scriptpp.service.NoSuchScriptOptionsException;
 import hu.borkuti.peter.scriptpp.service.model.Script;
 import hu.borkuti.peter.scriptpp.service.model.ScriptOptions;
@@ -54,6 +56,180 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link hu.borkuti.peter.scriptpp.service.service.ScriptServiceUtil} to access the script remote service.
 	 */
 
+	public void addScript(String importContent, String moduleContent) {
+		addScript(importContent, moduleContent, "anonym");
+	}
+
+	public void addScript(String importContent, String moduleContent,
+		String scriptName) {
+	
+		addScript(importContent, moduleContent, scriptName, "");
+	}
+
+	public void addScript(String importContent, String moduleContent,
+		String scriptName, String dependencies) {
+	
+		ServiceContext context = getContext();
+	
+		long userId = context.getUserId();
+	
+		if (userId == 0) {
+			return;
+		}
+	
+		if ("".equals(scriptName)) {
+			scriptName = "anonym";
+		}
+	
+		try {
+			long sOptId =
+				updateOrCreateScriptOptions(context, scriptName, dependencies);
+	
+			long scriptId = counterLocalService.increment();
+			Script script = scriptPersistence.create(scriptId);
+			script.setUserId(context.getUserId());
+			script.setGroupId(context.getScopeGroupId());
+			script.setCompanyId(context.getCompanyId());
+			script.setCreateDate(context.getCreateDate());
+			script.setModifiedDate(context.getModifiedDate());
+			script.setScriptOptionsId(sOptId);
+			script.setImportContent(importContent);
+			script.setModuleContent(moduleContent);
+	
+			scriptPersistence.update(script);
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		}
+	}
+
+	public void deleteScripts(String scriptIds) {
+		Long[] ids = ScriptUtil.getLongArrFromStringList(scriptIds);
+
+		for (Long id: ids) {
+			try {
+				scriptPersistence.remove(id);
+			} catch (NoSuchModelException e) {
+				_log.error(e.getMessage());
+			} catch (SystemException e) {
+				_log.error(e.getMessage());			}
+		}
+	}
+
+	public JSONObject getLastScript() {
+		JSONObject jsonScript = ScriptUtil.createEmptyJSONScriptObject();
+	
+		try {
+			ServiceContext context = getContext();
+	
+			long userId = context.getUserId();
+			long groupId = context.getScopeGroupId();
+	
+			if (userId == 0) {
+				return jsonScript;
+			}
+	
+			Script script = scriptPersistence.fetchByG_U_Last(groupId, userId, null);
+	
+			return getScript(script.getScriptId());
+	
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		}
+	
+		return jsonScript;
+	}
+
+	public JSONObject getScript(long scriptId) {
+		JSONObject jsonScript = ScriptUtil.createEmptyJSONScriptObject();
+	
+		try {
+			Script script = scriptPersistence.fetchByPrimaryKey(scriptId);
+	
+			ScriptUtil.setJSONScriptObject(jsonScript, script);
+	
+			ScriptOptions sOpts = scriptOptionsPersistence.fetchByPrimaryKey(script.getScriptOptionsId());
+	
+			ScriptUtil.setJSONScriptObject(jsonScript, sOpts);
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		}
+	
+		return jsonScript;
+	}
+
+	public String getScriptList() {
+		String scripts = "ScriptServiceImp.getScriptList - Not Implemented Yet";
+	
+		ServiceContext context = getContext();
+	
+		long userId = context.getUserId();
+		long groupId = context.getScopeGroupId();
+	
+		if (userId == 0) {
+			return "";
+		}
+	
+		try {
+			List<Script> scriptList =
+				scriptPersistence.findByG_U(groupId, userId);
+	
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		}
+	
+		return scripts;
+	}
+
+	public JSONObject getScriptNameVersions() {
+		List<ScriptOptions> scriptOpts = getScriptOptions();
+	
+		JSONArray jsonScriptNames = JSONFactoryUtil.createJSONArray();
+		JSONArray jsonScriptVersions = JSONFactoryUtil.createJSONArray();
+	
+		ServiceContext context = getContext();
+	
+		long userId = context.getUserId();
+		long groupId = context.getScopeGroupId();
+	
+		if (userId == 0) {
+			JSONObject emptyObj = JSONFactoryUtil.createJSONObject();
+			JSONArray emptyArr = JSONFactoryUtil.createJSONArray();
+	
+			emptyObj.put("scriptNames", emptyArr);
+			emptyObj.put("versions", emptyArr);
+	
+			return emptyObj;
+		}
+	
+		for (ScriptOptions sOpts : scriptOpts) {
+			long scriptOId = sOpts.getScriptOptionsId();
+	
+			String scriptName = sOpts.getScriptName() + " - " + sOpts.getScriptOptionsId();
+			jsonScriptNames.put(scriptName);
+	
+			try {
+				List<Script> scripts = scriptPersistence.findByG_U_SOid(groupId, userId, scriptOId);
+	
+				for (Script script: scripts) {
+					//$('#your-select').multiSelect('addOption', { value: 'test', text: 'test', index: 0, nested: 'optgroup_label' });
+					JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+					jsonObject.put("value",script.getScriptId());
+					jsonObject.put("text",script.getCreateDate());
+					jsonObject.put("nested", scriptName);
+					jsonScriptVersions.put(jsonObject);
+				}
+			} catch (SystemException e) {
+				_log.error(e.getMessage());
+			}
+		}
+	
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		json.put("scriptNames", jsonScriptNames);
+		json.put("versions", jsonScriptVersions);
+	
+		return json;
+	}
+
 	public List<ScriptOptions> getScriptOptions() {
 		List<ScriptOptions> scriptOpts = null;
 
@@ -72,6 +248,8 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 		return scriptOpts;
 	}
 
+	Logger _log = Logger.getLogger(getClass());
+
 	private ServiceContext getContext() {
 		ServiceContext context = new ServiceContext();
 		User user;
@@ -87,128 +265,27 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 		} catch (SystemException e) {
 			_log.error(e.getMessage());
 		}
-
+	
 		return context;
 	}
 
-	public JSONObject getScriptNameVersions() {
-		List<ScriptOptions> scriptOpts = getScriptOptions();
-
-		JSONArray jsonScriptNames = JSONFactoryUtil.createJSONArray();
-		JSONArray jsonScriptVersions = JSONFactoryUtil.createJSONArray();
-
-		ServiceContext context = getContext();
-
-		long userId = context.getUserId();
-		long groupId = context.getScopeGroupId();
-
-		if (userId == 0) {
-			JSONObject emptyObj = JSONFactoryUtil.createJSONObject();
-			JSONArray emptyArr = JSONFactoryUtil.createJSONArray();
-
-			emptyObj.put("scriptNames", emptyArr);
-			emptyObj.put("versions", emptyArr);
-
-			return emptyObj;
-		}
-
-		for (ScriptOptions sOpts : scriptOpts) {
-			long scriptOId = sOpts.getScriptOptionsId();
-
-			String scriptName = sOpts.getScriptName() + " - " + sOpts.getScriptOptionsId();
-			jsonScriptNames.put(scriptName);
-
-			try {
-				List<Script> scripts = scriptPersistence.findByG_U_SOid(groupId, userId, scriptOId);
-
-				for (Script script: scripts) {
-					//$('#your-select').multiSelect('addOption', { value: 'test', text: 'test', index: 0, nested: 'optgroup_label' });
-					JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-					jsonObject.put("value",script.getScriptId());
-					jsonObject.put("text",script.getCreateDate());
-					jsonObject.put("nested", scriptName);
-					jsonScriptVersions.put(jsonObject);
-				}
-			} catch (SystemException e) {
-				_log.error(e.getMessage());
-			}
-		}
-
-		JSONObject json = JSONFactoryUtil.createJSONObject();
-		json.put("scriptNames", jsonScriptNames);
-		json.put("versions", jsonScriptVersions);
-
-		return json;
-	}
-
-	public String[] getLastScript() {
-		String[] strScript = {"", ""};
-
-		try {
-			ServiceContext context = getContext();
-
-			long userId = context.getUserId();
-			long groupId = context.getScopeGroupId();
-
-			if (userId == 0) {
-				return new String[0];
-			}
-
-			Script script = scriptPersistence.fetchByG_U_Last(groupId, userId, null);
-
-			if (script != null) {
-				strScript[1] = script.getImportContent();
-				strScript[0] = script.getModuleContent();
-			}
-		} catch (SystemException e) {
-			_log.error(e.getMessage());
-		}
-
-		return strScript;
-	}
-
-	public String getScriptList() {
-		String scripts = "ScriptServiceImp.getScriptList - Not Implemented Yet";
-
-		ServiceContext context = getContext();
-
-		long userId = context.getUserId();
-		long groupId = context.getScopeGroupId();
-
-		if (userId == 0) {
-			return "";
-		}
-
-		try {
-			List<Script> scriptList =
-				scriptPersistence.findByG_U(groupId, userId);
-
-		} catch (SystemException e) {
-			_log.error(e.getMessage());
-		}
-
-		return scripts;
-	}
-
-	public void addScript(String importContent, String moduleContent) {
-		addScript(importContent, moduleContent, "anonym");
-	}
-
-	private long getOrCreateScriptOptions(ServiceContext context, String scriptName) {
+	private long updateOrCreateScriptOptions(ServiceContext context,
+		String scriptName, String dependencies) {
+	
 		ScriptOptions sOpt = null;
 		long sOptId = 0;
-
+	
 		try {
 			sOpt = scriptOptionsPersistence.findByG_U_ScriptName_Last(
 				context.getScopeGroupId(), context.getUserId(), scriptName, null);
-
+	
 			sOptId = sOpt.getScriptOptionsId();
 		} catch (NoSuchScriptOptionsException e1) {
 		} catch (SystemException e1) {
 			e1.printStackTrace();
 			return 0;
 		}
-
+	
 		if (sOpt == null) {
 			try {
 				sOptId = counterLocalService.increment();
@@ -216,57 +293,26 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 				e.printStackTrace();
 				return 0;
 			}
-
+	
 			sOpt = scriptOptionsPersistence.create(sOptId);
+	
 			sOpt.setScriptName(scriptName);
 			sOpt.setCompanyId(context.getCompanyId());
 			sOpt.setUserId(context.getUserId());
 			sOpt.setGroupId(context.getScopeGroupId());
 			sOpt.setCreateDate(context.getCreateDate());
 			sOpt.setModifiedDate(context.getModifiedDate());
-
-			try {
-				scriptOptionsPersistence.update(sOpt);
-			} catch (SystemException e) {
-				e.printStackTrace();
-				return 0;
-			}
 		}
-
+	
+		sOpt.setDependencyList(dependencies);
+	
+		try {
+			scriptOptionsPersistence.update(sOpt);
+		} catch (SystemException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	
 		return sOptId;
 	}
-
-	public void addScript(String importContent, String moduleContent, String scriptName) {
-		ServiceContext context = getContext();
-
-		long userId = context.getUserId();
-
-		if (userId == 0) {
-			return;
-		}
-
-		if ("".equals(scriptName)) {
-			scriptName = "anonym";
-		}
-
-		try {
-			long sOptId = getOrCreateScriptOptions(context, scriptName);
-
-			long scriptId = counterLocalService.increment();
-			Script script = scriptPersistence.create(scriptId);
-			script.setUserId(context.getUserId());
-			script.setGroupId(context.getScopeGroupId());
-			script.setCompanyId(context.getCompanyId());
-			script.setCreateDate(context.getCreateDate());
-			script.setModifiedDate(context.getModifiedDate());
-			script.setScriptOptionsId(sOptId);
-			script.setImportContent(importContent);
-			script.setModuleContent(moduleContent);
-			scriptPersistence.update(script);
-		} catch (SystemException e) {
-			_log.error(e.getMessage());
-		}
-	}
-
-	Logger _log = Logger.getLogger(getClass());
 }

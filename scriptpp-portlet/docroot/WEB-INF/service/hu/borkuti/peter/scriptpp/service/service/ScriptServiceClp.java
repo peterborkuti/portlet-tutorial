@@ -32,33 +32,48 @@ public class ScriptServiceClp implements ScriptService {
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
 
-		_methodName3 = "getScriptOptions";
+		_methodName3 = "addScript";
 
-		_methodParameterTypes3 = new String[] {  };
-
-		_methodName4 = "getScriptNameVersions";
-
-		_methodParameterTypes4 = new String[] {  };
-
-		_methodName5 = "getLastScript";
-
-		_methodParameterTypes5 = new String[] {  };
-
-		_methodName6 = "getScriptList";
-
-		_methodParameterTypes6 = new String[] {  };
-
-		_methodName7 = "addScript";
-
-		_methodParameterTypes7 = new String[] {
+		_methodParameterTypes3 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName8 = "addScript";
+		_methodName4 = "addScript";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes4 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName5 = "addScript";
+
+		_methodParameterTypes5 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName6 = "deleteScripts";
+
+		_methodParameterTypes6 = new String[] { "java.lang.String" };
+
+		_methodName7 = "getLastScript";
+
+		_methodParameterTypes7 = new String[] {  };
+
+		_methodName8 = "getScript";
+
+		_methodParameterTypes8 = new String[] { "long" };
+
+		_methodName9 = "getScriptList";
+
+		_methodParameterTypes9 = new String[] {  };
+
+		_methodName10 = "getScriptNameVersions";
+
+		_methodParameterTypes10 = new String[] {  };
+
+		_methodName11 = "getScriptOptions";
+
+		_methodParameterTypes11 = new String[] {  };
 	}
 
 	@Override
@@ -112,103 +127,11 @@ public class ScriptServiceClp implements ScriptService {
 	}
 
 	@Override
-	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName3,
-					_methodParameterTypes3, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.lang.String[] getLastScript() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.lang.String getScriptList() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent) {
 		try {
-			_invokableService.invokeMethod(_methodName7,
-				_methodParameterTypes7,
+			_invokableService.invokeMethod(_methodName3,
+				_methodParameterTypes3,
 				new Object[] {
 					ClpSerializer.translateInput(importContent),
 					
@@ -232,8 +155,8 @@ public class ScriptServiceClp implements ScriptService {
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent, java.lang.String scriptName) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName4,
+				_methodParameterTypes4,
 				new Object[] {
 					ClpSerializer.translateInput(importContent),
 					
@@ -255,6 +178,171 @@ public class ScriptServiceClp implements ScriptService {
 		}
 	}
 
+	@Override
+	public void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName,
+		java.lang.String dependencies) {
+		try {
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
+				new Object[] {
+					ClpSerializer.translateInput(importContent),
+					
+				ClpSerializer.translateInput(moduleContent),
+					
+				ClpSerializer.translateInput(scriptName),
+					
+				ClpSerializer.translateInput(dependencies)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteScripts(java.lang.String scriptIds) {
+		try {
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
+				new Object[] { ClpSerializer.translateInput(scriptIds) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getLastScript() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getScript(long scriptId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { scriptId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.lang.String getScriptList() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -272,4 +360,10 @@ public class ScriptServiceClp implements ScriptService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
 }

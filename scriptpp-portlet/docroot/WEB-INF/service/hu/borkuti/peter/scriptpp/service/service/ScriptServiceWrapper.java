@@ -57,26 +57,6 @@ public class ScriptServiceWrapper implements ScriptService,
 	}
 
 	@Override
-	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
-		return _scriptService.getScriptOptions();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
-		return _scriptService.getScriptNameVersions();
-	}
-
-	@Override
-	public java.lang.String[] getLastScript() {
-		return _scriptService.getLastScript();
-	}
-
-	@Override
-	public java.lang.String getScriptList() {
-		return _scriptService.getScriptList();
-	}
-
-	@Override
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent) {
 		_scriptService.addScript(importContent, moduleContent);
@@ -86,6 +66,44 @@ public class ScriptServiceWrapper implements ScriptService,
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent, java.lang.String scriptName) {
 		_scriptService.addScript(importContent, moduleContent, scriptName);
+	}
+
+	@Override
+	public void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName,
+		java.lang.String dependencies) {
+		_scriptService.addScript(importContent, moduleContent, scriptName,
+			dependencies);
+	}
+
+	@Override
+	public void deleteScripts(java.lang.String scriptIds) {
+		_scriptService.deleteScripts(scriptIds);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getLastScript() {
+		return _scriptService.getLastScript();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getScript(long scriptId) {
+		return _scriptService.getScript(scriptId);
+	}
+
+	@Override
+	public java.lang.String getScriptList() {
+		return _scriptService.getScriptList();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions() {
+		return _scriptService.getScriptNameVersions();
+	}
+
+	@Override
+	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions() {
+		return _scriptService.getScriptOptions();
 	}
 
 	/**

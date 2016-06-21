@@ -65,21 +65,30 @@ public interface ScriptService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String[] getLastScript();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getScriptList();
-
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent);
 
 	public void addScript(java.lang.String importContent,
 		java.lang.String moduleContent, java.lang.String scriptName);
+
+	public void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName,
+		java.lang.String dependencies);
+
+	public void deleteScripts(java.lang.String scriptIds);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getLastScript();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getScript(long scriptId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getScriptList();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getScriptNameVersions();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> getScriptOptions();
 }

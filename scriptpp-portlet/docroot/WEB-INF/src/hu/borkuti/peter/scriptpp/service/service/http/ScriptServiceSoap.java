@@ -62,13 +62,89 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class ScriptServiceSoap {
-	public static hu.borkuti.peter.scriptpp.service.model.ScriptOptionsSoap[] getScriptOptions()
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent) throws RemoteException {
+		try {
+			ScriptServiceUtil.addScript(importContent, moduleContent);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName)
 		throws RemoteException {
 		try {
-			java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> returnValue =
-				ScriptServiceUtil.getScriptOptions();
+			ScriptServiceUtil.addScript(importContent, moduleContent, scriptName);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 
-			return hu.borkuti.peter.scriptpp.service.model.ScriptOptionsSoap.toSoapModels(returnValue);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addScript(java.lang.String importContent,
+		java.lang.String moduleContent, java.lang.String scriptName,
+		java.lang.String dependencies) throws RemoteException {
+		try {
+			ScriptServiceUtil.addScript(importContent, moduleContent,
+				scriptName, dependencies);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteScripts(java.lang.String scriptIds)
+		throws RemoteException {
+		try {
+			ScriptServiceUtil.deleteScripts(scriptIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getLastScript() throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = ScriptServiceUtil.getLastScript();
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getScript(long scriptId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = ScriptServiceUtil.getScript(scriptId);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getScriptList() throws RemoteException {
+		try {
+			java.lang.String returnValue = ScriptServiceUtil.getScriptList();
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -91,49 +167,13 @@ public class ScriptServiceSoap {
 		}
 	}
 
-	public static java.lang.String[] getLastScript() throws RemoteException {
-		try {
-			java.lang.String[] returnValue = ScriptServiceUtil.getLastScript();
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static java.lang.String getScriptList() throws RemoteException {
-		try {
-			java.lang.String returnValue = ScriptServiceUtil.getScriptList();
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void addScript(java.lang.String importContent,
-		java.lang.String moduleContent) throws RemoteException {
-		try {
-			ScriptServiceUtil.addScript(importContent, moduleContent);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void addScript(java.lang.String importContent,
-		java.lang.String moduleContent, java.lang.String scriptName)
+	public static hu.borkuti.peter.scriptpp.service.model.ScriptOptionsSoap[] getScriptOptions()
 		throws RemoteException {
 		try {
-			ScriptServiceUtil.addScript(importContent, moduleContent, scriptName);
+			java.util.List<hu.borkuti.peter.scriptpp.service.model.ScriptOptions> returnValue =
+				ScriptServiceUtil.getScriptOptions();
+
+			return hu.borkuti.peter.scriptpp.service.model.ScriptOptionsSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
