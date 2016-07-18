@@ -1534,6 +1534,7 @@ public class ScriptOptionsPersistenceImpl extends BasePersistenceImpl<ScriptOpti
 		scriptOptionsImpl.setModifiedDate(scriptOptions.getModifiedDate());
 		scriptOptionsImpl.setScriptName(scriptOptions.getScriptName());
 		scriptOptionsImpl.setDependencyList(scriptOptions.getDependencyList());
+		scriptOptionsImpl.setScriptCounter(scriptOptions.getScriptCounter());
 
 		return scriptOptionsImpl;
 	}

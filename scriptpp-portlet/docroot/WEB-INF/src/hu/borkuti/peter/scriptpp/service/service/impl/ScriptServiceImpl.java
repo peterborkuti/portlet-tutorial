@@ -105,9 +105,26 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 	public void deleteScripts(String scriptIds) {
 		Long[] ids = ScriptUtil.getLongArrFromStringList(scriptIds);
 
-		for (Long id: ids) {
+		for (Long scriptId: ids) {
 			try {
-				scriptPersistence.remove(id);
+				Script script = scriptPersistence.fetchByPrimaryKey(scriptId);
+				if (script == null) {
+					continue;
+				}
+				// ScriptOptions's scriptCounter must be decremented
+				// and if it reaches 0, ScriptOptions should be deleted also
+				// because there are no versions for that Script
+				long sOptsId = script.getScriptOptionsId();
+				ScriptOptions sOpts =
+					scriptOptionsPersistence.fetchByPrimaryKey(sOptsId);
+				scriptPersistence.remove(scriptId);
+				sOpts.setScriptCounter(sOpts.getScriptCounter() - 1);
+				if (sOpts.getScriptCounter() <= 0) {
+					scriptOptionsPersistence.remove(sOptsId);
+				}
+				else {
+					scriptOptionsPersistence.update(sOpts);
+				}
 			} catch (NoSuchModelException e) {
 				_log.error(e.getMessage());
 			} catch (SystemException e) {
@@ -139,20 +156,37 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 		return jsonScript;
 	}
 
-	public JSONObject getScript(long scriptId) {
-		JSONObject jsonScript = ScriptUtil.createEmptyJSONScriptObject();
-	
+	public Script getScriptObject(long scriptId) {
+		//TODO : permissions
+		Script script = null;
 		try {
-			Script script = scriptPersistence.fetchByPrimaryKey(scriptId);
-	
-			ScriptUtil.setJSONScriptObject(jsonScript, script);
-	
-			ScriptOptions sOpts = scriptOptionsPersistence.fetchByPrimaryKey(script.getScriptOptionsId());
-	
-			ScriptUtil.setJSONScriptObject(jsonScript, sOpts);
+			script = scriptPersistence.fetchByPrimaryKey(scriptId);
 		} catch (SystemException e) {
 			_log.error(e.getMessage());
 		}
+
+		return script;
+	}
+
+	public JSONObject getScript(long scriptId) {
+		JSONObject jsonScript = ScriptUtil.createEmptyJSONScriptObject();
+	
+		Script script = getScriptObject(scriptId);
+
+		if (script == null) {
+			return jsonScript;
+		}
+
+		ScriptUtil.setJSONScriptObject(jsonScript, script);
+
+		ScriptOptions sOpts = null;
+		try {
+			sOpts = scriptOptionsPersistence.fetchByPrimaryKey(script.getScriptOptionsId());
+		} catch (SystemException e) {
+			_log.error(e.getMessage());
+		}
+
+		ScriptUtil.setJSONScriptObject(jsonScript, sOpts);
 	
 		return jsonScript;
 	}
@@ -280,6 +314,9 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 				context.getScopeGroupId(), context.getUserId(), scriptName, null);
 	
 			sOptId = sOpt.getScriptOptionsId();
+			// ScriptCounter counts how many Script have this ScriptOptions
+			// if this counter is 0, ScriptOptions should be deleted
+			sOpt.setScriptCounter(sOpt.getScriptCounter() + 1l);
 		} catch (NoSuchScriptOptionsException e1) {
 		} catch (SystemException e1) {
 			e1.printStackTrace();
@@ -302,6 +339,7 @@ public class ScriptServiceImpl extends ScriptServiceBaseImpl {
 			sOpt.setGroupId(context.getScopeGroupId());
 			sOpt.setCreateDate(context.getCreateDate());
 			sOpt.setModifiedDate(context.getModifiedDate());
+			sOpt.setScriptCounter(1l);
 		}
 	
 		sOpt.setDependencyList(dependencies);

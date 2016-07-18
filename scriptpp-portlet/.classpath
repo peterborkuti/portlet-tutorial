@@ -18,5 +18,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/c-liferay-portal-ee"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>

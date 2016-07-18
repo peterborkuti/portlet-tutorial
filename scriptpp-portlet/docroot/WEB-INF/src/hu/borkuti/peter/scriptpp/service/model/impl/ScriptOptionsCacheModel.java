@@ -38,7 +38,7 @@ public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{ScriptOptionsId=");
 		sb.append(ScriptOptionsId);
@@ -56,6 +56,8 @@ public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
 		sb.append(scriptName);
 		sb.append(", dependencyList=");
 		sb.append(dependencyList);
+		sb.append(", scriptCounter=");
+		sb.append(scriptCounter);
 		sb.append("}");
 
 		return sb.toString();
@@ -98,6 +100,8 @@ public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
 			scriptOptionsImpl.setDependencyList(dependencyList);
 		}
 
+		scriptOptionsImpl.setScriptCounter(scriptCounter);
+
 		scriptOptionsImpl.resetOriginalValues();
 
 		return scriptOptionsImpl;
@@ -113,6 +117,7 @@ public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
 		modifiedDate = objectInput.readLong();
 		scriptName = objectInput.readUTF();
 		dependencyList = objectInput.readUTF();
+		scriptCounter = objectInput.readLong();
 	}
 
 	@Override
@@ -138,6 +143,8 @@ public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
 		else {
 			objectOutput.writeUTF(dependencyList);
 		}
+
+		objectOutput.writeLong(scriptCounter);
 	}
 
 	public long ScriptOptionsId;
@@ -148,4 +155,5 @@ public class ScriptOptionsCacheModel implements CacheModel<ScriptOptions>,
 	public long modifiedDate;
 	public String scriptName;
 	public String dependencyList;
+	public Long scriptCounter;
 }

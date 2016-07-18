@@ -28,5 +28,6 @@ create table scriptpp_ScriptOptions (
 	createDate DATE null,
 	modifiedDate DATE null,
 	scriptName VARCHAR(75) null,
-	dependencyList VARCHAR(75) null
+	dependencyList VARCHAR(75) null,
+	scriptCounter LONG
 );

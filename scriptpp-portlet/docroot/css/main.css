@@ -17,12 +17,7 @@
 	font-weight: bold;
 }
 
-/* be in one line with the input element */
-.tabBox label {
-	display: inline;
-}
-
 /* file tab's dependency chooser */
-.ms-container {
+.fileTab select {
 	width: 100%;
 }

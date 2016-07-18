@@ -83,6 +83,7 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("scriptName", getScriptName());
 		attributes.put("dependencyList", getDependencyList());
+		attributes.put("scriptCounter", getScriptCounter());
 
 		return attributes;
 	}
@@ -135,6 +136,12 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 
 		if (dependencyList != null) {
 			setDependencyList(dependencyList);
+		}
+
+		Long scriptCounter = (Long)attributes.get("scriptCounter");
+
+		if (scriptCounter != null) {
+			setScriptCounter(scriptCounter);
 		}
 	}
 
@@ -333,6 +340,29 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 		}
 	}
 
+	@Override
+	public Long getScriptCounter() {
+		return _scriptCounter;
+	}
+
+	@Override
+	public void setScriptCounter(Long scriptCounter) {
+		_scriptCounter = scriptCounter;
+
+		if (_scriptOptionsRemoteModel != null) {
+			try {
+				Class<?> clazz = _scriptOptionsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setScriptCounter", Long.class);
+
+				method.invoke(_scriptOptionsRemoteModel, scriptCounter);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getScriptOptionsRemoteModel() {
 		return _scriptOptionsRemoteModel;
 	}
@@ -401,6 +431,7 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setScriptName(getScriptName());
 		clone.setDependencyList(getDependencyList());
+		clone.setScriptCounter(getScriptCounter());
 
 		return clone;
 	}
@@ -462,7 +493,7 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{ScriptOptionsId=");
 		sb.append(getScriptOptionsId());
@@ -480,6 +511,8 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 		sb.append(getScriptName());
 		sb.append(", dependencyList=");
 		sb.append(getDependencyList());
+		sb.append(", scriptCounter=");
+		sb.append(getScriptCounter());
 		sb.append("}");
 
 		return sb.toString();
@@ -487,7 +520,7 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("hu.borkuti.peter.scriptpp.service.model.ScriptOptions");
@@ -525,6 +558,10 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 			"<column><column-name>dependencyList</column-name><column-value><![CDATA[");
 		sb.append(getDependencyList());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>scriptCounter</column-name><column-value><![CDATA[");
+		sb.append(getScriptCounter());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -540,6 +577,7 @@ public class ScriptOptionsClp extends BaseModelImpl<ScriptOptions>
 	private Date _modifiedDate;
 	private String _scriptName;
 	private String _dependencyList;
+	private Long _scriptCounter;
 	private BaseModel<?> _scriptOptionsRemoteModel;
 	private Class<?> _clpSerializerClass = hu.borkuti.peter.scriptpp.service.service.ClpSerializer.class;
 }

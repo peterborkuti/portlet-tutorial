@@ -59,10 +59,9 @@ public class ScriptUtil {
 			json.put("scriptName", scriptOptions.getScriptName());
 			JSONArray depArr = JSONFactoryUtil.createJSONArray();
 
-			Long[] ids =
-				getLongArrFromStringList(scriptOptions.getDependencyList());
+			String[] ids = scriptOptions.getDependencyList().split(",");
 
-			for (Long id: ids) {
+			for (String id: ids) {
 				depArr.put(id);
 			}
 

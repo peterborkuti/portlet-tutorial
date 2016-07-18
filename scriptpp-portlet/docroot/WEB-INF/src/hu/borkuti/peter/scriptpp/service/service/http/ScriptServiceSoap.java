@@ -126,6 +126,20 @@ public class ScriptServiceSoap {
 		}
 	}
 
+	public static hu.borkuti.peter.scriptpp.service.model.ScriptSoap getScriptObject(
+		long scriptId) throws RemoteException {
+		try {
+			hu.borkuti.peter.scriptpp.service.model.Script returnValue = ScriptServiceUtil.getScriptObject(scriptId);
+
+			return hu.borkuti.peter.scriptpp.service.model.ScriptSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getScript(long scriptId)
 		throws RemoteException {
 		try {

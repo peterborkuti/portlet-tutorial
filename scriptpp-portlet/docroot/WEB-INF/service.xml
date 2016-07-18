@@ -47,6 +47,7 @@
 
 		<column name="scriptName" type="String" />
 		<column name="dependencyList" type="String" />
+		<column name="scriptCounter" type="Long" />
 
 		<order by="desc">
 			<order-column name="scriptName" />

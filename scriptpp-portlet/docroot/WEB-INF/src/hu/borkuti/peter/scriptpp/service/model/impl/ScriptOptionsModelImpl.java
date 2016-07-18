@@ -74,9 +74,10 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "scriptName", Types.VARCHAR },
-			{ "dependencyList", Types.VARCHAR }
+			{ "dependencyList", Types.VARCHAR },
+			{ "scriptCounter", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table scriptpp_ScriptOptions (ScriptOptionsId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,scriptName VARCHAR(75) null,dependencyList VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table scriptpp_ScriptOptions (ScriptOptionsId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,scriptName VARCHAR(75) null,dependencyList VARCHAR(75) null,scriptCounter LONG)";
 	public static final String TABLE_SQL_DROP = "drop table scriptpp_ScriptOptions";
 	public static final String ORDER_BY_JPQL = " ORDER BY scriptOptions.scriptName DESC, scriptOptions.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY scriptpp_ScriptOptions.scriptName DESC, scriptpp_ScriptOptions.createDate DESC";
@@ -118,6 +119,7 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setScriptName(soapModel.getScriptName());
 		model.setDependencyList(soapModel.getDependencyList());
+		model.setScriptCounter(soapModel.getScriptCounter());
 
 		return model;
 	}
@@ -190,6 +192,7 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("scriptName", getScriptName());
 		attributes.put("dependencyList", getDependencyList());
+		attributes.put("scriptCounter", getScriptCounter());
 
 		return attributes;
 	}
@@ -242,6 +245,12 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 
 		if (dependencyList != null) {
 			setDependencyList(dependencyList);
+		}
+
+		Long scriptCounter = (Long)attributes.get("scriptCounter");
+
+		if (scriptCounter != null) {
+			setScriptCounter(scriptCounter);
 		}
 	}
 
@@ -389,6 +398,17 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 		_dependencyList = dependencyList;
 	}
 
+	@JSON
+	@Override
+	public Long getScriptCounter() {
+		return _scriptCounter;
+	}
+
+	@Override
+	public void setScriptCounter(Long scriptCounter) {
+		_scriptCounter = scriptCounter;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -428,6 +448,7 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 		scriptOptionsImpl.setModifiedDate(getModifiedDate());
 		scriptOptionsImpl.setScriptName(getScriptName());
 		scriptOptionsImpl.setDependencyList(getDependencyList());
+		scriptOptionsImpl.setScriptCounter(getScriptCounter());
 
 		scriptOptionsImpl.resetOriginalValues();
 
@@ -548,12 +569,14 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 			scriptOptionsCacheModel.dependencyList = null;
 		}
 
+		scriptOptionsCacheModel.scriptCounter = getScriptCounter();
+
 		return scriptOptionsCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{ScriptOptionsId=");
 		sb.append(getScriptOptionsId());
@@ -571,6 +594,8 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 		sb.append(getScriptName());
 		sb.append(", dependencyList=");
 		sb.append(getDependencyList());
+		sb.append(", scriptCounter=");
+		sb.append(getScriptCounter());
 		sb.append("}");
 
 		return sb.toString();
@@ -578,7 +603,7 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("hu.borkuti.peter.scriptpp.service.model.ScriptOptions");
@@ -616,6 +641,10 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 			"<column><column-name>dependencyList</column-name><column-value><![CDATA[");
 		sb.append(getDependencyList());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>scriptCounter</column-name><column-value><![CDATA[");
+		sb.append(getScriptCounter());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -640,6 +669,7 @@ public class ScriptOptionsModelImpl extends BaseModelImpl<ScriptOptions>
 	private String _scriptName;
 	private String _originalScriptName;
 	private String _dependencyList;
+	private Long _scriptCounter;
 	private long _columnBitmask;
 	private ScriptOptions _escapedModel;
 }

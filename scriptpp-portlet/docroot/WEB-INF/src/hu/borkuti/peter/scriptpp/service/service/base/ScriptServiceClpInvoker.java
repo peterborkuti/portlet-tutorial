@@ -59,21 +59,25 @@ public class ScriptServiceClpInvoker {
 
 		_methodParameterTypes34 = new String[] {  };
 
-		_methodName35 = "getScript";
+		_methodName35 = "getScriptObject";
 
 		_methodParameterTypes35 = new String[] { "long" };
 
-		_methodName36 = "getScriptList";
+		_methodName36 = "getScript";
 
-		_methodParameterTypes36 = new String[] {  };
+		_methodParameterTypes36 = new String[] { "long" };
 
-		_methodName37 = "getScriptNameVersions";
+		_methodName37 = "getScriptList";
 
 		_methodParameterTypes37 = new String[] {  };
 
-		_methodName38 = "getScriptOptions";
+		_methodName38 = "getScriptNameVersions";
 
 		_methodParameterTypes38 = new String[] {  };
+
+		_methodName39 = "getScriptOptions";
+
+		_methodParameterTypes39 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -129,21 +133,26 @@ public class ScriptServiceClpInvoker {
 
 		if (_methodName35.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
-			return ScriptServiceUtil.getScript(((Long)arguments[0]).longValue());
+			return ScriptServiceUtil.getScriptObject(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName36.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
-			return ScriptServiceUtil.getScriptList();
+			return ScriptServiceUtil.getScript(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName37.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
-			return ScriptServiceUtil.getScriptNameVersions();
+			return ScriptServiceUtil.getScriptList();
 		}
 
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+			return ScriptServiceUtil.getScriptNameVersions();
+		}
+
+		if (_methodName39.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
 			return ScriptServiceUtil.getScriptOptions();
 		}
 
@@ -172,4 +181,6 @@ public class ScriptServiceClpInvoker {
 	private String[] _methodParameterTypes37;
 	private String _methodName38;
 	private String[] _methodParameterTypes38;
+	private String _methodName39;
+	private String[] _methodParameterTypes39;
 }

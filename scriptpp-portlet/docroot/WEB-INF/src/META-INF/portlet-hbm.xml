@@ -43,5 +43,6 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="scriptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dependencyList" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="scriptCounter" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

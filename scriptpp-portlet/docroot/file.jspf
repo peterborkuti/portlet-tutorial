@@ -1,0 +1,75 @@
+
+			<h4>Script name</h4>
+			<fieldset>
+			<div class="col-sm-4">
+			<input id="<portlet:namespace/>scriptName"/>
+			</div>
+			<div class="col-sm-3">
+			<button id="<portlet:namespace/>saveScriptButton">Save now</button>
+			</div>
+			<div class="col-sm-3">
+			Auto save
+			</div>
+			<div class="col-sm-2">
+			<input type="checkbox" id="<portlet:namespace/>autoSaveSwitch"/>
+			</div>
+			</fieldset>
+
+			<hr>
+
+			<fieldset>
+			<h4>Dependencies</h4>
+				<div class="col-sm-5">
+					<select name="from" id="<portlet:namespace/>dependenceSelector" class="form-control" size="8" multiple="multiple">
+						<optgroup label="placeholder">
+							<option value="0">without it multiselect plugin does not work</option>
+						</optgroup>
+					</select>
+				</div>
+				
+				<div class="col-sm-2">
+					<button type="button" id="<portlet:namespace/>dependenceSelector_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+					<button type="button" id="<portlet:namespace/>dependenceSelector_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+					<button type="button" id="<portlet:namespace/>dependenceSelector_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+					<button type="button" id="<portlet:namespace/>dependenceSelector_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+				</div>
+				
+				<div class="col-sm-5">
+					<select name="to" id="<portlet:namespace/>dependenceSelector_to" class="form-control" size="8" multiple="multiple">
+					</select>
+				</div>
+			</fieldset>
+
+			<hr>
+			<h4>Load script</h4>
+			<fieldset>
+			<div class="col-sm-8">
+			<select id="<portlet:namespace/>loadScriptSelector"></select>
+			</div>
+			<div class="col-sm-4">
+			<button id="<portlet:namespace/>loadScriptButton">Load</button>
+			</div>
+			</fieldset>
+
+			<hr>
+			<h4>Delete script</h4>
+			<fieldset>
+				<div class="col-sm-5">
+					<select name="from" id="<portlet:namespace/>deleteScriptsSelector" class="form-control" size="8" multiple="multiple">
+					</select>
+				</div>
+				
+				<div class="col-sm-2">
+					<button type="button" id="<portlet:namespace/>deleteScriptsSelector_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+					<button type="button" id="<portlet:namespace/>deleteScriptsSelector_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+					<button type="button" id="<portlet:namespace/>deleteScriptsSelector_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+					<button type="button" id="<portlet:namespace/>deleteScriptsSelector_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+				</div>
+				
+				<div class="col-sm-5">
+					<select name="to" id="<portlet:namespace/>deleteScriptsSelector_to" class="form-control" size="8" multiple="multiple">
+					</select>
+				</div>
+			</fieldset>
+			<button id="<portlet:namespace/>deleteScriptsButton">Delete selected scripts</button>
+			

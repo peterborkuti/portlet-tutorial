@@ -189,6 +189,20 @@ public interface ScriptOptionsModel extends BaseModel<ScriptOptions> {
 	 */
 	public void setDependencyList(String dependencyList);
 
+	/**
+	 * Returns the script counter of this script options.
+	 *
+	 * @return the script counter of this script options
+	 */
+	public Long getScriptCounter();
+
+	/**
+	 * Sets the script counter of this script options.
+	 *
+	 * @param scriptCounter the script counter of this script options
+	 */
+	public void setScriptCounter(Long scriptCounter);
+
 	@Override
 	public boolean isNew();
 

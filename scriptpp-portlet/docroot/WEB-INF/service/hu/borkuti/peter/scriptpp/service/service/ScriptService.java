@@ -81,6 +81,10 @@ public interface ScriptService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.json.JSONObject getLastScript();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public hu.borkuti.peter.scriptpp.service.model.Script getScriptObject(
+		long scriptId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONObject getScript(long scriptId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

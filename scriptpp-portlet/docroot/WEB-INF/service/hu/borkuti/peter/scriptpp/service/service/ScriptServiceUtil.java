@@ -88,6 +88,11 @@ public class ScriptServiceUtil {
 		return getService().getLastScript();
 	}
 
+	public static hu.borkuti.peter.scriptpp.service.model.Script getScriptObject(
+		long scriptId) {
+		return getService().getScriptObject(scriptId);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONObject getScript(
 		long scriptId) {
 		return getService().getScript(scriptId);

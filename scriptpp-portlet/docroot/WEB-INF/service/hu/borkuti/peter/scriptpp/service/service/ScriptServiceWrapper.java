@@ -87,6 +87,12 @@ public class ScriptServiceWrapper implements ScriptService,
 	}
 
 	@Override
+	public hu.borkuti.peter.scriptpp.service.model.Script getScriptObject(
+		long scriptId) {
+		return _scriptService.getScriptObject(scriptId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONObject getScript(long scriptId) {
 		return _scriptService.getScript(scriptId);
 	}

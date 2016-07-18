@@ -39,6 +39,7 @@ public class ScriptOptionsSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setScriptName(model.getScriptName());
 		soapModel.setDependencyList(model.getDependencyList());
+		soapModel.setScriptCounter(model.getScriptCounter());
 
 		return soapModel;
 	}
@@ -155,6 +156,14 @@ public class ScriptOptionsSoap implements Serializable {
 		_dependencyList = dependencyList;
 	}
 
+	public Long getScriptCounter() {
+		return _scriptCounter;
+	}
+
+	public void setScriptCounter(Long scriptCounter) {
+		_scriptCounter = scriptCounter;
+	}
+
 	private long _ScriptOptionsId;
 	private long _companyId;
 	private long _groupId;
@@ -163,4 +172,5 @@ public class ScriptOptionsSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _scriptName;
 	private String _dependencyList;
+	private Long _scriptCounter;
 }

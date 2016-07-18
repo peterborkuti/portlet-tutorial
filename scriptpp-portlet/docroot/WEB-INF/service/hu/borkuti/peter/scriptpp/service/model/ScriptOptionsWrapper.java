@@ -58,6 +58,7 @@ public class ScriptOptionsWrapper implements ScriptOptions,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("scriptName", getScriptName());
 		attributes.put("dependencyList", getDependencyList());
+		attributes.put("scriptCounter", getScriptCounter());
 
 		return attributes;
 	}
@@ -110,6 +111,12 @@ public class ScriptOptionsWrapper implements ScriptOptions,
 
 		if (dependencyList != null) {
 			setDependencyList(dependencyList);
+		}
+
+		Long scriptCounter = (Long)attributes.get("scriptCounter");
+
+		if (scriptCounter != null) {
+			setScriptCounter(scriptCounter);
 		}
 	}
 
@@ -313,6 +320,26 @@ public class ScriptOptionsWrapper implements ScriptOptions,
 	@Override
 	public void setDependencyList(java.lang.String dependencyList) {
 		_scriptOptions.setDependencyList(dependencyList);
+	}
+
+	/**
+	* Returns the script counter of this script options.
+	*
+	* @return the script counter of this script options
+	*/
+	@Override
+	public java.lang.Long getScriptCounter() {
+		return _scriptOptions.getScriptCounter();
+	}
+
+	/**
+	* Sets the script counter of this script options.
+	*
+	* @param scriptCounter the script counter of this script options
+	*/
+	@Override
+	public void setScriptCounter(java.lang.Long scriptCounter) {
+		_scriptOptions.setScriptCounter(scriptCounter);
 	}
 
 	@Override
