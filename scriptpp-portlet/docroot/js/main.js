@@ -56,7 +56,8 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		var moduleContent = moduleEditor.getValue(),
 			importContent = importEditor.val(),
 			script = importContent + ";" + moduleContent;
-		var depArray = getJQueryObject('dependenceSelector_to').val();
+		//gets all the option's value from the dependency_to select
+		var depArray = $.map($('option',getJQueryObject('dependenceSelector_to')), function(e) { return $(e).attr('value'); })
 		var dependencies = (depArray && depArray.join(",")) || "";
 		var ajaxData = {};
 		ajaxData[nameSpace + 'type'] = 'command';
@@ -126,15 +127,20 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		moduleEditor.setValue(payLoad.moduleContent || "");
 		importEditor.val(payLoad.importContent || "");
 		getJQueryObject("scriptName").val(payLoad.scriptName || "");
+
+		//Dependence selector
 		var ids = payLoad.dependencyIds || [];
-		var dependenceTo = getJQueryObject('dependenceSelector_to');
-		//clears everything, optgroups also
-		//dependenceTo.empty();
-		//dependenceMultiSelect = getJQueryObject('dependenceSelector').
-		//multiselect();
+		var dependence = getJQueryObject('dependenceSelector');
+		//moves everything from the right to the left
+		getJQueryObject('dependenceSelector_leftAll').click();
+		//clicks on the dependencies than move them to the right
 		if (ids.length > 0) {
-			//dependenceMultiSelect.multiselect().multiselect('select',ids);
+			$.each(ids, function(index, value) {
+				$('option[value="' + value + '"]',dependence).prop('selected', true).trigger('change');
+			})
+			getJQueryObject('dependenceSelector_rightSelected').click();
 		}
+
 		moduleEditor.refresh();
 	}
 

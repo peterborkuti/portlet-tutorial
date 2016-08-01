@@ -75,7 +75,6 @@ public class ScriptppPortlet extends MVCPortlet {
 		List<Long> newIds = new ArrayList<Long>();
 		for (Long newId: depIds) {
 			if (!allDeps.contains(newId)) {
-				allDeps.add(newId);
 				newIds.add(newId);
 			}
 		}
@@ -98,6 +97,10 @@ public class ScriptppPortlet extends MVCPortlet {
 
 			if ((subDeps != null) && !"".equals(subDeps)) {
 				getDependencyIds(subDeps, allDeps);
+			}
+
+			if (!allDeps.contains(scriptId)) {
+				allDeps.add(scriptId);
 			}
 		}
 
