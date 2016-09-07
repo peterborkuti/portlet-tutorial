@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.liferay.hu.badge.service">
+	<author>Borkuti Peter</author>
+	<namespace>BadgePortlet</namespace>
+
+	<entity name="Badge" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="badgeId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="badgeType" type="long" />
+		<column name="assignDate" type="Date" />
+		<column name="toUser" type="long" />
+		<column name="fromUser" type="long" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="assignDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="badgeType" return-type="Collection">
+			<finder-column name="badgeType" />
+		</finder>
+	</entity>
+</service-builder>
