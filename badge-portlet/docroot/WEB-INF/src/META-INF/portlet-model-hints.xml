@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.hu.badge.service.model.Badge">
+		<field name="badgeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="badgeType" type="long" />
+		<field name="assignDate" type="Date" />
+		<field name="toUser" type="long" />
+		<field name="fromUser" type="long" />
+		<field name="description" type="String" />
+	</model>
+</model-hints>

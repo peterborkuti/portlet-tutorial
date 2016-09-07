@@ -1,0 +1,1 @@
+create index IX_63B2A40C on BadgePortlet_Badge (badgeType);
