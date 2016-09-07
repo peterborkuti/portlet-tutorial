@@ -166,7 +166,8 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		}
 
 		var scriptName = getJQueryObject("scriptName").val();
-		var dependencies = getJQueryObject("dependenceSelector_to").val().join(",");
+		var depArray = $.map($('option',getJQueryObject('dependenceSelector_to')), function(e) { return $(e).attr('value'); })
+		var dependencies = (depArray && depArray.join(",")) || "";
 		autoSavingIsProcessing = true;
 
 		lastSavedModuleContent = moduleContent;
