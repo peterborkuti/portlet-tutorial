@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portal.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.model.User"%>
 <%
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -15,7 +18,34 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <portlet:defineObjects />
 
-This is the <b>Badge</b> portlet.
+This is the <b>Badge v0.01</b> portlet.
+
+<%
+	List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
+
+%>
+
+<portlet:actionURL var="addBadgeURL"></portlet:actionURL>
+
+<aui:form name="addBadgeForm" action="<%= addBadgeURL %>" method="POST">
+	<aui:select name="toUser">
+		<% 
+			for (User user: users) {
+				Long userId = user.getUserId();
+				String userName = user.getFullName();
+				%>
+				<aui:option value="<%= userId %>"><%= userName %></aui:option>
+				<%
+			}
+		%>
+	</aui:select>
+
+	<aui:input name="description"></aui:input>
+
+	<aui:input name="addBadge" type="submit" value="Add Badge"></aui:input>
+</aui:form>
