@@ -56,6 +56,13 @@ public class BadgeServiceWrapper implements BadgeService,
 		return _badgeService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public boolean addBadge(java.util.Date date, long fromUserId,
+		long toUserId, int badgeType, java.lang.String description) {
+		return _badgeService.addBadge(date, fromUserId, toUserId, badgeType,
+			description);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

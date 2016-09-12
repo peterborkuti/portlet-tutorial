@@ -14,7 +14,17 @@
 
 package com.liferay.hu.badge.service.service.impl;
 
+import java.util.Date;
+
+import com.liferay.counter.service.persistence.CounterUtil;
+import com.liferay.hu.badge.service.model.Badge;
+import com.liferay.hu.badge.service.service.BadgeServiceUtil;
 import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GroupThreadLocal;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 
 /**
  * The implementation of the badge remote service.
@@ -36,4 +46,54 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.hu.badge.service.service.BadgeServiceUtil} to access the badge remote service.
 	 */
+
+	public boolean addBadge(Date date, long fromUserId, long toUserId,
+			int badgeType, String description) {
+
+		long badgeId = 0;
+		try {
+			badgeId = counterLocalService.increment();
+		} catch (SystemException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+		long groupId = GroupThreadLocal.getGroupId();
+
+		long currentUserId = 0;
+		User currentUser;
+		try {
+			currentUser = userService.getCurrentUser();
+			if (currentUser != null) {
+				currentUserId = currentUser.getUserId();
+			}
+		} catch (PortalException e1) {
+			e1.printStackTrace();
+		} catch (SystemException e1) {
+			e1.printStackTrace();
+		}
+
+		Badge badge = badgePersistence.create(badgeId);
+
+		badge.setBadgeType(badgeType);
+		badge.setDescription(description);
+		badge.setToUser(toUserId);
+		badge.setFromUser(fromUserId);
+		badge.setAssignDate(date);
+
+		badge.setCompanyId(companyId);
+		badge.setCreateDate(date);
+		badge.setGroupId(groupId);
+		badge.setUserId(currentUserId);
+
+		try {
+			badgePersistence.update(badge);
+		} catch (SystemException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
 }

@@ -31,6 +31,12 @@ public class BadgeServiceClp implements BadgeService {
 		_methodName1 = "setBeanIdentifier";
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
+
+		_methodName3 = "addBadge";
+
+		_methodParameterTypes3 = new String[] {
+				"java.util.Date", "long", "long", "int", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -83,9 +89,46 @@ public class BadgeServiceClp implements BadgeService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public boolean addBadge(java.util.Date date, long fromUserId,
+		long toUserId, int badgeType, java.lang.String description) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName3,
+					_methodParameterTypes3,
+					new Object[] {
+						ClpSerializer.translateInput(date),
+						
+					fromUserId,
+						
+					toUserId,
+						
+					badgeType,
+						
+					ClpSerializer.translateInput(description)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
 	private String _methodName1;
 	private String[] _methodParameterTypes1;
+	private String _methodName3;
+	private String[] _methodParameterTypes3;
 }

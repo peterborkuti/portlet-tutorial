@@ -63,6 +63,12 @@ public class BadgeServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static boolean addBadge(java.util.Date date, long fromUserId,
+		long toUserId, int badgeType, java.lang.String description) {
+		return getService()
+				   .addBadge(date, fromUserId, toUserId, badgeType, description);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

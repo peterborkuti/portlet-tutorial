@@ -14,6 +14,13 @@
 
 package com.liferay.hu.badge.service.service.http;
 
+import com.liferay.hu.badge.service.service.BadgeServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.liferay.hu.badge.service.service.BadgeServiceUtil} service utility. The
@@ -55,4 +62,21 @@ package com.liferay.hu.badge.service.service.http;
  * @generated
  */
 public class BadgeServiceSoap {
+	public static boolean addBadge(java.util.Date date, long fromUserId,
+		long toUserId, int badgeType, java.lang.String description)
+		throws RemoteException {
+		try {
+			boolean returnValue = BadgeServiceUtil.addBadge(date, fromUserId,
+					toUserId, badgeType, description);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(BadgeServiceSoap.class);
 }
