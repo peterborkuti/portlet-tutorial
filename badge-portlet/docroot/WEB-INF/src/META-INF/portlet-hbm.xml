@@ -17,7 +17,9 @@
 		<property name="badgeType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="assignDate" type="org.hibernate.type.TimestampType" />
 		<property name="toUser" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="toUserFullName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fromUser" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fromUserFullName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

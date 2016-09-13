@@ -27,7 +27,9 @@
 		<column name="badgeType" type="long" />
 		<column name="assignDate" type="Date" />
 		<column name="toUser" type="long" />
+		<column name="toUserFullName" type="String" />
 		<column name="fromUser" type="long" />
+		<column name="fromUserFullName" type="String" />
 		<column name="description" type="String" />
 
 		<!-- Order -->

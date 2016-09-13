@@ -9,6 +9,8 @@ create table BadgePortlet_Badge (
 	badgeType LONG,
 	assignDate DATE null,
 	toUser LONG,
+	toUserFullName VARCHAR(75) null,
 	fromUser LONG,
+	fromUserFullName VARCHAR(75) null,
 	description VARCHAR(75) null
 );

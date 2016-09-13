@@ -12,7 +12,9 @@
 		<field name="badgeType" type="long" />
 		<field name="assignDate" type="Date" />
 		<field name="toUser" type="long" />
+		<field name="toUserFullName" type="String" />
 		<field name="fromUser" type="long" />
+		<field name="fromUserFullName" type="String" />
 		<field name="description" type="String" />
 	</model>
 </model-hints>

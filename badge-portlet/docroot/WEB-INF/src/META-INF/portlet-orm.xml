@@ -25,7 +25,9 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="toUser" />
+			<basic name="toUserFullName" />
 			<basic name="fromUser" />
+			<basic name="fromUserFullName" />
 			<basic name="description" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

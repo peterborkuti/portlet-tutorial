@@ -9,9 +9,14 @@
 			<name>view-template</name>
 			<value>/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>edit-template</name>
+			<value>/edit.jsp</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
+			<portlet-mode>EDIT</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>Badge</title>
