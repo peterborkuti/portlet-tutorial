@@ -85,7 +85,9 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		attributes.put("badgeType", getBadgeType());
 		attributes.put("assignDate", getAssignDate());
 		attributes.put("toUser", getToUser());
+		attributes.put("toUserFullName", getToUserFullName());
 		attributes.put("fromUser", getFromUser());
+		attributes.put("fromUserFullName", getFromUserFullName());
 		attributes.put("description", getDescription());
 
 		return attributes;
@@ -153,10 +155,22 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 			setToUser(toUser);
 		}
 
+		String toUserFullName = (String)attributes.get("toUserFullName");
+
+		if (toUserFullName != null) {
+			setToUserFullName(toUserFullName);
+		}
+
 		Long fromUser = (Long)attributes.get("fromUser");
 
 		if (fromUser != null) {
 			setFromUser(fromUser);
+		}
+
+		String fromUserFullName = (String)attributes.get("fromUserFullName");
+
+		if (fromUserFullName != null) {
+			setFromUserFullName(fromUserFullName);
 		}
 
 		String description = (String)attributes.get("description");
@@ -407,6 +421,30 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 	}
 
 	@Override
+	public String getToUserFullName() {
+		return _toUserFullName;
+	}
+
+	@Override
+	public void setToUserFullName(String toUserFullName) {
+		_toUserFullName = toUserFullName;
+
+		if (_badgeRemoteModel != null) {
+			try {
+				Class<?> clazz = _badgeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setToUserFullName",
+						String.class);
+
+				method.invoke(_badgeRemoteModel, toUserFullName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getFromUser() {
 		return _fromUser;
 	}
@@ -422,6 +460,30 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 				Method method = clazz.getMethod("setFromUser", long.class);
 
 				method.invoke(_badgeRemoteModel, fromUser);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getFromUserFullName() {
+		return _fromUserFullName;
+	}
+
+	@Override
+	public void setFromUserFullName(String fromUserFullName) {
+		_fromUserFullName = fromUserFullName;
+
+		if (_badgeRemoteModel != null) {
+			try {
+				Class<?> clazz = _badgeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setFromUserFullName",
+						String.class);
+
+				method.invoke(_badgeRemoteModel, fromUserFullName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -531,7 +593,9 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		clone.setBadgeType(getBadgeType());
 		clone.setAssignDate(getAssignDate());
 		clone.setToUser(getToUser());
+		clone.setToUserFullName(getToUserFullName());
 		clone.setFromUser(getFromUser());
+		clone.setFromUserFullName(getFromUserFullName());
 		clone.setDescription(getDescription());
 
 		return clone;
@@ -583,7 +647,7 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{badgeId=");
 		sb.append(getBadgeId());
@@ -605,8 +669,12 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		sb.append(getAssignDate());
 		sb.append(", toUser=");
 		sb.append(getToUser());
+		sb.append(", toUserFullName=");
+		sb.append(getToUserFullName());
 		sb.append(", fromUser=");
 		sb.append(getFromUser());
+		sb.append(", fromUserFullName=");
+		sb.append(getFromUserFullName());
 		sb.append(", description=");
 		sb.append(getDescription());
 		sb.append("}");
@@ -616,7 +684,7 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.hu.badge.service.model.Badge");
@@ -663,8 +731,16 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		sb.append(getToUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>toUserFullName</column-name><column-value><![CDATA[");
+		sb.append(getToUserFullName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>fromUser</column-name><column-value><![CDATA[");
 		sb.append(getFromUser());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fromUserFullName</column-name><column-value><![CDATA[");
+		sb.append(getFromUserFullName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
@@ -687,7 +763,9 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 	private long _badgeType;
 	private Date _assignDate;
 	private long _toUser;
+	private String _toUserFullName;
 	private long _fromUser;
+	private String _fromUserFullName;
 	private String _description;
 	private BaseModel<?> _badgeRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.hu.badge.service.service.ClpSerializer.class;

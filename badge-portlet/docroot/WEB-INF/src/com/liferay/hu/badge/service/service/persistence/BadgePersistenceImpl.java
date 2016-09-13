@@ -839,7 +839,9 @@ public class BadgePersistenceImpl extends BasePersistenceImpl<Badge>
 		badgeImpl.setBadgeType(badge.getBadgeType());
 		badgeImpl.setAssignDate(badge.getAssignDate());
 		badgeImpl.setToUser(badge.getToUser());
+		badgeImpl.setToUserFullName(badge.getToUserFullName());
 		badgeImpl.setFromUser(badge.getFromUser());
+		badgeImpl.setFromUserFullName(badge.getFromUserFullName());
 		badgeImpl.setDescription(badge.getDescription());
 
 		return badgeImpl;

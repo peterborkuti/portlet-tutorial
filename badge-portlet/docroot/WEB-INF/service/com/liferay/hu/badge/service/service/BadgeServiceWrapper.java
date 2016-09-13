@@ -63,6 +63,17 @@ public class BadgeServiceWrapper implements BadgeService,
 			description);
 	}
 
+	@Override
+	public java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges() {
+		return _badgeService.getBadges();
+	}
+
+	@Override
+	public java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges(
+		int badgeType) {
+		return _badgeService.getBadges(badgeType);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

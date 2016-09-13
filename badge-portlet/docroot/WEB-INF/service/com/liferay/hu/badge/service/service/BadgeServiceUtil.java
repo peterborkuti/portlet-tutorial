@@ -69,6 +69,15 @@ public class BadgeServiceUtil {
 				   .addBadge(date, fromUserId, toUserId, badgeType, description);
 	}
 
+	public static java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges() {
+		return getService().getBadges();
+	}
+
+	public static java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges(
+		int badgeType) {
+		return getService().getBadges(badgeType);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

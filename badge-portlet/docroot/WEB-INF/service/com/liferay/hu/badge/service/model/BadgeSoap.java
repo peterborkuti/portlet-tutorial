@@ -41,7 +41,9 @@ public class BadgeSoap implements Serializable {
 		soapModel.setBadgeType(model.getBadgeType());
 		soapModel.setAssignDate(model.getAssignDate());
 		soapModel.setToUser(model.getToUser());
+		soapModel.setToUserFullName(model.getToUserFullName());
 		soapModel.setFromUser(model.getFromUser());
+		soapModel.setFromUserFullName(model.getFromUserFullName());
 		soapModel.setDescription(model.getDescription());
 
 		return soapModel;
@@ -175,12 +177,28 @@ public class BadgeSoap implements Serializable {
 		_toUser = toUser;
 	}
 
+	public String getToUserFullName() {
+		return _toUserFullName;
+	}
+
+	public void setToUserFullName(String toUserFullName) {
+		_toUserFullName = toUserFullName;
+	}
+
 	public long getFromUser() {
 		return _fromUser;
 	}
 
 	public void setFromUser(long fromUser) {
 		_fromUser = fromUser;
+	}
+
+	public String getFromUserFullName() {
+		return _fromUserFullName;
+	}
+
+	public void setFromUserFullName(String fromUserFullName) {
+		_fromUserFullName = fromUserFullName;
 	}
 
 	public String getDescription() {
@@ -201,6 +219,8 @@ public class BadgeSoap implements Serializable {
 	private long _badgeType;
 	private Date _assignDate;
 	private long _toUser;
+	private String _toUserFullName;
 	private long _fromUser;
+	private String _fromUserFullName;
 	private String _description;
 }

@@ -76,10 +76,12 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 			{ "badgeType", Types.BIGINT },
 			{ "assignDate", Types.TIMESTAMP },
 			{ "toUser", Types.BIGINT },
+			{ "toUserFullName", Types.VARCHAR },
 			{ "fromUser", Types.BIGINT },
+			{ "fromUserFullName", Types.VARCHAR },
 			{ "description", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BadgePortlet_Badge (badgeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,badgeType LONG,assignDate DATE null,toUser LONG,fromUser LONG,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table BadgePortlet_Badge (badgeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,badgeType LONG,assignDate DATE null,toUser LONG,toUserFullName VARCHAR(75) null,fromUser LONG,fromUserFullName VARCHAR(75) null,description VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table BadgePortlet_Badge";
 	public static final String ORDER_BY_JPQL = " ORDER BY badge.assignDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BadgePortlet_Badge.assignDate ASC";
@@ -121,7 +123,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		model.setBadgeType(soapModel.getBadgeType());
 		model.setAssignDate(soapModel.getAssignDate());
 		model.setToUser(soapModel.getToUser());
+		model.setToUserFullName(soapModel.getToUserFullName());
 		model.setFromUser(soapModel.getFromUser());
+		model.setFromUserFullName(soapModel.getFromUserFullName());
 		model.setDescription(soapModel.getDescription());
 
 		return model;
@@ -197,7 +201,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		attributes.put("badgeType", getBadgeType());
 		attributes.put("assignDate", getAssignDate());
 		attributes.put("toUser", getToUser());
+		attributes.put("toUserFullName", getToUserFullName());
 		attributes.put("fromUser", getFromUser());
+		attributes.put("fromUserFullName", getFromUserFullName());
 		attributes.put("description", getDescription());
 
 		return attributes;
@@ -265,10 +271,22 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 			setToUser(toUser);
 		}
 
+		String toUserFullName = (String)attributes.get("toUserFullName");
+
+		if (toUserFullName != null) {
+			setToUserFullName(toUserFullName);
+		}
+
 		Long fromUser = (Long)attributes.get("fromUser");
 
 		if (fromUser != null) {
 			setFromUser(fromUser);
+		}
+
+		String fromUserFullName = (String)attributes.get("fromUserFullName");
+
+		if (fromUserFullName != null) {
+			setFromUserFullName(fromUserFullName);
 		}
 
 		String description = (String)attributes.get("description");
@@ -419,6 +437,22 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@JSON
 	@Override
+	public String getToUserFullName() {
+		if (_toUserFullName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _toUserFullName;
+		}
+	}
+
+	@Override
+	public void setToUserFullName(String toUserFullName) {
+		_toUserFullName = toUserFullName;
+	}
+
+	@JSON
+	@Override
 	public long getFromUser() {
 		return _fromUser;
 	}
@@ -426,6 +460,22 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 	@Override
 	public void setFromUser(long fromUser) {
 		_fromUser = fromUser;
+	}
+
+	@JSON
+	@Override
+	public String getFromUserFullName() {
+		if (_fromUserFullName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fromUserFullName;
+		}
+	}
+
+	@Override
+	public void setFromUserFullName(String fromUserFullName) {
+		_fromUserFullName = fromUserFullName;
 	}
 
 	@JSON
@@ -485,7 +535,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		badgeImpl.setBadgeType(getBadgeType());
 		badgeImpl.setAssignDate(getAssignDate());
 		badgeImpl.setToUser(getToUser());
+		badgeImpl.setToUserFullName(getToUserFullName());
 		badgeImpl.setFromUser(getFromUser());
+		badgeImpl.setFromUserFullName(getFromUserFullName());
 		badgeImpl.setDescription(getDescription());
 
 		badgeImpl.resetOriginalValues();
@@ -595,7 +647,23 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 		badgeCacheModel.toUser = getToUser();
 
+		badgeCacheModel.toUserFullName = getToUserFullName();
+
+		String toUserFullName = badgeCacheModel.toUserFullName;
+
+		if ((toUserFullName != null) && (toUserFullName.length() == 0)) {
+			badgeCacheModel.toUserFullName = null;
+		}
+
 		badgeCacheModel.fromUser = getFromUser();
+
+		badgeCacheModel.fromUserFullName = getFromUserFullName();
+
+		String fromUserFullName = badgeCacheModel.fromUserFullName;
+
+		if ((fromUserFullName != null) && (fromUserFullName.length() == 0)) {
+			badgeCacheModel.fromUserFullName = null;
+		}
 
 		badgeCacheModel.description = getDescription();
 
@@ -610,7 +678,7 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{badgeId=");
 		sb.append(getBadgeId());
@@ -632,8 +700,12 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		sb.append(getAssignDate());
 		sb.append(", toUser=");
 		sb.append(getToUser());
+		sb.append(", toUserFullName=");
+		sb.append(getToUserFullName());
 		sb.append(", fromUser=");
 		sb.append(getFromUser());
+		sb.append(", fromUserFullName=");
+		sb.append(getFromUserFullName());
 		sb.append(", description=");
 		sb.append(getDescription());
 		sb.append("}");
@@ -643,7 +715,7 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.hu.badge.service.model.Badge");
@@ -690,8 +762,16 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		sb.append(getToUser());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>toUserFullName</column-name><column-value><![CDATA[");
+		sb.append(getToUserFullName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>fromUser</column-name><column-value><![CDATA[");
 		sb.append(getFromUser());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fromUserFullName</column-name><column-value><![CDATA[");
+		sb.append(getFromUserFullName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
@@ -718,7 +798,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 	private boolean _setOriginalBadgeType;
 	private Date _assignDate;
 	private long _toUser;
+	private String _toUserFullName;
 	private long _fromUser;
+	private String _fromUserFullName;
 	private String _description;
 	private long _columnBitmask;
 	private Badge _escapedModel;

@@ -78,5 +78,35 @@ public class BadgeServiceSoap {
 		}
 	}
 
+	public static com.liferay.hu.badge.service.model.BadgeSoap[] getBadges()
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.hu.badge.service.model.Badge> returnValue =
+				BadgeServiceUtil.getBadges();
+
+			return com.liferay.hu.badge.service.model.BadgeSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.hu.badge.service.model.BadgeSoap[] getBadges(
+		int badgeType) throws RemoteException {
+		try {
+			java.util.List<com.liferay.hu.badge.service.model.Badge> returnValue =
+				BadgeServiceUtil.getBadges(badgeType);
+
+			return com.liferay.hu.badge.service.model.BadgeSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(BadgeServiceSoap.class);
 }

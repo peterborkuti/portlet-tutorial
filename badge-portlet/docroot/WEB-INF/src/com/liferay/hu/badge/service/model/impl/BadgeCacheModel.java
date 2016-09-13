@@ -37,7 +37,7 @@ import java.util.Date;
 public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{badgeId=");
 		sb.append(badgeId);
@@ -59,8 +59,12 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 		sb.append(assignDate);
 		sb.append(", toUser=");
 		sb.append(toUser);
+		sb.append(", toUserFullName=");
+		sb.append(toUserFullName);
 		sb.append(", fromUser=");
 		sb.append(fromUser);
+		sb.append(", fromUserFullName=");
+		sb.append(fromUserFullName);
 		sb.append(", description=");
 		sb.append(description);
 		sb.append("}");
@@ -108,7 +112,22 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 		}
 
 		badgeImpl.setToUser(toUser);
+
+		if (toUserFullName == null) {
+			badgeImpl.setToUserFullName(StringPool.BLANK);
+		}
+		else {
+			badgeImpl.setToUserFullName(toUserFullName);
+		}
+
 		badgeImpl.setFromUser(fromUser);
+
+		if (fromUserFullName == null) {
+			badgeImpl.setFromUserFullName(StringPool.BLANK);
+		}
+		else {
+			badgeImpl.setFromUserFullName(fromUserFullName);
+		}
 
 		if (description == null) {
 			badgeImpl.setDescription(StringPool.BLANK);
@@ -134,7 +153,9 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 		badgeType = objectInput.readLong();
 		assignDate = objectInput.readLong();
 		toUser = objectInput.readLong();
+		toUserFullName = objectInput.readUTF();
 		fromUser = objectInput.readLong();
+		fromUserFullName = objectInput.readUTF();
 		description = objectInput.readUTF();
 	}
 
@@ -158,7 +179,22 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 		objectOutput.writeLong(badgeType);
 		objectOutput.writeLong(assignDate);
 		objectOutput.writeLong(toUser);
+
+		if (toUserFullName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(toUserFullName);
+		}
+
 		objectOutput.writeLong(fromUser);
+
+		if (fromUserFullName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(fromUserFullName);
+		}
 
 		if (description == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -178,6 +214,8 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 	public long badgeType;
 	public long assignDate;
 	public long toUser;
+	public String toUserFullName;
 	public long fromUser;
+	public String fromUserFullName;
 	public String description;
 }

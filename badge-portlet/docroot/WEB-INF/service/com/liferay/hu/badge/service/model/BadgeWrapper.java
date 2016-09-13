@@ -59,7 +59,9 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 		attributes.put("badgeType", getBadgeType());
 		attributes.put("assignDate", getAssignDate());
 		attributes.put("toUser", getToUser());
+		attributes.put("toUserFullName", getToUserFullName());
 		attributes.put("fromUser", getFromUser());
+		attributes.put("fromUserFullName", getFromUserFullName());
 		attributes.put("description", getDescription());
 
 		return attributes;
@@ -127,10 +129,22 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 			setToUser(toUser);
 		}
 
+		String toUserFullName = (String)attributes.get("toUserFullName");
+
+		if (toUserFullName != null) {
+			setToUserFullName(toUserFullName);
+		}
+
 		Long fromUser = (Long)attributes.get("fromUser");
 
 		if (fromUser != null) {
 			setFromUser(fromUser);
+		}
+
+		String fromUserFullName = (String)attributes.get("fromUserFullName");
+
+		if (fromUserFullName != null) {
+			setFromUserFullName(fromUserFullName);
 		}
 
 		String description = (String)attributes.get("description");
@@ -383,6 +397,26 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 	}
 
 	/**
+	* Returns the to user full name of this badge.
+	*
+	* @return the to user full name of this badge
+	*/
+	@Override
+	public java.lang.String getToUserFullName() {
+		return _badge.getToUserFullName();
+	}
+
+	/**
+	* Sets the to user full name of this badge.
+	*
+	* @param toUserFullName the to user full name of this badge
+	*/
+	@Override
+	public void setToUserFullName(java.lang.String toUserFullName) {
+		_badge.setToUserFullName(toUserFullName);
+	}
+
+	/**
 	* Returns the from user of this badge.
 	*
 	* @return the from user of this badge
@@ -400,6 +434,26 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 	@Override
 	public void setFromUser(long fromUser) {
 		_badge.setFromUser(fromUser);
+	}
+
+	/**
+	* Returns the from user full name of this badge.
+	*
+	* @return the from user full name of this badge
+	*/
+	@Override
+	public java.lang.String getFromUserFullName() {
+		return _badge.getFromUserFullName();
+	}
+
+	/**
+	* Sets the from user full name of this badge.
+	*
+	* @param fromUserFullName the from user full name of this badge
+	*/
+	@Override
+	public void setFromUserFullName(java.lang.String fromUserFullName) {
+		_badge.setFromUserFullName(fromUserFullName);
 	}
 
 	/**

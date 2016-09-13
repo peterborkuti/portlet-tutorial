@@ -14,11 +14,11 @@
 
 package com.liferay.hu.badge.service.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import com.liferay.counter.service.persistence.CounterUtil;
 import com.liferay.hu.badge.service.model.Badge;
-import com.liferay.hu.badge.service.service.BadgeServiceUtil;
 import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -74,6 +74,10 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 			e1.printStackTrace();
 		}
 
+		
+		String fromUserName = _getUserFullNameById(fromUserId);
+		String toUserName = _getUserFullNameById(toUserId);
+
 		Badge badge = badgePersistence.create(badgeId);
 
 		badge.setBadgeType(badgeType);
@@ -81,9 +85,11 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		badge.setToUser(toUserId);
 		badge.setFromUser(fromUserId);
 		badge.setAssignDate(date);
+		badge.setToUserFullName(toUserName);
+		badge.setFromUserFullName(fromUserName);
 
 		badge.setCompanyId(companyId);
-		badge.setCreateDate(date);
+		badge.setCreateDate(new Date());
 		badge.setGroupId(groupId);
 		badge.setUserId(currentUserId);
 
@@ -96,4 +102,39 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 
 		return true;
 	}
+
+	private String _getUserFullNameById(long userId) {
+		String userName = "";
+		try {
+			User user = userLocalService.fetchUser(userId);
+			userName = user.getFullName();
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+
+		return userName;
+	}
+
+	public List<Badge> getBadges() {
+		List<Badge> badges = new ArrayList<Badge>();
+
+		try {
+			badges = badgePersistence.findAll();
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return badges;
+	}
+
+	public List<Badge> getBadges(int badgeType) {
+		List<Badge> badges = new ArrayList<Badge>();
+
+		try {
+			badges = badgePersistence.findBybadgeType(badgeType);
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return badges;
+	}
+
 }

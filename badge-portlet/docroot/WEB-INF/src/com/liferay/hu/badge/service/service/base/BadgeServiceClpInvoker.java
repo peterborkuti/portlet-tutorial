@@ -37,6 +37,14 @@ public class BadgeServiceClpInvoker {
 		_methodParameterTypes24 = new String[] {
 				"java.util.Date", "long", "long", "int", "java.lang.String"
 			};
+
+		_methodName26 = "getBadges";
+
+		_methodParameterTypes26 = new String[] {  };
+
+		_methodName27 = "getBadges";
+
+		_methodParameterTypes27 = new String[] { "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -62,6 +70,16 @@ public class BadgeServiceClpInvoker {
 				(java.lang.String)arguments[4]);
 		}
 
+		if (_methodName26.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+			return BadgeServiceUtil.getBadges();
+		}
+
+		if (_methodName27.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+			return BadgeServiceUtil.getBadges(((Integer)arguments[0]).intValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -71,4 +89,8 @@ public class BadgeServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
 }

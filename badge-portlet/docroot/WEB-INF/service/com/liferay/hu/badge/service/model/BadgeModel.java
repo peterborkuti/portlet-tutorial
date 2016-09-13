@@ -232,6 +232,21 @@ public interface BadgeModel extends BaseModel<Badge>, GroupedModel {
 	public void setToUser(long toUser);
 
 	/**
+	 * Returns the to user full name of this badge.
+	 *
+	 * @return the to user full name of this badge
+	 */
+	@AutoEscape
+	public String getToUserFullName();
+
+	/**
+	 * Sets the to user full name of this badge.
+	 *
+	 * @param toUserFullName the to user full name of this badge
+	 */
+	public void setToUserFullName(String toUserFullName);
+
+	/**
 	 * Returns the from user of this badge.
 	 *
 	 * @return the from user of this badge
@@ -244,6 +259,21 @@ public interface BadgeModel extends BaseModel<Badge>, GroupedModel {
 	 * @param fromUser the from user of this badge
 	 */
 	public void setFromUser(long fromUser);
+
+	/**
+	 * Returns the from user full name of this badge.
+	 *
+	 * @return the from user full name of this badge
+	 */
+	@AutoEscape
+	public String getFromUserFullName();
+
+	/**
+	 * Sets the from user full name of this badge.
+	 *
+	 * @param fromUserFullName the from user full name of this badge
+	 */
+	public void setFromUserFullName(String fromUserFullName);
 
 	/**
 	 * Returns the description of this badge.

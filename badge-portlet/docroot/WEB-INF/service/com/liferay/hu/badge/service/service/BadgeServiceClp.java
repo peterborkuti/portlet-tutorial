@@ -37,6 +37,14 @@ public class BadgeServiceClp implements BadgeService {
 		_methodParameterTypes3 = new String[] {
 				"java.util.Date", "long", "long", "int", "java.lang.String"
 			};
+
+		_methodName4 = "getBadges";
+
+		_methodParameterTypes4 = new String[] {  };
+
+		_methodName5 = "getBadges";
+
+		_methodParameterTypes5 = new String[] { "int" };
 	}
 
 	@Override
@@ -124,6 +132,53 @@ public class BadgeServiceClp implements BadgeService {
 		return ((Boolean)returnObj).booleanValue();
 	}
 
+	@Override
+	public java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.hu.badge.service.model.Badge>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges(
+		int badgeType) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5, new Object[] { badgeType });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.hu.badge.service.model.Badge>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -131,4 +186,8 @@ public class BadgeServiceClp implements BadgeService {
 	private String[] _methodParameterTypes1;
 	private String _methodName3;
 	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
+	private String _methodName5;
+	private String[] _methodParameterTypes5;
 }
