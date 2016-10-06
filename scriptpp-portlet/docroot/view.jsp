@@ -62,9 +62,9 @@
 	</div>
 	<div id="<portlet:namespace/>fileTab" class="fileTab">
 		<div class="tabBox">
-		<div class="container-fluid">
-			<%@ include file="/file.jspf" %>
-		</div>
+			<div class="container-fluid">
+				<%@ include file="/file.jspf" %>
+			</div>
 		</div>
 	</div>
 </div>

@@ -8,8 +8,8 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 
 	getJQueryObject('dependenceSelector').multiselect().empty();
 
-	var deleteMultiSelect = getJQueryObject('deleteScriptsSelector').
-		multiselect();
+	var deleteMultiSelect =
+		getJQueryObject('deleteScriptsSelector').multiselect();
 
 	var history = getJQueryObject('history');
 
@@ -193,7 +193,11 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 
 	var saveScript = function() {
 		var scriptName = getJQueryObject('scriptName').val();
-		var depArray = getJQueryObject('dependenceSelector_to').val();
+
+		var depArray = $.map($('option',
+			getJQueryObject('dependenceSelector_to')),
+			function(e) { return $(e).attr('value'); });
+
 		var dependencies = (depArray && depArray.join(",")) || "";
 		var moduleContent = moduleEditor.getValue();
 		var importContent =  importEditor.val();
@@ -211,6 +215,7 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		})
 		.done(function() {
 			console.log('script added on backend');
+			fillFileTab();
 		});
 	};
 
@@ -262,7 +267,9 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 	}
 
 	var deleteScripts = function() {
-		var scriptIds = getJQueryObject('deleteScriptsSelector_to').val();
+		var scriptIds =
+				getJQueryObject('deleteScriptsSelector_to').children('option').
+					map(function(i,v) { return $(v).val() });
 
 		if (!scriptIds || scriptIds.length === 0) {
 			return;
@@ -277,7 +284,6 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 			}
 		})
 		.done(function(content) {
-			getJQueryObject('deleteScriptsSelector').multiselect('deselect_all');
 			fillFileTab();
 		});
 	}
@@ -304,6 +310,13 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 			}
 		})
 		.done(function(content) {
+			//clearing the selects
+
+			dependenceSelector.children().remove();
+			loadScriptSelector.children().remove();
+			deleteScriptsSelector.children().remove();
+			getJQueryObject('deleteScriptsSelector_to').children().remove();
+
 			var scriptNames = content["scriptNames"];
 			var versions = content["versions"];
 			var optgroups = {};
@@ -331,9 +344,6 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 				loadScriptSelector.append(value.clone());
 				deleteScriptsSelector.append(value.clone());
 			});
-
-			//dependenceMultiSelect.multiselect('refresh');
-			//deleteMultiSelect.multiselect('refresh');
 		});
 	}
 
