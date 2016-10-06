@@ -55,7 +55,7 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		updateHistoryOnUI(command);
 		var moduleContent = moduleEditor.getValue(),
 			importContent = importEditor.val(),
-			script = importContent + ";" + moduleContent;
+			script = importContent + ";\n" + moduleContent;
 		//gets all the option's value from the dependency_to select
 		var depArray = $.map($('option',getJQueryObject('dependenceSelector_to')), function(e) { return $(e).attr('value'); })
 		var dependencies = (depArray && depArray.join(",")) || "";

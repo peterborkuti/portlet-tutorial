@@ -109,15 +109,17 @@ public class ScriptppPortlet extends MVCPortlet {
 	protected String getConcatenatedScripts(String moduleContent,
 		String importContent, String command, Long[] allDeps) {
 
-		String concatenatedScripts = "";
+		String concatenatedScripts = "\n";
 		for (long scriptId: allDeps) {
 			Script script = ScriptServiceUtil.getScriptObject(scriptId);
 
 			concatenatedScripts +=
-				";" + script.getImportContent() + ";" + script.getModuleContent();
+				";\n" + script.getImportContent() + ";\n" +
+					script.getModuleContent() + "\n";
 		}
 
-		return concatenatedScripts + ";" + importContent + ";" + moduleContent + ";" + command; 
+		return concatenatedScripts + ";\n" + importContent + ";\n" +
+			moduleContent + ";\n" + command + "\n";
 	}
 
 	protected void runScript(
