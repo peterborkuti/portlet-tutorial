@@ -6,6 +6,16 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		return $(getDOMObject(id));
 	}
 
+	var getOptionArr = function(id) {
+		var obj =
+			$.map(
+				$('option',getJQueryObject(id)),
+				function(e) { return $(e).attr('value'); }
+			);
+
+		return $.makeArray(obj);
+	}
+
 	getJQueryObject('dependenceSelector').multiselect().empty();
 
 	var deleteMultiSelect =
@@ -57,7 +67,7 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 			importContent = importEditor.val(),
 			script = importContent + ";\n" + moduleContent;
 		//gets all the option's value from the dependency_to select
-		var depArray = $.map($('option',getJQueryObject('dependenceSelector_to')), function(e) { return $(e).attr('value'); })
+		var depArray = getOptionArr('dependenceSelector_to');
 		var dependencies = (depArray && depArray.join(",")) || "";
 		var ajaxData = {};
 		ajaxData[nameSpace + 'type'] = 'command';
@@ -166,7 +176,7 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 		}
 
 		var scriptName = getJQueryObject("scriptName").val();
-		var depArray = $.map($('option',getJQueryObject('dependenceSelector_to')), function(e) { return $(e).attr('value'); })
+		var depArray = getOptionArr('dependenceSelector_to');
 		var dependencies = (depArray && depArray.join(",")) || "";
 		autoSavingIsProcessing = true;
 
@@ -194,9 +204,7 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 	var saveScript = function() {
 		var scriptName = getJQueryObject('scriptName').val();
 
-		var depArray = $.map($('option',
-			getJQueryObject('dependenceSelector_to')),
-			function(e) { return $(e).attr('value'); });
+		var depArray = getOptionArr('dependenceSelector_to');
 
 		var dependencies = (depArray && depArray.join(",")) || "";
 		var moduleContent = moduleEditor.getValue();
@@ -267,9 +275,7 @@ var ScriptppJS = function (nameSpace, pAuth, actionURL) {
 	}
 
 	var deleteScripts = function() {
-		var scriptIds =
-				getJQueryObject('deleteScriptsSelector_to').children('option').
-					map(function(i,v) { return $(v).val() });
+		var scriptIds = getOptionArr('deleteScriptsSelector_to');
 
 		if (!scriptIds || scriptIds.length === 0) {
 			return;
